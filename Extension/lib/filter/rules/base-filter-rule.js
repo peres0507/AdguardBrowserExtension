@@ -258,7 +258,7 @@ FilterRule.createRule = function (ruleText) {
 			rule = new UrlFilterRule(ruleText);
 		}
 	} catch (ex) {
-		Log.error("Error creating rule from {0}, cause {1}", ruleText, ex);
+		Log.warn("Cannot create rule from {0}, cause {1}", ruleText, ex);
 	}
 	return rule;
 };
