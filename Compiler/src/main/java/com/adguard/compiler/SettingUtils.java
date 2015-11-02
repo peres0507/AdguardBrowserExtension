@@ -119,9 +119,9 @@ public class SettingUtils {
 		if (filterScriptRules != null) {
 			for (int filterId : filterScriptRules.keySet()) {
 				List<String> scriptRules = filterScriptRules.get(filterId);
-				sb.append("DEFAULT_SCRIPT_RULES[").append(filterId).append("] = [];\r\n");
 				for (String scriptRule : scriptRules) {
-					sb.append("DEFAULT_SCRIPT_RULES[").append(filterId).append("].push(\"").append(StringEscapeUtils.escapeJavaScript(scriptRule)).append("\");\r\n");
+					String ruleText = StringEscapeUtils.escapeJavaScript(scriptRule);
+					sb.append("DEFAULT_SCRIPT_RULES[\"").append(ruleText).append("\"] = ").append(filterId).append(";\r\n");
 				}
 			}
 		}

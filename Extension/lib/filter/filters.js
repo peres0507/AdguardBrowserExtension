@@ -31,6 +31,8 @@ var UrlUtils = require('utils/url').UrlUtils;
 var StringUtils = require('utils/common').StringUtils;
 var Prefs = require('prefs').Prefs;
 var userSettings = require('utils/user-settings').userSettings;
+var USE_DEFAULT_SCRIPT_RULES = require('utils/local-script-rules').USE_DEFAULT_SCRIPT_RULES;
+var DEFAULT_SCRIPT_RULES = require('utils/local-script-rules').DEFAULT_SCRIPT_RULES;
 
 /**
  * Request filter is main class which applies filter rules.
@@ -65,6 +67,8 @@ var RequestFilter = exports.RequestFilter = function () {
     // Init small cache for url filtering rules
     this.requestCache = Object.create(null);
     this.requestCacheSize = 0;
+
+    this._addLocalScriptRules();
 };
 
 RequestFilter.prototype = {
@@ -78,14 +82,13 @@ RequestFilter.prototype = {
      * Adds rules to the request filter
      *
      * @param rules List of rules to add
-     * @param filterId Filter identifier
      */
-    addRules: function (rules, filterId) {
+    addRules: function (rules) {
         if (!rules) {
             return;
         }
         for (var i = 0; i < rules.length; i++) {
-            this.addRule(rules[i], filterId);
+            this.addRule(rules[i]);
         }
     },
 
@@ -95,16 +98,11 @@ RequestFilter.prototype = {
      *
      * @param rule     Rule to add. Rule should be an object of
      *                 one of these classes: UrlFilterRule, CssFilterRule, ScriptFilterRule
-     * @param filterId Filter identifier
      */
-    addRule: function (rule, filterId) {
+    addRule: function (rule) {
         if (rule == null || !rule.ruleText) {
             Log.error("FilterRule must not be null");
             return;
-        }
-        // For fast access by filterId
-        if (filterId != null) {
-            rule.filterId = filterId - 0;
         }
         if (rule instanceof UrlFilterRule) {
             if (rule.whiteListRule) {
@@ -203,18 +201,6 @@ RequestFilter.prototype = {
     getScriptsForUrl: function (url) {
         var domain = UrlUtils.toPunyCode(UrlUtils.getDomainName(url));
         return this.scriptFilter.buildScript(domain);
-    },
-
-    /**
-     * Builds JS injection for the specified page using custom rules from user's own filter.
-     * http://adguard.com/en/filterrules.html#javascriptInjection
-     *
-     * @param url       Page URL
-     * @returns         Javascript
-     */
-    getUserScriptsForUrl: function (url) {
-        var domain = UrlUtils.toPunyCode(UrlUtils.getDomainName(url));
-        return this.scriptFilter.buildScriptFromUserRules(domain);
     },
 
     /**
@@ -436,5 +422,17 @@ RequestFilter.prototype = {
 
         this.requestCache = Object.create(null);
         this.requestCacheSize = 0;
+    },
+
+    _addLocalScriptRules: function () {
+        if (USE_DEFAULT_SCRIPT_RULES) {
+            for (var ruleText in DEFAULT_SCRIPT_RULES) {
+                var filterId = DEFAULT_SCRIPT_RULES[ruleText] - 0;
+                var rule = FilterRule.createRule(ruleText, filterId);
+                if (rule) {
+                    this.addRule(rule);
+                }
+            }
+        }
     }
 };
