@@ -361,4 +361,4 @@ var loadAdguardModule = function (module) {
         throw ex;
     }
 };
-loadAdguardModule.scopes = {__proto__: null};
+loadAdguardModule.scopes = Object.create(null);
