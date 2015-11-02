@@ -50,10 +50,6 @@ var PreloadHelper = {
             }
         }
 
-        var userAgent = navigator.userAgent.toLowerCase();
-        this.isFirefox = userAgent.indexOf('firefox') > -1;
-        this.isOpera = userAgent.indexOf('opera') > -1 || userAgent.indexOf('opr') > -1;
-
         this._initCollapse();
         this.tryLoadCssAndScripts();
     },
@@ -131,7 +127,7 @@ var PreloadHelper = {
     /**
      * Applies JS injections.
      *
-     * @param scripts Array with JS scripts and scriptSource ('remote' or 'local')
+     * @param scripts Array with JS scripts
      * @private
      */
     _applyScripts: function (scripts) {
@@ -140,40 +136,19 @@ var PreloadHelper = {
             return;
         }
 
-        var scriptsToApply = [];
-        for (var i = 0; i < scripts.length; i++) {
-            var scriptObject = scripts[i];
-            switch (scriptObject.scriptSource) {
-                case 'remote':
-                    /**
-                     * Note (!) (Firefox, Opera):
-                     * In case of Firefox and Opera add-ons, JS filtering rules are hardcoded into add-on code.
-                     * Look at WorkaroundUtils.getScriptsForUrl to learn more.
-                     */
-                    if (!this.isFirefox && !this.isOpera) {
-                        scriptsToApply = scriptsToApply.concat(scriptObject.data);
-                    }
-                    break;
-                case 'local':
-                    scriptsToApply = scriptsToApply.concat(scriptObject.data);
-                    break;
-            }
-        }
-
-        if (scriptsToApply.length === 0) {
-            return;
-        }
-
         /**
          * JS injections are created by JS filtering rules:
          * http://adguard.com/en/filterrules.html#javascriptInjection
          *
+         * Note (!) (Firefox, Opera):
+         * In case of Firefox and Opera add-ons, JS filtering rules are hardcoded into add-on code.
+         * Look at WorkaroundUtils.getScriptsForUrl to learn more.
          */
         var script = document.createElement("script");
         script.setAttribute("type", "text/javascript");
-        scriptsToApply.unshift("try {");
-        scriptsToApply.push("} catch (ex) { console.error('Error executing AG js: ' + ex); }");
-        script.textContent = scriptsToApply.join("\r\n");
+        scripts.unshift("try {");
+        scripts.push("} catch (ex) { console.error('Error executing AG js: ' + ex); }");
+        script.textContent = scripts.join("\r\n");
         (document.head || document.documentElement).appendChild(script);
     },
 

@@ -119,46 +119,37 @@ var WorkaroundUtils = exports.WorkaroundUtils = {
      */
 	getScriptsForUrl: function (antiBannerService, url) {
 
-		var remoteScripts = [];
-		var localScripts = [];
+	    if (!USE_DEFAULT_SCRIPT_RULES) {
+		    // Get JS scripts from filters
+		    return antiBannerService.getRequestFilter().getScriptsForUrl(url);
+	    }
 
-		// Get JS scripts from user filter
+	    // In case of opera and firefox browsers, use predefined script rules
+		if (WorkaroundUtils._scriptRules == null) {
+			WorkaroundUtils._populateScriptRules();
+		}
+
+		var rules = [];
+		for (var filterId in WorkaroundUtils._scriptRules) {
+			if (antiBannerService.isAntiBannerFilterEnabled(filterId)) {
+				var filterRules = WorkaroundUtils._scriptRules[filterId] || [];
+				rules = rules.concat(filterRules);
+			}
+		}
+
+		var domain = UrlUtils.toPunyCode(UrlUtils.getDomainName(url));
+		var scripts = [];
+		for (var j = 0; j < rules.length; j++) {
+			var rule = rules[j];
+			if (rule.isPermitted(domain)) {
+				scripts.push(rule.script);
+			}
+		}
+
 		var userScripts = antiBannerService.getRequestFilter().getUserScriptsForUrl(url);
 		if (userScripts) {
-			localScripts = localScripts.concat(userScripts);
+			scripts = scripts.concat(userScripts);
 		}
-
-		if (!USE_DEFAULT_SCRIPT_RULES) {
-			// Get JS scripts from filters
-			remoteScripts = remoteScripts.concat(antiBannerService.getRequestFilter().getScriptsForUrl(url));
-		} else {
-
-			// In case of opera and firefox browsers, use predefined script rules
-			if (WorkaroundUtils._scriptRules == null) {
-				WorkaroundUtils._populateScriptRules();
-			}
-
-			var rules = [];
-			for (var filterId in WorkaroundUtils._scriptRules) {
-				if (antiBannerService.isAntiBannerFilterEnabled(filterId)) {
-					var filterRules = WorkaroundUtils._scriptRules[filterId] || [];
-					rules = rules.concat(filterRules);
-				}
-			}
-
-			var domain = UrlUtils.toPunyCode(UrlUtils.getDomainName(url));
-			for (var j = 0; j < rules.length; j++) {
-				var rule = rules[j];
-				if (rule.isPermitted(domain)) {
-					localScripts.push(rule.script);
-				}
-			}
-		}
-
-		var scripts = [];
-		scripts.push({scriptSource: 'remote', data: remoteScripts});
-		scripts.push({scriptSource: 'local', data: localScripts});
-
 		return scripts;
 	},
 
