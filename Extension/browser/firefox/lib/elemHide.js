@@ -270,11 +270,6 @@ ElemHide = exports.ElemHide = {
             }
             var result = this.webRequestService.processGetSelectorsAndScripts(worker.tab, message.documentUrl);
             if (result) {
-                // NOTE: Script rules are fully disabled in Firefox add-on
-                // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/42
-                // TODO: Make local rules working and make it easier to review:
-                // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/43
-                result.scripts = [];
                 worker.port.emit('get-selectors-and-scripts', result);
             }
         }.bind(this));

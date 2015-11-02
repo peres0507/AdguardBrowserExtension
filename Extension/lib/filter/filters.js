@@ -31,8 +31,6 @@ var UrlUtils = require('utils/url').UrlUtils;
 var StringUtils = require('utils/common').StringUtils;
 var Prefs = require('prefs').Prefs;
 var userSettings = require('utils/user-settings').userSettings;
-var USE_DEFAULT_SCRIPT_RULES = require('utils/local-script-rules').USE_DEFAULT_SCRIPT_RULES;
-var DEFAULT_SCRIPT_RULES = require('utils/local-script-rules').DEFAULT_SCRIPT_RULES;
 
 /**
  * Request filter is main class which applies filter rules.
@@ -67,8 +65,6 @@ var RequestFilter = exports.RequestFilter = function () {
     // Init small cache for url filtering rules
     this.requestCache = Object.create(null);
     this.requestCacheSize = 0;
-
-    this._addLocalScriptRules();
 };
 
 RequestFilter.prototype = {
@@ -422,17 +418,5 @@ RequestFilter.prototype = {
 
         this.requestCache = Object.create(null);
         this.requestCacheSize = 0;
-    },
-
-    _addLocalScriptRules: function () {
-        if (USE_DEFAULT_SCRIPT_RULES) {
-            for (var ruleText in DEFAULT_SCRIPT_RULES) {
-                var filterId = DEFAULT_SCRIPT_RULES[ruleText] - 0;
-                var rule = FilterRule.createRule(ruleText, filterId);
-                if (rule) {
-                    this.addRule(rule);
-                }
-            }
-        }
     }
 };
