@@ -119,15 +119,19 @@ var WorkaroundUtils = exports.WorkaroundUtils = {
      */
 	getScriptsForUrl: function (antiBannerService, url) {
 
-		var scripts = [];
+		var remoteScripts = [];
+		var localScripts = [];
+
+		// Get JS scripts from user filter
+		var userScripts = antiBannerService.getRequestFilter().getUserScriptsForUrl(url);
+		if (userScripts) {
+			localScripts = localScripts.concat(userScripts);
+		}
 
 		if (!USE_DEFAULT_SCRIPT_RULES) {
 			// Get JS scripts from filters
-			var remoteScripts = antiBannerService.getRequestFilter().getScriptsForUrl(url);
-			scripts.push({scriptSource: 'remote', data: remoteScripts});
+			remoteScripts = remoteScripts.concat(antiBannerService.getRequestFilter().getScriptsForUrl(url));
 		} else {
-
-			var localScripts = [];
 
 			// In case of opera and firefox browsers, use predefined script rules
 			if (WorkaroundUtils._scriptRules == null) {
@@ -149,13 +153,11 @@ var WorkaroundUtils = exports.WorkaroundUtils = {
 					localScripts.push(rule.script);
 				}
 			}
-
-			// Get JS scripts from user filter
-			var userScripts = antiBannerService.getRequestFilter().getUserScriptsForUrl(url);
-			localScripts = localScripts.concat(userScripts);
-
-			scripts.push({scriptSource: 'local', data: localScripts});
 		}
+
+		var scripts = [];
+		scripts.push({scriptSource: 'remote', data: remoteScripts});
+		scripts.push({scriptSource: 'local', data: localScripts});
 
 		return scripts;
 	},
