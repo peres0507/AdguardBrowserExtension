@@ -150,7 +150,9 @@ var PreloadHelper = {
                     break;
                 case 'remote':
                     /**
-                     * Look at "WorkaroundUtils.getScriptSource".
+                     * Note (!) (Firefox, Opera):
+                     * In case of Firefox and Opera add-ons, JS filtering rules are hardcoded into add-on code.
+                     * Look at WorkaroundUtils.getScriptSource to learn more.
                      */
                     if (!this.isFirefox && !this.isOpera) {
                         scriptsToApply.push(scriptRule.rule);
