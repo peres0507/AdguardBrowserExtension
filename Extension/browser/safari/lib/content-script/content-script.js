@@ -75,6 +75,23 @@
 										document.dispatchEvent(event);\
 										return event.detail.url === false;\
 									};\
+									var img = Image;\
+									Image = function () {\
+										var x = new img();\
+										try {\
+											Object.defineProperty(x, "src", {\
+												get: function () {\
+													return x.getAttribute("src");\
+												},\
+												set: function (val) {\
+													x.setAttribute("src", block(val, "image") ? "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs=" : val);\
+												}\
+											});\
+										} catch (e) {\
+											//ignore\
+										}\
+										return x;\
+									};\
 									var _emptyFunc = function () {\
 									};\
 									var xmlHttpRequestOpen = XMLHttpRequest.prototype.open;\
