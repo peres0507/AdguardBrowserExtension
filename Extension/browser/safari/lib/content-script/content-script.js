@@ -102,6 +102,9 @@
 					return this[this.createKey(url, type, frameId)];
 				}
 			};
+			
+			var totalElapsed = 0;
+			var totalCount = 0;
 
 			var canLoadRequest = function (url, type, frameId) {
 				var cached = canLoadCache.get(url, type, frameId);
@@ -109,6 +112,8 @@
 					return cached;
 				}
 
+				var start = window.performance.now();
+				
 				var canLoad = safari.self.tab.canLoad(event, {
 					type: "safariWebRequest", data: {
 						url: url,
@@ -117,6 +122,13 @@
                         requestFrameId: 0
                     }
                 });
+				
+				var elapsed = window.performance.now() - start;
+				totalCount++;
+				totalElapsed += elapsed;
+				if (totalCount == 400) {
+					console.log('Average elapsed: ' + (totalElapsed / totalCount));
+				}
 
 				canLoadCache.add(url, type, frameId, canLoad);
                 return canLoad;

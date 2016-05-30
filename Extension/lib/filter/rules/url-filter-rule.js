@@ -34,8 +34,11 @@ var UrlFilterRule = exports.UrlFilterRule = function (rule, filterId) {
 
     FilterRule.call(this, rule, filterId);
 
-    // Url shortcut
+    // Rule shortcut
     this.shortcut = null;
+    // URL components without special symbols
+    this.urlComponents = null;
+    
     // Content type masks
     this.permittedContentType = UrlFilterRule.contentTypes.ALL;
     this.restrictedContentType = 0;
@@ -148,7 +151,8 @@ UrlFilterRule.prototype.isFiltered = function (requestUrl, thirdParty, requestCo
         }
     }
 
-    if (this.shortcut != null && !StringUtils.containsIgnoreCase(requestUrl, this.shortcut)) {
+    var requestUrlLowerCase = requestUrl.toLowerCase();
+    if (this.shortcut !== null && !StringUtils.contains(requestUrlLowerCase, this.shortcut)) {
         return false;
     }
 
@@ -161,13 +165,41 @@ UrlFilterRule.prototype.isFiltered = function (requestUrl, thirdParty, requestCo
         //in restricted list - skip this rule
         return false;
     }
+    
+    var urlComponents = this._getUrlComponents();
+    if (urlComponents && urlComponents.length) {
+        for (var i = 0; i < urlComponents.length; i++) {
+            var component = urlComponents[i];
+            if (!StringUtils.contains(requestUrlLowerCase, component)) {
+                return false;
+            }
+        }
+    }
 
     var regexp = this.getUrlRegExp();
     if (!regexp) {
         //malformed regexp rule
         return false;
     }
+    
     return regexp.test(requestUrl);
+};
+
+UrlFilterRule.prototype._getUrlComponents = function() {
+    if ((this.urlComponents !== null) || this.urlRegExp || this.wrongUrlRegExp) {
+        return this.urlComponents;
+    }
+    
+    this.urlComponents = [];
+    var parts = this.urlRuleText.split(/[*^|]/);
+    for (var i = 0; i < parts.length; i++) {
+        var part = parts[i];
+        if (part.length >= 3) {
+            this.urlComponents.push(part.toLowerCase());
+        }
+    }
+    
+    return this.urlComponents;
 };
 
 /**
