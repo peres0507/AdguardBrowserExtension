@@ -33,6 +33,8 @@ exports.SafariContentBlocker = {
     emptyBlockerUrl: 'config/empty.json',
     emptyBlockerJSON: null,
 
+    contentBlockListDirty: true,
+
     /**
      * Load content blocker
      */
@@ -111,7 +113,49 @@ exports.SafariContentBlocker = {
     _setSafariContentBlocker: function (json) {
         try {
             Log.info('Setting content blocker. Length=' + json.length);
-            safari.extension.setContentBlocker(json);
+
+            var self = this;
+
+            function setContentBlocker(callback) {
+                //TODO: Manage contentBlockListDirty flag
+
+                // When given the same rules as last time setContentBlocker will always give
+                // null (success) to the callback, even when there was actually an error. We
+                // cache the last result therefore so that we can provide a consistent result
+                // and also to avoid wastefully regenerating an identical blocklist.
+                if (!self.contentBlockListDirty) {
+                    callback(self.lastSetContentBlockerError);
+                    return;
+                }
+
+                this.contentBlockListDirty = false;
+                safari.extension.setContentBlocker(
+                    // There is a strange bug in setContentBlocker for Safari 9 where if both
+                    // the callback parameter is provided and the rules aren't converted to a
+                    // JSON string it fails. Worse still it actually performs the callback twice
+                    // too, firstly with an empty string and then with an Error:
+                    //   "Extension compilation failed: Failed to parse the JSON String."
+                    // To mitigate this we convert the rules to JSON here and also ignore
+                    // callback values of "". (Usually the callback is performed with either
+                    // null for success or an Error on failure.)
+                    // Bug #26322821 filed on bugreport.apple.com
+                    JSON.stringify(json),
+                    function(error) {
+                        if (!error || error == "")
+                            return;
+
+                        self.lastSetContentBlockerError = error;
+                        callback(error);
+                    }
+                );
+            }
+
+            setContentBlocker(function(error) {
+                Log.error('Error setting content blocker: ' + error);
+
+                //TODO: Handle error
+            });
+
             Log.info('Content blocker has been set.');
         } catch (ex) {
             Log.error('Error while setting content blocker: ' + ex);
@@ -132,6 +176,6 @@ exports.SafariContentBlocker = {
             }
         }
 
-            return invertedWhitelistRule;
+        return invertedWhitelistRule;
     }
 };
