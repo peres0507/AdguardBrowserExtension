@@ -39,8 +39,10 @@ exports.SafariContentBlocker = {
      * Load content blocker
      */
     updateContentBlocker: function () {
-
         this._loadAndConvertRules(this.RULES_LIMIT, function (result) {
+
+            //TODO: Check somehow if it is not the same set of rules
+            this.contentBlockListDirty = true;
 
             if (!result) {
                 this._clearFilters();
@@ -48,8 +50,10 @@ exports.SafariContentBlocker = {
             }
 
             var json = JSON.parse(result.converted);
-            this._setSafariContentBlocker(json);
-            EventNotifier.notifyListeners(EventNotifierTypes.CONTENT_BLOCKER_UPDATED, {rulesCount: json.length, rulesOverLimit: result.overLimit});
+            this._setSafariContentBlocker(json, function (error) {
+                EventNotifier.notifyListeners(EventNotifierTypes.CONTENT_BLOCKER_UPDATED,
+                    {rulesCount: json.length, rulesOverLimit: result.overLimit, error: error});
+            });
 
         }.bind(this));
     },
@@ -110,15 +114,13 @@ exports.SafariContentBlocker = {
 
     }, 500),
 
-    _setSafariContentBlocker: function (json) {
+    _setSafariContentBlocker: function (json, onContentBlockerSetCallback) {
         try {
             Log.info('Setting content blocker. Length=' + json.length);
 
             var self = this;
 
             function setContentBlocker(callback) {
-                //TODO: Manage contentBlockListDirty flag
-
                 // When given the same rules as last time setContentBlocker will always give
                 // null (success) to the callback, even when there was actually an error. We
                 // cache the last result therefore so that we can provide a consistent result
@@ -140,9 +142,11 @@ exports.SafariContentBlocker = {
                     // null for success or an Error on failure.)
                     // Bug #26322821 filed on bugreport.apple.com
                     JSON.stringify(json),
-                    function(error) {
-                        if (!error || error == "")
+                    function (error) {
+                        if (error == "") {
+                            callback();
                             return;
+                        }
 
                         self.lastSetContentBlockerError = error;
                         callback(error);
@@ -150,15 +154,24 @@ exports.SafariContentBlocker = {
                 );
             }
 
-            setContentBlocker(function(error) {
-                Log.error('Error setting content blocker: ' + error);
+            setContentBlocker(function (error) {
+                if (error) {
+                    Log.error('Error setting content blocker: ' + error);
+                } else {
+                    Log.info('Content blocker has been set.');
+                }
 
-                //TODO: Handle error
+                if (onContentBlockerSetCallback) {
+                    onContentBlockerSetCallback(error);
+                }
+
             });
-
-            Log.info('Content blocker has been set.');
         } catch (ex) {
             Log.error('Error while setting content blocker: ' + ex);
+
+            if (onContentBlockerSetCallback) {
+                onContentBlockerSetCallback(ex);
+            }
         }
     },
 

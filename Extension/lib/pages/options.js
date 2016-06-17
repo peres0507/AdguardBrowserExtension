@@ -522,6 +522,10 @@ PageController.prototype = {
 
         if (environmentOptions.isContentBlockerEnabled) {
             this._checkSafariContentBlockerRulesLimit(info.rulesOverLimit);
+
+            if (info.error) {
+                //TODO: Show content blocker setup error
+            }
         }
     },
 
