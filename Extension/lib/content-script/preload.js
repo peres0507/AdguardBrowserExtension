@@ -77,8 +77,6 @@
             loadTruncatedCss = (height * width) < 100000;
         }
 
-        addIframeHidingStyle();
-
         initCollapseEventListeners();
         tryLoadCssAndScripts();
     };
@@ -174,11 +172,6 @@
      * @param response Response from the background page
      */
     var processCssAndScriptsResponse = function(response) {
-        if (!response || !response.selectors || response.selectors.length == 0) {
-            // Remove iframe style as page seems to be in the exceptions.
-            removeIframeHidingStyle();
-        }
-
         if (!response || response.requestFilterReady === false) {
             /**
              * This flag (requestFilterReady) means that we should wait for a while, because the 
@@ -337,7 +330,7 @@
             tagName: tagName
         };
 
-        if (eventType == "error") {
+        if (eventType == "error" || tagName == "iframe") {
             // Hide elements with "error" type right now
             // We will roll it back if element should not be collapsed
             collapseElement(element, tagName);
@@ -361,10 +354,6 @@
      * @param response Response got from the background page
      */
     var onProcessShouldCollapseResponse = function (response) {
-
-        // Removing added iframes-hiding style
-        // We do it here, cause otherwise it's not working properly
-        removeIframeHidingStyle();
 
         if (!response) {
             return;
@@ -542,4 +531,16 @@
     
     // Start the content script
     init();
+
+    addIframeHidingStyle();
+    document.addEventListener('DOMContentLoaded', function() {
+        var iframes = document.getElementsByTagName('iframe');
+        for (var i = 0; i < iframes.length; i++) {
+            checkShouldCollapse({
+                target: iframes[i],
+                type: "load"
+            });
+        }
+        removeIframeHidingStyle();
+    });
 })();
