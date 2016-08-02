@@ -17,7 +17,6 @@
 /* global contentPage */
 (function() {
     var AG_HIDDEN_ATTRIBUTE = "adg-hidden";
-    var AG_FRAMES_STYLE = "adguard-frames-style";
 
     var requestTypeMap = {
         "img": "IMAGE",
@@ -138,27 +137,28 @@
      * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/301
      */
     var addIframeHidingStyle = function () {
+        var AG_FRAMES_STYLE = "adguard-frames-style";
+
         var styleFrame = document.createElement("style");
         styleFrame.id = AG_FRAMES_STYLE;
         styleFrame.setAttribute("type", "text/css");
         styleFrame.textContent = 'iframe[src] { display: none !important; }';
         (document.head || document.documentElement).appendChild(styleFrame);
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             var iframes = document.getElementsByTagName('iframe');
             for (var i = 0; i < iframes.length; i++) {
-                checkShouldCollapseElement(iframes[i]);
+                checkShouldCollapse({
+                    target: iframes[i],
+                    type: "load"
+                });
             }
 
-            removeIframeHidingStyle();
+            var framesStyle = document.getElementById(AG_FRAMES_STYLE);
+            if (framesStyle) {
+                framesStyle.parentNode.removeChild(framesStyle);
+            }
         });
-    };
-
-    var removeIframeHidingStyle = function () {
-        var framesStyle = document.getElementById(AG_FRAMES_STYLE);
-        if (framesStyle) {
-            framesStyle.parentNode.removeChild(framesStyle);
-        }
     };
 
     /**
@@ -183,11 +183,6 @@
      * @param response Response from the background page
      */
     var processCssAndScriptsResponse = function(response) {
-        if (!response || !response.selectors || response.selectors.length == 0) {
-            // Remove iframe style as page seems to be in the exceptions.
-            removeIframeHidingStyle();
-        }
-
         if (!response || response.requestFilterReady === false) {
             /**
              * This flag (requestFilterReady) means that we should wait for a while, because the 
@@ -312,35 +307,25 @@
         // We need to listen for load events to hide blocked iframes (they don't raise error event)
         document.addEventListener("load", checkShouldCollapse, true);
     };
-    
+
     /**
      * Checks if loaded element is blocked by AG and should be hidden
-     * 
+     *
      * @param event Load or error event
      */
     var checkShouldCollapse = function(event) {
+
         var element = event.target;
         var eventType = event.type;
         var tagName = element.tagName.toLowerCase();
 
-        var expectedEventType = (tagName == "iframe" || tagName == "frame") ? "load" : "error";
-        if (eventType != expectedEventType) {
+        var requestType = requestTypeMap[tagName];
+        if (!requestType) {
             return;
         }
 
-        checkShouldCollapseElement(element);
-    };
-
-    /**
-     * Checks if element is blocked by AG and should be hidden
-     *
-     * @param element
-     */
-    var checkShouldCollapseElement = function (element) {
-        var tagName = element.tagName.toLowerCase();
-
-        var requestType = requestTypeMap[tagName];
-        if (!requestType) {
+        var expectedEventType = (tagName == "iframe" || tagName == "frame") ? "load" : "error";
+        if (eventType != expectedEventType) {
             return;
         }
 
@@ -356,7 +341,11 @@
             tagName: tagName
         };
 
-        collapseElement(element, tagName);
+        if (eventType == "error" || tagName == "iframe" || tagName == "frame") {
+            // Hide elements with "error" type and iframes right now
+            // We will roll it back if element should not be collapsed
+            collapseElement(element, tagName);
+        }
 
         // Send a message to the background page to check if the element really should be collapsed
         var message = {
