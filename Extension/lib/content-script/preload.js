@@ -267,11 +267,7 @@
             applyScripts(response.scripts);
             initBatchCollapse();
         } else {
-            if (document.readyState == 'complete') {
-                applySelectors(response.selectors, response.useShadowDom);
-            } else {
-                applySelectors(response.selectors, response.useShadowDom);
-            }
+            applySelectors(response.selectors, response.useShadowDom);
             applyScripts(response.scripts);
         }
 
