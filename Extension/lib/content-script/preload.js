@@ -267,7 +267,11 @@
             applyScripts(response.scripts);
             initBatchCollapse();
         } else {
-            applySelectors(response.selectors, response.useShadowDom);
+            if (document.readyState == 'complete') {
+                applySelectors(response.selectors, response.useShadowDom);
+            } else {
+                applySelectors(response.selectors, response.useShadowDom);
+            }
             applyScripts(response.scripts);
         }
 
@@ -303,7 +307,15 @@
      * @param useShadowDom  If true - add styles to shadow DOM instead of normal DOM. 
      */
     var applySelectors = function (selectors, useShadowDom) {
-        if (!selectors || selectors.length == 0) {
+        if (!selectors || selectors.length === 0) {
+            return;
+        }
+
+        if (document.readyState != 'complete' && document.readyState != 'interactive') {
+            // Delay CSS rules application a bit
+            setTimeout(function() {
+                applySelectors(selectors, useShadowDom);
+            }, 10);
             return;
         }
 
