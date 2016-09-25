@@ -140,9 +140,9 @@ public class FileUtil {
 
 		copyCommonFiles(source, dest, browser);
 
-		//move processed html pages to data/content folder
+		//move processed html pages to content folder
 		File sourcePagesDir = new File(dest, "pages");
-		File destPagesDir = new File(dest, "data/content");
+		File destPagesDir = new File(dest, "./");
 		copyDirectory(sourcePagesDir, destPagesDir);
 		FileUtils.deleteQuietly(sourcePagesDir);
 
@@ -154,20 +154,20 @@ public class FileUtil {
 		FileUtils.moveFile(firefoxFontsFile, fontsFile);
 		FileUtils.deleteQuietly(fontsDir);
 
-		//move js pages files to data/content/pages folder
+		//move js pages files to content/pages folder
 		File sourceJsPagesDir = new File(dest, "lib/pages");
-		File destJsPagesDir = new File(dest, "data/content/pages");
+		File destJsPagesDir = new File(dest, "pages");
 		FileUtils.moveDirectory(sourceJsPagesDir, destJsPagesDir);
 
-		//move lib/content-script folder to data/content/content-script folder
+		//move lib/content-script folder to content-script folder
 		File sourceContentScript = new File(dest, "lib/content-script");
-		File destContentScript = new File(dest, "data/content/content-script");
+		File destContentScript = new File(dest, "content-script");
 		copyDirectory(sourceContentScript, destContentScript);
 		FileUtils.deleteQuietly(sourceContentScript);
 
-		//move third-party js files to data/content folder
+		//move third-party js files to content folder
 		File sourceLibsDir = new File(dest, "lib/libs");
-		File destLibsDir = new File(dest, "data/content/libs");
+		File destLibsDir = new File(dest, "libs");
 		FileUtils.moveDirectory(sourceLibsDir, destLibsDir);
 		//TODO: optimize
 		//Remove deferred.min.js file, cause use only in chrome and safari extension
