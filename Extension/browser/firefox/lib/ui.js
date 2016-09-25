@@ -212,7 +212,7 @@ var UI = exports.UI = {
 
     getAssistantCssOptions: function () {
         return {
-            cssLink: self.data.url("content/content-script/assistant/css/assistant.css")
+            cssLink: self.data.url("content/lib/content-script/assistant/css/assistant.css")
         };
     },
 
@@ -332,14 +332,14 @@ var UI = exports.UI = {
         this.abusePanel = SdkPanel({
             width: 552,
             height: 345,
-            contentURL: self.data.url('content/content-script/abuse.html'),
+            contentURL: self.data.url('content/lib/content-script/abuse.html'),
             contentScriptOptions: contentScripts.getContentScriptOptions(),
             contentScriptFile: [
                 self.data.url('content/libs/jquery-2.2.4.min.js'),
-                self.data.url('content/content-script/content-script.js'),
-                self.data.url('content/content-script/i18n-helper.js'),
+                self.data.url('content/lib/content-script/content-script.js'),
+                self.data.url('content/lib/content-script/i18n-helper.js'),
                 self.data.url('content/pages/i18n.js'),
-                self.data.url('content/content-script/abuse.js')
+                self.data.url('content/lib/content-script/abuse.js')
             ]
         });
 

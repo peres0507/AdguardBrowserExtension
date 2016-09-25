@@ -74,12 +74,12 @@ var PopupButton = exports.PopupButton = {
             contentURL: self.data.url('content/popup.html'),
             contentScriptFile: [
                 self.data.url('content/libs/jquery-2.2.4.min.js'),
-                self.data.url('content/content-script/content-script.js'),
-                self.data.url('content/content-script/i18n-helper.js'),
+                self.data.url('content/lib/content-script/content-script.js'),
+                self.data.url('content/lib/content-script/i18n-helper.js'),
                 self.data.url('content/pages/i18n.js'),
                 self.data.url('content/pages/popup-controller.js'),
                 self.data.url('content/pages/script.js'),
-                self.data.url('content/content-script/panel-popup.js')
+                self.data.url('content/lib/content-script/panel-popup.js')
             ],
             contentScriptOptions: contentScripts.getContentScriptOptions(),
             contentScriptWhen: 'ready',

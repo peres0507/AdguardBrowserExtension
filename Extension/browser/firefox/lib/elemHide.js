@@ -35,7 +35,7 @@ var styleService = require('./styleSheetService');
  *
  * Depending on the user settings we can use one of the following ways:
  * 1. Registering browser-wide stylesheet
- * 2. Injecting CSS/JS with content-script/preload.js script
+ * 2. Injecting CSS/JS with lib/content-script/preload.js script
  */
 var ElemHide = exports.ElemHide = {
 
@@ -197,7 +197,7 @@ var ElemHide = exports.ElemHide = {
      * @private
      */
     _registerSelectorStyle: function () {
-        this.selectorStyle = Services.io.newURI("data:text/css," + encodeURIComponent(self.data.load('content/content-script/assistant/css/selector.css')), null, null);
+        this.selectorStyle = Services.io.newURI("data:text/css," + encodeURIComponent(self.data.load('content/lib/content-script/assistant/css/selector.css')), null, null);
         this._applyCssStyleSheet(this.selectorStyle);
         Log.info("Selector style registered successfully");
     },

@@ -63,8 +63,8 @@ ContentScripts.prototype = {
         this.registerChromeContentScript('filter-download.html', [
             'libs/jquery-2.2.4.min.js',
             'libs/nprogress.patched.js',
-            'content-script/content-script.js',
-            'content-script/i18n-helper.js',
+            'lib/content-script/content-script.js',
+            'lib/content-script/i18n-helper.js',
             'pages/i18n.js',
             'pages/script.js',
             'pages/filter-download.js'
@@ -73,9 +73,9 @@ ContentScripts.prototype = {
         // Thankyou.html
         this.registerChromeContentScript('thankyou.html', [
             'libs/jquery-2.2.4.min.js',
-            'content-script/content-script.js',
-            'content-script/content-utils.js',
-            'content-script/i18n-helper.js',
+            'lib/content-script/content-script.js',
+            'lib/content-script/content-utils.js',
+            'lib/content-script/i18n-helper.js',
             'pages/i18n.js',
             'pages/script.js',
             'pages/thankyou.js'
@@ -88,9 +88,9 @@ ContentScripts.prototype = {
             'libs/jquery.mousewheel.min.js',
             'libs/jquery.jscrollpane.min.js',
             'libs/moment-with-locales.min.js',
-            'content-script/content-script.js',
-            'content-script/content-utils.js',
-            'content-script/i18n-helper.js',
+            'lib/content-script/content-script.js',
+            'lib/content-script/content-utils.js',
+            'lib/content-script/i18n-helper.js',
             'pages/i18n.js',
             'pages/script.js',
             'pages/options.js'
@@ -101,9 +101,9 @@ ContentScripts.prototype = {
             'libs/jquery-2.2.4.min.js',
             'libs/bootstrap.min.js',
             'libs/moment-with-locales.min.js',
-            'content-script/content-script.js',
-            'content-script/content-utils.js',
-            'content-script/i18n-helper.js',
+            'lib/content-script/content-script.js',
+            'lib/content-script/content-utils.js',
+            'lib/content-script/i18n-helper.js',
             'pages/i18n.js',
             'pages/script.js',
             'pages/log.js'
@@ -112,15 +112,15 @@ ContentScripts.prototype = {
         // Export.html
         this.registerChromeContentScript('export.html', [
             'libs/jquery-2.2.4.min.js',
-            'content-script/content-script.js',
+            'lib/content-script/content-script.js',
             'pages/export.js'
         ]);
 
         // Sb.html
         this.registerChromeContentScript('sb.html', [
             'libs/jquery-2.2.4.min.js',
-            'content-script/content-script.js',
-            'content-script/i18n-helper.js',
+            'lib/content-script/content-script.js',
+            'lib/content-script/i18n-helper.js',
             'pages/i18n.js',
             'pages/sb-filtered-page.js'
         ]);
@@ -128,13 +128,13 @@ ContentScripts.prototype = {
         // Web pages content scripts (responsible for ad blocking)
         this.registerPageContentScript([
             'libs/extended-css.js',
-            'content-script/content-script.js',
-            'content-script/preload.js'
+            'lib/content-script/content-script.js',
+            'lib/content-script/preload.js'
         ], 'document_start', true);
 
         this.registerPageContentScript([
-            'content-script/content-script.js', // Message passing
-            'content-script/content-utils.js'   // Show alert popup and reload without cache functionality
+            'lib/content-script/content-script.js', // Message passing
+            'lib/content-script/content-utils.js'   // Show alert popup and reload without cache functionality
         ], 'document_start', false);
 
         // Assistant
@@ -143,13 +143,13 @@ ContentScripts.prototype = {
             'libs/dom.patched.js',
             'libs/balalaika.patched.js',
             'libs/deferred.js',
-            'content-script/i18n-helper.js',    // Localization placeholders
-            'content-script/content-script.js', // Message passing
-            'content-script/assistant/js/slider-widget.js',
-            'content-script/assistant/js/start-assistant.js',
-            'content-script/assistant/js/adguard-selector.js',
-            'content-script/assistant/js/adguard-rules-constructor.js',
-            'content-script/assistant/js/assistant.js'
+            'lib/content-script/i18n-helper.js',    // Localization placeholders
+            'lib/content-script/content-script.js', // Message passing
+            'lib/content-script/assistant/js/slider-widget.js',
+            'lib/content-script/assistant/js/start-assistant.js',
+            'lib/content-script/assistant/js/adguard-selector.js',
+            'lib/content-script/assistant/js/adguard-rules-constructor.js',
+            'lib/content-script/assistant/js/assistant.js'
         ], 'document_end', false);
 
         // abp:subscribe
@@ -187,9 +187,9 @@ ContentScripts.prototype = {
         ];
 
         this.registerPageContentScript([
-            'content-script/content-script.js', // message-passing
-            'content-script/content-utils.js',  // showAlertPopup function
-            'content-script/subscribe.js'
+            'lib/content-script/content-script.js', // message-passing
+            'lib/content-script/content-utils.js',  // showAlertPopup function
+            'lib/content-script/subscribe.js'
         ], 'document_end', false, subscribeIncludeDomains);
 
         this._loadFrameScript();
@@ -395,7 +395,7 @@ ContentScripts.prototype = {
         // Using global MM to register our frame script browser-wide
         var messageManager = Cc["@mozilla.org/globalmessagemanager;1"].getService(Ci.nsIMessageListenerManager);
         messageManager.addMessageListener('Adguard:send-message-channel', listener);
-        messageManager.loadFrameScript(this._contentUrl('content-script/frame-script.js'), true);
+        messageManager.loadFrameScript(this._contentUrl('lib/content-script/frame-script.js'), true);
     },
 
     
