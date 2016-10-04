@@ -49,9 +49,6 @@ function startup(data, reason) {
         version = data.version;
     }
 
-    console.log('App version:' + version);
-    console.log(bgProcess);
-
     // Already started?
     if (bgProcess !== null) {
         console.log('App is already started');
@@ -60,10 +57,6 @@ function startup(data, reason) {
 
     var appShell = Components.classes['@mozilla.org/appshell/appShellService;1']
         .getService(Components.interfaces.nsIAppShellService);
-
-    console.log(appShell);
-
-    console.log('App startup 2');
 
     var isReady = function () {
         var hiddenDoc;
@@ -104,8 +97,6 @@ function startup(data, reason) {
         console.log('App is ready');
         return;
     }
-
-    console.log('App startup 3');
 
     // https://github.com/gorhill/uBlock/issues/749
     // Poll until the proper environment is set up -- or give up eventually.
