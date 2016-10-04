@@ -22,12 +22,10 @@
 
 /******************************************************************************/
 
-const {classes: Cc, interfaces: Ci} = Components;
-
 // Accessing the context of the background page:
 // var win = Services.appShell.hiddenDOMWindow.document.querySelector('iframe[src*=adguard]').contentWindow;
 
-var bgProcess;
+var bgProcess = null;
 var version;
 const hostName = 'adguard';
 const restartListener = {
@@ -37,23 +35,35 @@ const restartListener = {
     },
 
     receiveMessage: function () {
+        console.log('restart message received');
+
         shutdown();
         startup();
     }
 };
 
 function startup(data, reason) {
+    console.log('App startup');
+
     if (data !== undefined) {
         version = data.version;
     }
 
+    console.log('App version:' + version);
+    console.log(bgProcess);
+
     // Already started?
     if (bgProcess !== null) {
+        console.log('App is already started');
         return;
     }
 
-    var appShell = Cc['@mozilla.org/appshell/appShellService;1']
-        .getService(Ci.nsIAppShellService);
+    var appShell = Components.classes['@mozilla.org/appshell/appShellService;1']
+        .getService(Components.interfaces.nsIAppShellService);
+
+    console.log(appShell);
+
+    console.log('App startup 2');
 
     var isReady = function () {
         var hiddenDoc;
@@ -91,8 +101,11 @@ function startup(data, reason) {
     };
 
     if (isReady()) {
+        console.log('App is ready');
         return;
     }
+
+    console.log('App startup 3');
 
     // https://github.com/gorhill/uBlock/issues/749
     // Poll until the proper environment is set up -- or give up eventually.
@@ -103,8 +116,8 @@ function startup(data, reason) {
     // https://trac.torproject.org/projects/tor/ticket/19438
     // Try for a longer period.
     var tryMax = 600011;
-    var timer = Cc['@mozilla.org/timer;1']
-        .createInstance(Ci.nsITimer);
+    var timer = Components.classes['@mozilla.org/timer;1']
+        .createInstance(Components.interfaces.nsITimer);
 
     var checkLater = function () {
         trySum += tryDelay;
@@ -134,6 +147,8 @@ function startup(data, reason) {
 }
 
 function shutdown(data, reason) {
+    console.log('App shutdown');
+
     if (reason === APP_SHUTDOWN) {
         return;
     }
@@ -155,6 +170,8 @@ function shutdown(data, reason) {
  * On addon install
  */
 function install() {
+    console.log('App install');
+
     // https://bugzil.la/719376
     Components.classes['@mozilla.org/intl/stringbundle;1']
         .getService(Components.interfaces.nsIStringBundleService)
@@ -168,6 +185,8 @@ function install() {
  * @param reason
  */
 function uninstall(data, reason) {
+    console.log('App uninstall');
+
     if (reason !== ADDON_UNINSTALL) {
         return;
     }
