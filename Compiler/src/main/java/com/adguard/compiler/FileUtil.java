@@ -159,10 +159,6 @@ public class FileUtil {
 		File destJsPagesDir = new File(dest, "pages");
 		FileUtils.moveDirectory(sourceJsPagesDir, destJsPagesDir);
 
-		//Remove deferred.min.js file, cause use only in chrome and safari extension
-		File sourceLibsDir = new File(dest, "lib/libs");
-		FileUtils.deleteQuietly(new File(sourceLibsDir, "deferred.min.js"));
-
 		//convert chrome style locales to firefox style
 		File sourceLocalesDir = new File(dest, "_locales");
 		File destLocalesDir = new File(dest, "chrome/locale");

@@ -15,31 +15,29 @@
  * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-//TODO: FF Fix drop addon-sdk
-//var defer = require('sdk/core/promise').defer;
-//var deferAll = require('sdk/core/promise').all;
+/* global exports, Deferred */
+
+var defer = exports.Deferred;
 
 /**
  * Promise wrapper
- * @type {Promise}
  */
 var Promise = exports.Promise = function () {
 
-	var deferred = defer();
 	var promise;
-	if (typeof deferred.promise == 'function') {
-		promise = deferred.promise();
+	if (typeof defer.promise == 'function') {
+		promise = defer.promise();
 	} else {
-		promise = deferred.promise;
+		promise = defer.promise;
 	}
 	this.promise = promise;
 
 	this.resolve = function () {
-		deferred.resolve();
+		defer.resolve();
 	};
 
 	this.reject = function () {
-		deferred.reject();
+		defer.reject();
 	};
 
 	this.then = function (onSuccess, onReject) {
@@ -52,5 +50,5 @@ Promise.all = function (promises) {
 	for (var i = 0; i < promises.length; i++) {
 		defers.push(promises[i].promise);
 	}
-	return deferAll(defers);
+	return exports.when.apply(defer, defers);
 };

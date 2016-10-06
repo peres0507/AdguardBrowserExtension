@@ -15,24 +15,16 @@
  * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * Initializing required libraries for this file.
- * require method is overridden in Chrome extension (port/require.js).
- */
-var XMLHttpRequestConstructor = Components.classes["@mozilla.org/xmlextras/xmlhttprequest;1"];
+/* global Components, Log, Utils, FilterRule, FilterRuleBuilder, Prefs */
 
-//var Log = require('../../lib/utils/log').Log;
-//var Utils = require('../../lib/utils/browser-utils').Utils;
-//var FilterRule = require('../../lib/filter/rules/base-filter-rule').FilterRule;
-//var FilterRuleBuilder = require('../../lib/filter/rules/filter-rule-builder').FilterRuleBuilder;
-//var Prefs = require('../../lib/prefs').Prefs;
+var XMLHttpRequestConstructor = Components.classes["@mozilla.org/xmlextras/xmlhttprequest;1"];
 
 /**
  * Class for working with our backend server.
  * All requests sent by this class are covered in the privacy policy:
  * http://adguard.com/en/privacy.html#browsers
  */
-var ServiceClient = function () {
+var ServiceClient = exports.ServiceClient = function () {
 
 	// Base url of our backend server
 	this.backendUrl = "https://chrome.adtidy.org";
@@ -107,8 +99,6 @@ ServiceClient.prototype = {
 			return;
 		}
 
-		var AdguardFilterVersion = require('../../lib/filter/antibanner').AdguardFilterVersion;
-
 		var success = function (response) {
 			var xml = response.responseXML;
 			if (xml && xml.getElementsByTagName) {
@@ -145,8 +135,6 @@ ServiceClient.prototype = {
 	 * @param errorCallback     	Called on error
 	 */
 	loadFilterRules: function (filterId, useOptimizedFilters, successCallback, errorCallback) {
-
-		var AdguardFilterVersion = require('../../lib/filter/antibanner').AdguardFilterVersion;
 
 		var success = function (response) {
 
@@ -206,8 +194,6 @@ ServiceClient.prototype = {
 	 * @param errorCallback     	Called on error
 	 */
 	loadLocalFilter: function (filterId, useOptimizedFilters, successCallback, errorCallback) {
-
-		var AdguardFilterVersion = require('../../lib/filter/antibanner').AdguardFilterVersion;
 
 		var success = function (response) {
 			var responseText = response.responseText;
@@ -295,8 +281,6 @@ ServiceClient.prototype = {
 	 */
 	loadLocalGroupsMetadata: function (successCallback, errorCallback) {
 
-		var SubscriptionGroup = require('../../lib/filter/subscription').SubscriptionGroup;
-
 		var success = function (response) {
 			var xml = response.responseXML;
 			if (xml && xml.getElementsByTagName) {
@@ -323,8 +307,6 @@ ServiceClient.prototype = {
 	 * @param errorCallback     Called on error
 	 */
 	loadLocalFiltersMetadata: function (successCallback, errorCallback) {
-
-		var SubscriptionFilter = require('../../lib/filter/subscription').SubscriptionFilter;
 
 		var success = function (response) {
 			var xml = response.responseXML;
@@ -386,7 +368,7 @@ ServiceClient.prototype = {
 		}
 		params = this._addKeyParameter(params);
 
-		var request = XMLHttpRequestConstructor.createInstance(Ci.nsIXMLHttpRequest);
+		var request = XMLHttpRequestConstructor.createInstance(Components.interfaces.nsIXMLHttpRequest);
 		request.open('POST', this.reportUrl);
 		request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 		request.send(params);
@@ -471,7 +453,7 @@ ServiceClient.prototype = {
 		}
 		params = this._addKeyParameter(params);
 
-		var request = XMLHttpRequestConstructor.createInstance(Ci.nsIXMLHttpRequest);
+		var request = XMLHttpRequestConstructor.createInstance(Components.interfaces.nsIXMLHttpRequest);
 		request.open('POST', this.ruleStatsUrl);
 		request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 		request.send(params);
@@ -502,7 +484,7 @@ ServiceClient.prototype = {
 
 	_executeRequestAsync: function (url, contentType, successCallback, errorCallback) {
 
-		var request = XMLHttpRequestConstructor.createInstance(Ci.nsIXMLHttpRequest);
+		var request = XMLHttpRequestConstructor.createInstance(Components.interfaces.nsIXMLHttpRequest);
 		try {
 			request.open('GET', url);
 			request.setRequestHeader('Content-type', contentType);
