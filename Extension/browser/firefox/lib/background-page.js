@@ -27,7 +27,6 @@ try {
     console = Components.utils.import('resource://gre/modules/devtools/Console.jsm', {}).console;
 }
 
-
 console.log('Initializing background-page');
 
 
