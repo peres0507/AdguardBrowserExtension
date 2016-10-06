@@ -15,6 +15,7 @@
  * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+//TODO: FF Fix drop addon-sdk
 //var defer = require('sdk/core/promise').defer;
 //var deferAll = require('sdk/core/promise').all;
 

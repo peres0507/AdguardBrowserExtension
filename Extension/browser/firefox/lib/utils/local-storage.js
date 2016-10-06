@@ -15,40 +15,42 @@
  * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-//Components.utils.import("resource://gre/modules/Services.jsm");
-//
-//var SimplePrefs = require('sdk/simple-prefs');
-//var Log = require('../../lib/utils/log').Log;
-//
-//var self = require('sdk/self');
+/* global exports, Components */
 
 /**
  * Local storage adapter
  */
+
 var LS = exports.LS = {
 
-	storage: SimplePrefs.prefs,
-	branch: Services.prefs.getBranch('extensions.' + self.id + '.'),
+    branch: Services.prefs.getBranch('extensions.' + location.host + '.'),
+    str: Components.classes['@mozilla.org/supports-string;1']
+        .createInstance(Components.interfaces.nsISupportsString),
 
-	getItem: function (key) {
-		return this.storage[key];
-	},
+    getItem: function (key) {
+        try {
+            return this.branch.getComplexValue(
+                key,
+                Components.interfaces.nsISupportsString
+            ).data;
+        } catch (ex) {
+            return null;
+        }
+    },
 
-	setItem: function (key, value) {
-		try {
-			this.storage[key] = value;
-		} catch (ex) {
-			Log.error("Error save item cause: {0}", ex);
-		}
-	},
+    setItem: function (key, value) {
+        this.str.data = value;
+        this.branch.setComplexValue(
+            key,
+            Components.interfaces.nsISupportsString,
+            this.str
+        );
+    },
 
-	removeItem: function (key) {
-		this.branch.clearUserPref(key);
-	},
-
-	clean: function () {
-		for (var key in this.storage) {
-			this.removeItem(key);
-		}
-	}
+    removeItem: function (key) {
+        this.branch.clearUserPref(key);
+    },
+    clean: function () {
+        this.branch.deleteBranch('');
+    }
 };

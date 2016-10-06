@@ -14,16 +14,8 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
-/* global require, exports */
-/**
- * Initializing required libraries for this file.
- * require method is overridden in Chrome extension (port/require.js).
- */
-//var Utils = require('../../lib/utils/browser-utils').Utils;
-//var LS = require('../../lib/utils/local-storage').LS;
-//var Log = require('../../lib/utils/log').Log;
-//var EventNotifier = require('../../lib/utils/notifier').EventNotifier;
-//var EventNotifierTypes = require('../../lib/utils/common').EventNotifierTypes;
+
+/* global exports, Utils, LS, Log, EventNotifier, EventNotifierTypes */
 
 /**
  * Object that manages user settings.
@@ -49,6 +41,7 @@ var UserSettings = function () {
     for (var name in this.settings) { // jshint ignore: line
         this.defaultProperties[this.settings[name]] = false;
     }
+
     this.defaultProperties[this.settings.DISABLE_SHOW_ADGUARD_PROMO_INFO] = (!Utils.isWindowsOs() && !Utils.isMacOs()) || Utils.isEdgeBrowser();
     this.defaultProperties[this.settings.DISABLE_SAFEBROWSING] = true;
     this.defaultProperties[this.settings.DISABLE_COLLECT_HITS] = true;
@@ -59,6 +52,7 @@ var UserSettings = function () {
     this.properties = Object.create(null);
 };
 
+
 UserSettings.prototype.getProperty = function (propertyName) {
 
     if (propertyName in this.properties) {
@@ -67,9 +61,10 @@ UserSettings.prototype.getProperty = function (propertyName) {
 
     var propertyValue = null;
 
-    if (propertyName in LS.storage) {
+    var storedValue = LS.getItem(propertyName);
+    if (storedValue != null) {
         try {
-            propertyValue = JSON.parse(LS.getItem(propertyName));
+            propertyValue = JSON.parse(storedValue);
         } catch (ex) {
             Log.error('Error get property {0}, cause: {1}', propertyName, ex);
         }
@@ -167,7 +162,7 @@ UserSettings.prototype.getAllSettings = function () {
 
     var result = {
         names: Object.create(null),
-        values: Object.create(null),
+        values: Object.create(null)
     };
 
     for (var key in this.settings) {
