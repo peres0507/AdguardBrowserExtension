@@ -14,32 +14,23 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+/* global Components, Prefs, ContextMenu, PopupButton, MobileMenu, UrlUtils, Utils, StringUtils, EventNotifier,
+EventNotifierTypes, RequestTypes, userSettings, UiUtils, Log, contentScripts */
+
 //var {Cc, Ci, Cu} = require('chrome');
 //var self = require('sdk/self');
 //var tabs = require('sdk/tabs');
 //var unload = require('sdk/system/unload');
 //var tabUtils = require('sdk/tabs/utils');
 //var sdkWindows = require('sdk/windows').browserWindows;
-//
-//var Prefs = require('./prefs').Prefs;
-//var ContextMenu = require('./contextMenu').ContextMenu;
-//var PopupButton = require('./popupButton').PopupButton;
-//var MobileMenu = require('./mobileMenu').MobileMenu;
-//var UrlUtils = require('./utils/url').UrlUtils;
-//var Utils = require('./utils/browser-utils').Utils;
-//var StringUtils = require('./utils/common').StringUtils;
-//var EventNotifier = require('./utils/notifier').EventNotifier;
-//var EventNotifierTypes = require('./utils/common').EventNotifierTypes;
-//var RequestTypes = require('./utils/common').RequestTypes;
-//var userSettings = require('./utils/user-settings').userSettings;
-//var UiUtils = require('./uiUtils').UiUtils;
-//var Log = require('./utils/log').Log;
-//var contentScripts = require('./contentScripts').contentScripts;
 
 /**
  * UI entry point.
  *
- * Inits toolbar button and context menu.
+ * TODO: Drop addon-sdk with new tabs-api
+ *
+ * Initializes toolbar button and context menu.
  * Contains methods managing browser tabs (open/close tabs).
  */
 var UI = exports.UI = {

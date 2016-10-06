@@ -1730,21 +1730,22 @@ var SAVE_FILTER_RULES_TO_STORAGE_EVENTS = [EventNotifierTypes.UPDATE_FILTER_RULE
 
 // Events
 // TODO: move to UI.js.
-(function () {
-
-    //on filter auto-enabled event
-    EventNotifier.addListener(function (event, enabledFilters) {
-        if (event == EventNotifierTypes.ENABLE_FILTER_SHOW_POPUP) {
-            var result = Utils.getFiltersEnabledResultMessage(enabledFilters);
-            UI.showAlertMessagePopup(result.title, result.text);
-        }
-    });
-
-    //on filters updated event
-    EventNotifier.addListener(function (event, success, updatedFilters) {
-        if (event == EventNotifierTypes.UPDATE_FILTERS_SHOW_POPUP) {
-            var result = Utils.getFiltersUpdateResultMessage(success, updatedFilters);
-            UI.showAlertMessagePopup(result.title, result.text);
-        }
-    });
-})();
+// TODO: FF Fix
+//(function () {
+//
+//    //on filter auto-enabled event
+//    EventNotifier.addListener(function (event, enabledFilters) {
+//        if (event == EventNotifierTypes.ENABLE_FILTER_SHOW_POPUP) {
+//            var result = Utils.getFiltersEnabledResultMessage(enabledFilters);
+//            UI.showAlertMessagePopup(result.title, result.text);
+//        }
+//    });
+//
+//    //on filters updated event
+//    EventNotifier.addListener(function (event, success, updatedFilters) {
+//        if (event == EventNotifierTypes.UPDATE_FILTERS_SHOW_POPUP) {
+//            var result = Utils.getFiltersUpdateResultMessage(success, updatedFilters);
+//            UI.showAlertMessagePopup(result.title, result.text);
+//        }
+//    });
+//})();

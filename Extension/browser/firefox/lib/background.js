@@ -22,19 +22,48 @@
 /* global FilteringLog */
 /* global WebRequestService */
 /* global ContentMessageHandler */
+/* global contentScripts */
 /* global ext */
+
+var antiBannerService = new AntiBannerService();
+
+//try {
+//    console.log('Init app..');
+//
+//    var framesMap = new FramesMap(antiBannerService, TabsMap);
+//    var adguardApplication = new AdguardApplication(framesMap);
+//    var filteringLog = new FilteringLog(TabsMap, framesMap, UI);
+//    var webRequestService = new WebRequestService(framesMap, antiBannerService, filteringLog, adguardApplication);
+//
+//    WebRequestImpl.init(antiBannerService, adguardApplication, ElemHide, framesMap, filteringLog, webRequestService);
+//    ElemHide.init(framesMap, antiBannerService, webRequestService);
+//    InterceptHandler.init(framesMap, antiBannerService);
+//    filterRulesHitCount.setAntiBannerService(antiBannerService);
+//
+//    // Initialize content-message handler
+//    var contentMessageHandler = new ContentMessageHandler();
+//    contentMessageHandler.init(antiBannerService, webRequestService, framesMap, adguardApplication, filteringLog, UI);
+//    contentMessageHandler.setSendMessageToSender(function (worker, message) {
+//        contentScripts.sendMessageToWorker(worker, message);
+//    });
+//    contentScripts.init(contentMessageHandler);
+//
+//    // Initialize overlay toolbar button
+//    UI.init(antiBannerService, framesMap, filteringLog, adguardApplication, SdkPanel, SdkContextMenu, SdkButton);
+//
+//    console.log('Init app..OK');
+//} catch (ex) {
+//    console.error(ex);
+//}
 
 try {
     console.log('Starting app..');
 
-    var antiBannerService = new AntiBannerService();
+    //var antiBannerService = new AntiBannerService();
 
     antiBannerService.init({
 
         runCallback: function (runInfo) {
-            console.log('Callback');
-            console.log(UI);
-
             if (runInfo.isFirstRun) {
                 UI.openFiltersDownloadPage();
             }
