@@ -19,17 +19,17 @@
  * Initializing required libraries for this file.
  * require method is overridden in Chrome extension (port/require.js).
  */
-var Log = require('../../lib/utils/log').Log;
-var Utils = require('../../lib/utils/browser-utils').Utils;
-var LS = require('../../lib/utils/local-storage').LS;
-var Prefs = require('../../lib/prefs').Prefs;
-var AntiBannerFiltersId = require('../../lib/utils/common').AntiBannerFiltersId;
-var RulesStorage = require('../../lib/utils/rules-storage').RulesStorage;
-var FilterStorage = require('../../lib/filter/storage').FilterStorage;
-var CollectionUtils = require('../../lib/utils/common').CollectionUtils;
-var Promise = require('../../lib/utils/promises').Promise;
-var filterRulesHitCount = require('../../lib/filter/filters-hit').filterRulesHitCount;
-var simpleStorage = require('sdk/simple-storage');
+//var Log = require('../../lib/utils/log').Log;
+//var Utils = require('../../lib/utils/browser-utils').Utils;
+//var LS = require('../../lib/utils/local-storage').LS;
+//var Prefs = require('../../lib/prefs').Prefs;
+//var AntiBannerFiltersId = require('../../lib/utils/common').AntiBannerFiltersId;
+//var RulesStorage = require('../../lib/utils/rules-storage').RulesStorage;
+//var FilterStorage = require('../../lib/filter/storage').FilterStorage;
+//var CollectionUtils = require('../../lib/utils/common').CollectionUtils;
+//var Promise = require('../../lib/utils/promises').Promise;
+//var filterRulesHitCount = require('../../lib/filter/filters-hit').filterRulesHitCount;
+//var simpleStorage = require('sdk/simple-storage');
 
 /**
  * Service that manages extension version information and handles

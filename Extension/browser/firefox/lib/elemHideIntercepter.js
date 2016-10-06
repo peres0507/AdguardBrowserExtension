@@ -15,21 +15,21 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
-const {Cu, Ci, Cr, Cc, components} = require('chrome');
-
-Cu.import("resource://gre/modules/XPCOMUtils.jsm");
-Cu.import("resource://gre/modules/Services.jsm");
-
-var PrincipalService = Cc["@mozilla.org/systemprincipal;1"].getService(Ci.nsIPrincipal);
-
-var unload = require('sdk/system/unload');
-
-var filterRulesHitCount = require('./filter/filters-hit').filterRulesHitCount;
-
-var ConcurrentUtils = require('./utils/browser-utils').ConcurrentUtils;
-var Log = require('./utils/log').Log;
-var FilterUtils = require('./utils/common').FilterUtils;
-var WebRequestHelper = require('./contentPolicy').WebRequestHelper;
+//const {Cu, Ci, Cr, Cc, components} = require('chrome');
+//
+//Cu.import("resource://gre/modules/XPCOMUtils.jsm");
+//Cu.import("resource://gre/modules/Services.jsm");
+//
+//var PrincipalService = Cc["@mozilla.org/systemprincipal;1"].getService(Ci.nsIPrincipal);
+//
+//var unload = require('sdk/system/unload');
+//
+//var filterRulesHitCount = require('./filter/filters-hit').filterRulesHitCount;
+//
+//var ConcurrentUtils = require('./utils/browser-utils').ConcurrentUtils;
+//var Log = require('./utils/log').Log;
+//var FilterUtils = require('./utils/common').FilterUtils;
+//var WebRequestHelper = require('./contentPolicy').WebRequestHelper;
 
 /**
  * Handler that intercepts requests to about:adg-intercept.

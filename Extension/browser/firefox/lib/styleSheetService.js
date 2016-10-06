@@ -15,10 +15,10 @@
  * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var {Cc, Ci, Cu} = require('chrome');
-var unload = require('sdk/system/unload').when;
-var styleService = Cc['@mozilla.org/content/style-sheet-service;1'].getService(Ci.nsIStyleSheetService);
-var ioService = Cc['@mozilla.org/network/io-service;1'].getService(Ci.nsIIOService);
+//var {Cc, Ci, Cu} = require('chrome');
+//var unload = require('sdk/system/unload').when;
+//var styleService = Cc['@mozilla.org/content/style-sheet-service;1'].getService(Ci.nsIStyleSheetService);
+//var ioService = Cc['@mozilla.org/network/io-service;1'].getService(Ci.nsIIOService);
 
 function makeURI(url) {
     return ioService.newURI(url, null, null);

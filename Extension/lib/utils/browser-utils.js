@@ -17,16 +17,16 @@
  */
 /* global require, exports, i18n */
 
-var Cu = require('chrome').Cu;
-var Cc = require('chrome').Cc;
-var Ci = require('chrome').Ci;
-var setTimeout = require('sdk/timers').setTimeout; // jshint ignore: line
-var clearTimeout = require('sdk/timers').clearTimeout; // jshint ignore: line
-Cu.import("resource://gre/modules/Services.jsm");
-
-var LS = require('../../lib/utils/local-storage').LS;
-var Prefs = require('../../lib/prefs').Prefs;
-var RequestTypes = require('../../lib/utils/common').RequestTypes;
+//var Cu = require('chrome').Cu;
+//var Cc = require('chrome').Cc;
+//var Ci = require('chrome').Ci;
+//var setTimeout = require('sdk/timers').setTimeout; // jshint ignore: line
+//var clearTimeout = require('sdk/timers').clearTimeout; // jshint ignore: line
+//Cu.import("resource://gre/modules/Services.jsm");
+//
+//var LS = require('../../lib/utils/local-storage').LS;
+//var Prefs = require('../../lib/prefs').Prefs;
+//var RequestTypes = require('../../lib/utils/common').RequestTypes;
 
 var Utils = exports.Utils = {
 

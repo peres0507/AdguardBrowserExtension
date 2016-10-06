@@ -19,12 +19,11 @@
  * Initializing required libraries for this file.
  * require method is overridden in Chrome extension (port/require.js).
  */
-var Prefs = require('../../../lib/prefs').Prefs;
-var FilterUtils = require('../../../lib/utils/common').FilterUtils;
-var FilterRule = require('../../../lib/filter/rules/base-filter-rule').FilterRule;
-var Utils = require('../../../lib/utils/browser-utils').Utils;
+//var Prefs = require('../../../lib/prefs').Prefs;
+//var FilterUtils = require('../../../lib/utils/common').FilterUtils;
+//var FilterRule = require('../../../lib/filter/rules/base-filter-rule').FilterRule;
+//var Utils = require('../../../lib/utils/browser-utils').Utils;
 
-//TODO: Fix - doesn't work in FF bootstrap
 //var isFirefox = (Prefs.platform == "firefox");
 //var isShadowDomSupported = Utils.isShadowDomSupported();
 

@@ -14,18 +14,18 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
-var {Cu, Cc, Ci} = require('chrome');
-
-Cu.import("resource://gre/modules/XPCOMUtils.jsm");
-Cu.import("resource://gre/modules/Services.jsm");
-
-var self = require('sdk/self');
-var tabs = require('sdk/tabs');
-
-var WorkaroundUtils = require('./utils/workaround').WorkaroundUtils;
-var UiUtils = require('./uiUtils').UiUtils;
-var styleService = require('./styleSheetService');
-var contentScripts = require('./contentScripts').contentScripts;
+//var {Cu, Cc, Ci} = require('chrome');
+//
+//Cu.import("resource://gre/modules/XPCOMUtils.jsm");
+//Cu.import("resource://gre/modules/Services.jsm");
+//
+//var self = require('sdk/self');
+//var tabs = require('sdk/tabs');
+//
+//var WorkaroundUtils = require('./utils/workaround').WorkaroundUtils;
+//var UiUtils = require('./uiUtils').UiUtils;
+//var styleService = require('./styleSheetService');
+//var contentScripts = require('./contentScripts').contentScripts;
 
 /**
  * Object that manages toolbar button rendering.

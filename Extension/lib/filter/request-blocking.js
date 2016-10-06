@@ -15,15 +15,15 @@
  * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 /* global require, exports */
-var filterRulesHitCount = require('../../lib/filter/filters-hit').filterRulesHitCount;
-var FilterUtils = require('../../lib/utils/common').FilterUtils;
-var EventNotifier = require('../../lib/utils/notifier').EventNotifier;
-var EventNotifierTypes = require('../../lib/utils/common').EventNotifierTypes;
-var ServiceClient = require('../../lib/utils/service-client').ServiceClient;
-var Utils = require('../../lib/utils/browser-utils').Utils;
-var RequestTypes = require('../../lib/utils/common').RequestTypes;
-var userSettings = require('../../lib/utils/user-settings').userSettings;
-var Prefs = require('../../lib/prefs').Prefs;
+//var filterRulesHitCount = require('../../lib/filter/filters-hit').filterRulesHitCount;
+//var FilterUtils = require('../../lib/utils/common').FilterUtils;
+//var EventNotifier = require('../../lib/utils/notifier').EventNotifier;
+//var EventNotifierTypes = require('../../lib/utils/common').EventNotifierTypes;
+//var ServiceClient = require('../../lib/utils/service-client').ServiceClient;
+//var Utils = require('../../lib/utils/browser-utils').Utils;
+//var RequestTypes = require('../../lib/utils/common').RequestTypes;
+//var userSettings = require('../../lib/utils/user-settings').userSettings;
+//var Prefs = require('../../lib/prefs').Prefs;
 
 var WebRequestService = exports.WebRequestService = function (framesMap, antiBannerService, filteringLog, adguardApplication) {
     this.framesMap = framesMap;

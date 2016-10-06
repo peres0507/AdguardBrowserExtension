@@ -15,10 +15,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
-var Log = require('../../lib/utils/log').Log;
-var RulesStorage = require('../../lib/utils/rules-storage').RulesStorage;
-var FS = require('../../lib/utils/file-storage').FS;
-var FilterRuleBuilder = require('../../lib/filter/rules/filter-rule-builder').FilterRuleBuilder;
+//var Log = require('../../lib/utils/log').Log;
+//var RulesStorage = require('../../lib/utils/rules-storage').RulesStorage;
+//var FS = require('../../lib/utils/file-storage').FS;
+//var FilterRuleBuilder = require('../../lib/filter/rules/filter-rule-builder').FilterRuleBuilder;
 
 /**
  * This class manages file storage for filters.

@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
-var {Cc,Ci} = require('chrome');
-var tabUtils = require('sdk/tabs/utils');
-var {viewFor} = require('sdk/view/core');
-var winUtils = require('sdk/window/utils');
-
-var {Log} = require('./utils/log');
+//var {Cc,Ci} = require('chrome');
+//var tabUtils = require('sdk/tabs/utils');
+//var {viewFor} = require('sdk/view/core');
+//var winUtils = require('sdk/window/utils');
+//
+//var {Log} = require('./utils/log');
 
 var ContentScripts = function () {
 };

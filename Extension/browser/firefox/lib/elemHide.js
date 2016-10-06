@@ -14,21 +14,21 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
-var {Cc, Ci, Cu} = require('chrome');
-
-Cu.import("resource://gre/modules/Services.jsm");
-Cu.import("resource://gre/modules/FileUtils.jsm");
-
-var self = require('sdk/self');
-
-var {EventNotifier} = require('./utils/notifier');
-let {FS} = require('./utils/file-storage');
-var {EventNotifierTypes} = require('./utils/common');
-var {ConcurrentUtils} = require('./utils/browser-utils');
-var {Log} = require('./utils/log');
-var {userSettings} = require('./utils/user-settings');
-var Prefs = require('./prefs').Prefs;
-var styleService = require('./styleSheetService');
+//var {Cc, Ci, Cu} = require('chrome');
+//
+//Cu.import("resource://gre/modules/Services.jsm");
+//Cu.import("resource://gre/modules/FileUtils.jsm");
+//
+//var self = require('sdk/self');
+//
+//var {EventNotifier} = require('./utils/notifier');
+//let {FS} = require('./utils/file-storage');
+//var {EventNotifierTypes} = require('./utils/common');
+//var {ConcurrentUtils} = require('./utils/browser-utils');
+//var {Log} = require('./utils/log');
+//var {userSettings} = require('./utils/user-settings');
+//var Prefs = require('./prefs').Prefs;
+//var styleService = require('./styleSheetService');
 
 /**
  * This object manages CSS and JS rules.

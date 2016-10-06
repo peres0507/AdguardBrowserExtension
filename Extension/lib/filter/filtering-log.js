@@ -17,9 +17,9 @@
 
 /* global require, exports */
 
-var LogEvents = require('../../lib/utils/common').LogEvents;
-var UrlUtils = require('../../lib/utils/url').UrlUtils;
-var EventNotifier = require('../../lib/utils/notifier').EventNotifier;
+//var LogEvents = require('../../lib/utils/common').LogEvents;
+//var UrlUtils = require('../../lib/utils/url').UrlUtils;
+//var EventNotifier = require('../../lib/utils/notifier').EventNotifier;
 
 var FilteringLog = exports.FilteringLog = function (BrowserTabsClass, framesMap, UI) {
 	this.tabsInfo = new BrowserTabsClass();

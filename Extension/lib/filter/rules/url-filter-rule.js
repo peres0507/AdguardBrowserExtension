@@ -19,12 +19,12 @@
  * Initializing required libraries for this file.
  * require method is overridden in Chrome extension (port/require.js).
  */
-var Prefs = require('../../../lib/prefs').Prefs;
-var StringUtils = require('../../../lib/utils/common').StringUtils;
-var FilterRule = require('../../../lib/filter/rules/base-filter-rule').FilterRule;
-var Log = require('../../../lib/utils/log').Log;
-var UrlUtils = require('../../../lib/utils/url').UrlUtils;
-var SimpleRegex = require('../../../lib/filter/rules/simple-regex').SimpleRegex;
+//var Prefs = require('../../../lib/prefs').Prefs;
+//var StringUtils = require('../../../lib/utils/common').StringUtils;
+//var FilterRule = require('../../../lib/filter/rules/base-filter-rule').FilterRule;
+//var Log = require('../../../lib/utils/log').Log;
+//var UrlUtils = require('../../../lib/utils/url').UrlUtils;
+//var SimpleRegex = require('../../../lib/filter/rules/simple-regex').SimpleRegex;
 
 /**
  * Rule for blocking requests to URLs.

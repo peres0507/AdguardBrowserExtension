@@ -15,8 +15,8 @@
  * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var defer = require('sdk/core/promise').defer;
-var deferAll = require('sdk/core/promise').all;
+//var defer = require('sdk/core/promise').defer;
+//var deferAll = require('sdk/core/promise').all;
 
 /**
  * Promise wrapper

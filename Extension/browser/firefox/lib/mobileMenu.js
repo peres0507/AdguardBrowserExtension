@@ -14,18 +14,18 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
-var {Cu, Cc, Ci} = require('chrome');
-
-Cu.import("resource://gre/modules/XPCOMUtils.jsm");
-Cu.import("resource://gre/modules/Services.jsm");
-
-var self = require('sdk/self');
-var system = require('sdk/system');
-var tabs = require('sdk/tabs');
-var events = require('sdk/system/events');
-var unload = require('sdk/system/unload');
-
-var {UiUtils, WindowObserver} = require('./uiUtils');
+//var {Cu, Cc, Ci} = require('chrome');
+//
+//Cu.import("resource://gre/modules/XPCOMUtils.jsm");
+//Cu.import("resource://gre/modules/Services.jsm");
+//
+//var self = require('sdk/self');
+//var system = require('sdk/system');
+//var tabs = require('sdk/tabs');
+//var events = require('sdk/system/events');
+//var unload = require('sdk/system/unload');
+//
+//var {UiUtils, WindowObserver} = require('./uiUtils');
 
 /**
  * Object that manages mobile menu rendering.

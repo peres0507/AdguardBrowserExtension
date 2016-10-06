@@ -19,23 +19,20 @@
  * Initializing required libraries for this file.
  * require method is overridden in Chrome extension (port/require.js).
  */
-//TODO: Fix - doesn't work in FF bootstrap
-//var Cc = require('chrome').Cc;
-//var Ci = require('chrome').Ci;
-//var XMLHttpRequestConstructor = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"];
+var XMLHttpRequestConstructor = Components.classes["@mozilla.org/xmlextras/xmlhttprequest;1"];
 
-var Log = require('../../lib/utils/log').Log;
-var Utils = require('../../lib/utils/browser-utils').Utils;
-var FilterRule = require('../../lib/filter/rules/base-filter-rule').FilterRule;
-var FilterRuleBuilder = require('../../lib/filter/rules/filter-rule-builder').FilterRuleBuilder;
-var Prefs = require('../../lib/prefs').Prefs;
+//var Log = require('../../lib/utils/log').Log;
+//var Utils = require('../../lib/utils/browser-utils').Utils;
+//var FilterRule = require('../../lib/filter/rules/base-filter-rule').FilterRule;
+//var FilterRuleBuilder = require('../../lib/filter/rules/filter-rule-builder').FilterRuleBuilder;
+//var Prefs = require('../../lib/prefs').Prefs;
 
 /**
  * Class for working with our backend server.
  * All requests sent by this class are covered in the privacy policy:
  * http://adguard.com/en/privacy.html#browsers
  */
-var ServiceClient = exports.ServiceClient = function () {
+var ServiceClient = function () {
 
 	// Base url of our backend server
 	this.backendUrl = "https://chrome.adtidy.org";

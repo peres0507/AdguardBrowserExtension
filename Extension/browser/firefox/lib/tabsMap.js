@@ -15,7 +15,7 @@
  * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var privateBrowsing = require('sdk/private-browsing');
+//var privateBrowsing = require('sdk/private-browsing');
 
 /**
  * Map containing tabs data

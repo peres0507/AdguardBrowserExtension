@@ -15,19 +15,19 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
-var {components, Cu, Ci, Cc} = require('chrome');
-var sdkPathFor = require('sdk/system').pathFor;
-var sdkFile = require('sdk/io/file');
-
-var {NetUtil} = Cu.import("resource://gre/modules/NetUtil.jsm", null);
-var {FileUtils} = Cu.import("resource://gre/modules/FileUtils.jsm", null);
-
-var converter = Cc["@mozilla.org/intl/scriptableunicodeconverter"].createInstance(Ci.nsIScriptableUnicodeConverter);
-converter.charset = "UTF-8";
-
-var ioService = Cc["@mozilla.org/network/io-service;1"].getService(Ci.nsIIOService);
-
-var Log = require('../../lib/utils/log').Log;
+//var {components, Cu, Ci, Cc} = require('chrome');
+//var sdkPathFor = require('sdk/system').pathFor;
+//var sdkFile = require('sdk/io/file');
+//
+//var {NetUtil} = Cu.import("resource://gre/modules/NetUtil.jsm", null);
+//var {FileUtils} = Cu.import("resource://gre/modules/FileUtils.jsm", null);
+//
+//var converter = Cc["@mozilla.org/intl/scriptableunicodeconverter"].createInstance(Ci.nsIScriptableUnicodeConverter);
+//converter.charset = "UTF-8";
+//
+//var ioService = Cc["@mozilla.org/network/io-service;1"].getService(Ci.nsIIOService);
+//
+//var Log = require('../../lib/utils/log').Log;
 
 /**
  * File storage adapter.

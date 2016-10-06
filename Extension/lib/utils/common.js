@@ -19,7 +19,7 @@
  * Initializing required libraries for this file.
  * require method is overridden in Chrome extension (port/require.js).
  */
-var Log = require('../../lib/utils/log').Log; // jshint ignore:line
+//var Log = require('../../lib/utils/log').Log; // jshint ignore:line
 
 var StringUtils = exports.StringUtils = { // jshint ignore:line
 

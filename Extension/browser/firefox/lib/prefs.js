@@ -18,13 +18,12 @@ var self = require('sdk/self');
 var platform = require('sdk/system').platform;
 var simplePrefs = require('sdk/simple-prefs');
 var unload = require('sdk/system/unload');
-const {Cc, Ci} = require('chrome');
 
 var EventNotifier = require('./utils/notifier').EventNotifier;
 var EventNotifierTypes = require('./utils/common').EventNotifierTypes;
 
 var locale = (function () {
-	return Cc["@mozilla.org/chrome/chrome-registry;1"].getService(Ci.nsIXULChromeRegistry).getSelectedLocale('global');
+	return Components.classes["@mozilla.org/chrome/chrome-registry;1"].getService(Components.interfaces.nsIXULChromeRegistry).getSelectedLocale('global');
 })();
 
 /**

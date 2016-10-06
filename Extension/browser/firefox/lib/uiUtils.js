@@ -14,16 +14,16 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
-var {Cu, Cc, Ci} = require('chrome');
-
-Cu.import("resource://gre/modules/Services.jsm");
-Cu.import("resource://gre/modules/XPCOMUtils.jsm");
-
-var winMediator = Cc['@mozilla.org/appshell/window-mediator;1'].getService(Ci.nsIWindowMediator);
-
-var unload = require('sdk/system/unload');
-var Prefs = require('./prefs').Prefs;
-var Mobile = Prefs.mobile;
+//var {Cu, Cc, Ci} = require('chrome');
+//
+//Cu.import("resource://gre/modules/Services.jsm");
+//Cu.import("resource://gre/modules/XPCOMUtils.jsm");
+//
+//var winMediator = Cc['@mozilla.org/appshell/window-mediator;1'].getService(Ci.nsIWindowMediator);
+//
+//var unload = require('sdk/system/unload');
+//var Prefs = require('./prefs').Prefs;
+//var Mobile = Prefs.mobile;
 
 /**
  * Helper methods for work with windows

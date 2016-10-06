@@ -17,24 +17,24 @@
  */
 
 /* global require, exports */
-var {Cc, Ci, Cu, Cm, Cr, components} = require('chrome'); // jshint ignore:line
-
-Cu.import("resource://gre/modules/XPCOMUtils.jsm");
-Cu.import("resource://gre/modules/Services.jsm");
-
-var categoryManager = Cc["@mozilla.org/categorymanager;1"].getService(Ci.nsICategoryManager);
-
-var tabUtils = require('sdk/tabs/utils');
-var unload = require('sdk/system/unload');
-var events = require('sdk/system/events');
-
-var {Log} = require('./utils/log');
-var {EventNotifier} = require('./utils/notifier');
-var {EventNotifierTypes,RequestTypes} = require('./utils/common');
-var {UrlUtils} = require('./utils/url');
-var {Utils} = require('./utils/browser-utils');
-var {WebRequestService} = require('./filter/request-blocking'); // jshint ignore:line
-var {WorkaroundUtils} = require('./utils/workaround'); // jshint ignore:line
+//var {Cc, Ci, Cu, Cm, Cr, components} = require('chrome'); // jshint ignore:line
+//
+//Cu.import("resource://gre/modules/XPCOMUtils.jsm");
+//Cu.import("resource://gre/modules/Services.jsm");
+//
+//var categoryManager = Cc["@mozilla.org/categorymanager;1"].getService(Ci.nsICategoryManager);
+//
+//var tabUtils = require('sdk/tabs/utils');
+//var unload = require('sdk/system/unload');
+//var events = require('sdk/system/events');
+//
+//var {Log} = require('./utils/log');
+//var {EventNotifier} = require('./utils/notifier');
+//var {EventNotifierTypes,RequestTypes} = require('./utils/common');
+//var {UrlUtils} = require('./utils/url');
+//var {Utils} = require('./utils/browser-utils');
+//var {WebRequestService} = require('./filter/request-blocking'); // jshint ignore:line
+//var {WorkaroundUtils} = require('./utils/workaround'); // jshint ignore:line
 
 /**
  * Helper object to work with web requests.

@@ -31,6 +31,7 @@ console.log('Initializing background-page');
 
 
 var ext = ext || {};
+var exports = exports || {};
 
 console.log('Initializing i18n');
 var i18n = (function () {
