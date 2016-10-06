@@ -19,9 +19,10 @@
  * Initializing required libraries for this file.
  * require method is overridden in Chrome extension (port/require.js).
  */
-var Cc = require('chrome').Cc;
-var Ci = require('chrome').Ci;
-var XMLHttpRequestConstructor = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"];
+//TODO: Fix - doesn't work in FF bootstrap
+//var Cc = require('chrome').Cc;
+//var Ci = require('chrome').Ci;
+//var XMLHttpRequestConstructor = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"];
 
 var Log = require('../../lib/utils/log').Log;
 var Utils = require('../../lib/utils/browser-utils').Utils;

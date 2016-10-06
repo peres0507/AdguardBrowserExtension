@@ -27,11 +27,7 @@
 try {
     console.log('Starting app..');
 
-    console.log(AntiBannerService);
-
     var antiBannerService = new AntiBannerService();
-
-    console.log(antiBannerService);
 
     antiBannerService.init({
 

@@ -24,8 +24,9 @@ var FilterUtils = require('../../../lib/utils/common').FilterUtils;
 var FilterRule = require('../../../lib/filter/rules/base-filter-rule').FilterRule;
 var Utils = require('../../../lib/utils/browser-utils').Utils;
 
-var isFirefox = (Prefs.platform == "firefox");
-var isShadowDomSupported = Utils.isShadowDomSupported();
+//TODO: Fix - doesn't work in FF bootstrap
+//var isFirefox = (Prefs.platform == "firefox");
+//var isShadowDomSupported = Utils.isShadowDomSupported();
 
 /**
  * This class manages CSS rules and builds styles to inject to pages.
