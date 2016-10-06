@@ -1,4 +1,3 @@
-/* global require, exports */
 /**
  * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
  *
@@ -15,7 +14,8 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
-//var FS = require('../../lib/utils/file-storage').FS;
+
+/* global exports, Components, FS */
 
 /**
  * Filter rules storage adapter.

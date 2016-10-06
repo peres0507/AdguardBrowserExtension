@@ -17,36 +17,24 @@
 
 /* global Components, exports, LS */
 
-//var self = require('sdk/self');
-//var platform = require('sdk/system').platform;
-//var simplePrefs = require('sdk/simple-prefs');
-//var unload = require('sdk/system/unload');
-
-//var EventNotifier = require('./utils/notifier').EventNotifier;
-//var EventNotifierTypes = require('./utils/common').EventNotifierTypes;
-
 var locale = (function () {
 	return Components.classes["@mozilla.org/chrome/chrome-registry;1"].getService(Components.interfaces.nsIXULChromeRegistry).getSelectedLocale('global');
 })();
 
 /**
  * Global preferences for Firefox extension
- * TODO: FF Fix Prefs
  */
 var Prefs = exports.Prefs = {
-	//appId: self.id,
-	//version: self.version,
+	version: location.hash.slice(1),
 	locale: locale,
-	//getLocalFilterPath: function (filterId) {
-	//	var url = "filters/filter_" + filterId + ".txt";
-	//	return self.data.url(url);
-	//},
-	//getLocalMobileFilterPath: function (filterId) {
-	//	var url = "filters/filter_mobile_" + filterId + ".txt";
-	//	return self.data.url(url);
-	//},
-	//localGroupsMetadataPath: self.data.url('filters/groups.xml'),
-	//localFiltersMetadataPath: self.data.url('filters/filters.xml'),
+	getLocalFilterPath: function (filterId) {
+		return "chrome://adguard/content/data/filters/filter_" + filterId + ".txt";
+	},
+	getLocalMobileFilterPath: function (filterId) {
+		return "chrome://adguard/content/data/filters/filter_mobile_" + filterId + ".txt";
+	},
+	localGroupsMetadataPath: 'chrome://adguard/content/data/filters/groups.xml',
+	localFiltersMetadataPath: 'chrome://adguard/content/data/filters/filters.xml',
 	safebrowsingPagePath: 'sb.html',
 	platform: "firefox",
 	mobile: window.navigator.platform.indexOf('android') > -1,
@@ -68,6 +56,9 @@ var Prefs = exports.Prefs = {
     collapseByContentScript: LS.getItem('collapse_by_content_script'),
     useGlobalStyleSheet: LS.getItem('use_global_style_sheet')
 };
+
+//TODO: FF Fix Prefs
+//var unload = require('sdk/system/unload');
 
 //var onPreferenceChanged = function(prefName) {
 //    Prefs.collapseByContentScript = LS.getItem('collapse_by_content_script');

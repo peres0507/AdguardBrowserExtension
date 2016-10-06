@@ -15,6 +15,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+/* global exports, Components, Log */
+
 //var {components, Cu, Ci, Cc} = require('chrome');
 //var sdkPathFor = require('sdk/system').pathFor;
 //var sdkFile = require('sdk/io/file');
@@ -26,8 +29,6 @@
 //converter.charset = "UTF-8";
 //
 //var ioService = Cc["@mozilla.org/network/io-service;1"].getService(Ci.nsIIOService);
-//
-//var Log = require('../../lib/utils/log').Log;
 
 /**
  * File storage adapter.

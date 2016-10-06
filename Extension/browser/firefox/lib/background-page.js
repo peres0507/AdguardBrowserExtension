@@ -16,7 +16,6 @@
  */
 /* global Components, Prefs, Log, BaseEvent, RequestTypes, Utils, OnMessageEvent, SendMessageFunction */
 
-//const {classes: Cc, interfaces: Ci, utils: Cu} = Components;
 const {Services} = Components.utils.import('resource://gre/modules/Services.jsm', null);
 
 var console = null;
