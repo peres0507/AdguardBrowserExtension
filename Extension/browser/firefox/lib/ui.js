@@ -15,8 +15,8 @@
  * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/* global Components, Prefs, ContextMenu, PopupButton, MobileMenu, UrlUtils, Utils, StringUtils, EventNotifier,
-EventNotifierTypes, RequestTypes, userSettings, UiUtils, Log, contentScripts */
+/*  global Components, Prefs, ContextMenu, PopupButton, MobileMenu, UrlUtils, Utils, StringUtils, EventNotifier,
+    EventNotifierTypes, RequestTypes, userSettings, UiUtils, Log, contentScripts */
 
 //var {Cc, Ci, Cu} = require('chrome');
 //var self = require('sdk/self');

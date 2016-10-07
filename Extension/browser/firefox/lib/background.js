@@ -27,34 +27,65 @@
 
 var antiBannerService = new AntiBannerService();
 
-//try {
-//    console.log('Init app..');
-//
-//    var framesMap = new FramesMap(antiBannerService, TabsMap);
-//    var adguardApplication = new AdguardApplication(framesMap);
-//    var filteringLog = new FilteringLog(TabsMap, framesMap, UI);
-//    var webRequestService = new WebRequestService(framesMap, antiBannerService, filteringLog, adguardApplication);
-//
-//    WebRequestImpl.init(antiBannerService, adguardApplication, ElemHide, framesMap, filteringLog, webRequestService);
-//    ElemHide.init(framesMap, antiBannerService, webRequestService);
-//    InterceptHandler.init(framesMap, antiBannerService);
-//    filterRulesHitCount.setAntiBannerService(antiBannerService);
-//
-//    // Initialize content-message handler
-//    var contentMessageHandler = new ContentMessageHandler();
-//    contentMessageHandler.init(antiBannerService, webRequestService, framesMap, adguardApplication, filteringLog, UI);
-//    contentMessageHandler.setSendMessageToSender(function (worker, message) {
-//        contentScripts.sendMessageToWorker(worker, message);
-//    });
-//    contentScripts.init(contentMessageHandler);
-//
-//    // Initialize overlay toolbar button
-//    UI.init(antiBannerService, framesMap, filteringLog, adguardApplication, SdkPanel, SdkContextMenu, SdkButton);
-//
-//    console.log('Init app..OK');
-//} catch (ex) {
-//    console.error(ex);
-//}
+try {
+    console.log('Init app..');
+
+    // In case of firefox browser we move application data from simple-storage to prefs.
+    // So we need move app-version to prefs for properly update
+    //var appVersion = simpleStorage.storage['app-version'];
+    //if (appVersion) {
+    //    LS.setItem('app-version', appVersion);
+    //    delete simpleStorage.storage['app-version'];
+    //}
+
+    //var SdkPanel = null;
+    //// PaleMoon (25) and fennec doesn't support sdk/panel
+    //try {
+    //    SdkPanel = require('sdk/panel').Panel;
+    //} catch (ex) {
+    //    Log.info("Module sdk/panel is not supported");
+    //}
+
+    //var SdkContextMenu = null;
+    //try {
+    //    SdkContextMenu = require('sdk/context-menu');
+    //} catch (ex) {
+    //    Log.info("Module sdk/context-menu is not supported");
+    //}
+
+    //load module 'sdk/ui/button/toggle'. This module supported from 29 version
+    var SdkButton;
+    try {
+        SdkButton = require('sdk/ui/button/toggle').ToggleButton;
+    } catch (ex) {
+        Log.info('Module sdk/ui/button/toggle is not supported');
+    }
+
+    var framesMap = new FramesMap(antiBannerService, TabsMap);
+    var adguardApplication = new AdguardApplication(framesMap);
+    //var filteringLog = new FilteringLog(TabsMap, framesMap, UI);
+    //var webRequestService = new WebRequestService(framesMap, antiBannerService, filteringLog, adguardApplication);
+    //
+    //WebRequestImpl.init(antiBannerService, adguardApplication, ElemHide, framesMap, filteringLog, webRequestService);
+    //ElemHide.init(framesMap, antiBannerService, webRequestService);
+    //InterceptHandler.init(framesMap, antiBannerService);
+    //filterRulesHitCount.setAntiBannerService(antiBannerService);
+    //
+    //// Initialize content-message handler
+    //var contentMessageHandler = new ContentMessageHandler();
+    //contentMessageHandler.init(antiBannerService, webRequestService, framesMap, adguardApplication, filteringLog, UI);
+    //contentMessageHandler.setSendMessageToSender(function (worker, message) {
+    //    contentScripts.sendMessageToWorker(worker, message);
+    //});
+    //contentScripts.init(contentMessageHandler);
+    //
+    //// Initialize overlay toolbar button
+    //UI.init(antiBannerService, framesMap, filteringLog, adguardApplication, SdkPanel, SdkContextMenu, SdkButton);
+
+    console.log('Init app..OK');
+} catch (ex) {
+    console.error(ex);
+}
 
 try {
     console.log('Starting app..');
