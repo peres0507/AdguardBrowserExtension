@@ -15,88 +15,40 @@
  * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/* global exports */
+/* global Components, Prefs, Services */
 
 /**
- * Firefox toolbar button
+ * Firefox toolbar toggle button
  */
-var ToolbarButton = exports.ToolbarButton = function () {
-    var id = location.host + '-button';
-    var type = 'view';
-    var viewId = location.host + '-panel';
-    //TODO: Load localizations
-    var label = "Adguard";
-    var tooltiptext = "Adguard";
+var ToolbarButton = (function (api) {
 
-    var init = function() {
-        //if ( vAPI.fennec ) {
-        //    // Menu UI for Fennec
-        //    var tb = {
-        //        menuItemIds: new WeakMap(),
-        //        label: vAPI.app.name,
-        //        tabs: {}
-        //    };
-        //    vAPI.toolbarButton = tb;
-        //
-        //    tb.getMenuItemLabel = function(tabId) {
-        //        var label = this.label;
-        //        if ( tabId === undefined ) {
-        //            return label;
-        //        }
-        //        var tabDetails = this.tabs[tabId];
-        //        if ( !tabDetails ) {
-        //            return label;
-        //        }
-        //        if ( !tabDetails.img ) {
-        //            label += ' (' + vAPI.i18n('fennecMenuItemBlockingOff') + ')';
-        //        } else if ( tabDetails.badge ) {
-        //            label += ' (' + tabDetails.badge + ')';
-        //        }
-        //        return label;
-        //    };
-        //
-        //    tb.onClick = function() {
-        //        var win = Services.wm.getMostRecentWindow('navigator:browser');
-        //        var curTabId = vAPI.tabs.getTabId(getTabBrowser(win).selectedTab);
-        //        vAPI.tabs.open({
-        //            url: 'popup.html?tabId=' + curTabId,
-        //            index: -1,
-        //            select: true
-        //        });
-        //    };
-        //
-        //    tb.updateState = function(win, tabId) {
-        //        var id = this.menuItemIds.get(win);
-        //        if ( !id ) {
-        //            return;
-        //        }
-        //        win.NativeWindow.menu.update(id, {
-        //            name: this.getMenuItemLabel(tabId)
-        //        });
-        //    };
-        //
-        //    // Only actually expecting one window under Fennec (note, not tabs, windows)
-        //    for ( var win of vAPI.tabs.getWindows() ) {
-        //        var label = tb.getMenuItemLabel();
-        //        var id = win.NativeWindow.menu.add({
-        //            name: label,
-        //            callback: tb.onClick
-        //        });
-        //        tb.menuItemIds.set(win, id);
-        //    }
-        //
-        //    cleanupTasks.push(function() {
-        //        for ( var win of vAPI.tabs.getWindows() ) {
-        //            var id = tb.menuItemIds.get(win);
-        //            if ( id ) {
-        //                win.NativeWindow.menu.remove(id);
-        //                tb.menuItemIds.delete(win);
-        //            }
-        //        }
-        //    });
-        //
-        //    return;
-        //}
+    var TOOLBAR_BUTTON_ID = 'adguard-toggle-button';
+    var TOOLBAR_TYPE = 'view';
+    var TOOLBAR_VIEW_ID = 'adguard-toggle-panel';
+    var LABEL = "AG";
+    var TOOLTIP_TEXT = "AG tooltip";
+
+    var ICON_GRAY = {
+        '16': Prefs.getUrl('content/skin/firefox-gray-16.png'),
+        '32': Prefs.getUrl('content/skin/firefox-gray-32.png')
+    };
+    var ICON_BLUE = {
+        '16': Prefs.getUrl('content/skin/firefox-blue-16.png'),
+        '32': Prefs.getUrl('content/skin/firefox-blue-32.png')
+    };
+    var ICON_GREEN = {
+        '16': Prefs.getUrl('content/skin/firefox-16.png'),
+        '32': Prefs.getUrl('content/skin/firefox-32.png')
+    };
+
+
+    var CustomizableUI;
+    var defaultArea;
+    var styleURI;
+    var CUIEvents;
+
+    var init = function (UI) {
+        console.log('Init toolbar button');
 
         //vAPI.messaging.globalMessageManager.addMessageListener(
         //    location.host + ':closePopup',
@@ -109,21 +61,18 @@ var ToolbarButton = exports.ToolbarButton = function () {
         //        vAPI.toolbarButton.onPopupCloseRequested
         //    );
         //});
-        //
-        //var CustomizableUI;
-        //
-        //var forceLegacyToolbarButton = vAPI.localStorage.getBool("forceLegacyToolbarButton");
-        //if (!forceLegacyToolbarButton) {
-        //    try {
-        //        CustomizableUI = Cu.import('resource:///modules/CustomizableUI.jsm', null).CustomizableUI;
-        //    } catch (ex) {
-        //    }
-        //}
-        //
+
+        try {
+            CustomizableUI = Components.utils.import('resource:///modules/CustomizableUI.jsm', null).CustomizableUI;
+        } catch (ex) {
+            //Ignore exception
+        }
+
         //if (!CustomizableUI) {
         //    // Create a fallback non-customizable UI button
-        //    var sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
+        //    var sss = Components.classes["@mozilla.org/content/style-sheet-service;1"].getService(Components.interfaces.nsIStyleSheetService);
         //    var styleSheetUri = Services.io.newURI(vAPI.getURL("css/legacy-toolbar-button.css"), null, null);
+        //
         //    var legacyButtonId = "uBlock-legacy-button"; // NOTE: must match legacy-toolbar-button.css
         //    this.id = legacyButtonId;
         //    this.viewId = legacyButtonId + "-panel";
@@ -230,119 +179,129 @@ var ToolbarButton = exports.ToolbarButton = function () {
         //    }.bind(this));
         //    return;
         //}
-        //
-        //this.CustomizableUI = CustomizableUI;
-        //
-        //this.defaultArea = CustomizableUI.AREA_NAVBAR;
-        //this.styleURI = [
-        //    '#' + this.id + '.off {',
-        //    'list-style-image: url(',
-        //    vAPI.getURL('img/browsericons/icon16-off.svg'),
-        //    ');',
-        //    '}',
-        //    '#' + this.id + ' {',
-        //    'list-style-image: url(',
-        //    vAPI.getURL('img/browsericons/icon16.svg'),
-        //    ');',
-        //    '}',
-        //    '#' + this.viewId + ' {',
-        //    'width: 160px;',
-        //    'height: 290px;',
-        //    'overflow: hidden !important;',
-        //    '}'
-        //];
-        //
-        //var platformVersion = Services.appinfo.platformVersion;
-        //
-        //if ( Services.vc.compare(platformVersion, '36.0') < 0 ) {
-        //    this.styleURI.push(
-        //        '#' + this.id + '[badge]:not([badge=""])::after {',
-        //        'position: absolute;',
-        //        'margin-left: -16px;',
-        //        'margin-top: 3px;',
-        //        'padding: 1px 2px;',
-        //        'font-size: 9px;',
-        //        'font-weight: bold;',
-        //        'color: #fff;',
-        //        'background: #666;',
-        //        'content: attr(badge);',
-        //        '}'
-        //    );
-        //} else {
-        //    this.CUIEvents = {};
-        //    var updateBadge = function() {
-        //        var wId = vAPI.toolbarButton.id;
-        //        var buttonInPanel = CustomizableUI.getWidget(wId).areaType === CustomizableUI.TYPE_MENU_PANEL;
-        //
-        //        for ( var win of vAPI.tabs.getWindows() ) {
-        //            var button = win.document.getElementById(wId);
-        //            if ( buttonInPanel ) {
-        //                button.classList.remove('badged-button');
-        //                continue;
-        //            }
-        //            if ( button === null ) {
-        //                continue;
-        //            }
-        //            button.classList.add('badged-button');
-        //        }
-        //
-        //        if ( buttonInPanel ) {
-        //            return;
-        //        }
-        //
-        //        // Anonymous elements need some time to be reachable
-        //        setTimeout(this.updateBadgeStyle, 250);
-        //    }.bind(this.CUIEvents);
-        //    this.CUIEvents.onCustomizeEnd = updateBadge;
-        //    this.CUIEvents.onWidgetUnderflow = updateBadge;
-        //
-        //    this.CUIEvents.updateBadgeStyle = function() {
-        //        var css = [
-        //            'background: #666',
-        //            'color: #fff'
-        //        ].join(';');
-        //
-        //        for ( var win of vAPI.tabs.getWindows() ) {
-        //            var button = win.document.getElementById(vAPI.toolbarButton.id);
-        //            if ( button === null ) {
-        //                continue;
-        //            }
-        //            var badge = button.ownerDocument.getAnonymousElementByAttribute(
-        //                button,
-        //                'class',
-        //                'toolbarbutton-badge'
-        //            );
-        //            if ( !badge ) {
-        //                return;
-        //            }
-        //
-        //            badge.style.cssText = css;
-        //        }
-        //    };
-        //
-        //    this.onCreated = function(button) {
-        //        button.setAttribute('badge', '');
-        //        setTimeout(updateBadge, 250);
-        //    };
-        //
-        //    CustomizableUI.addListener(this.CUIEvents);
-        //}
-        //
-        //this.styleURI = Services.io.newURI(
-        //    'data:text/css,' + encodeURIComponent(this.styleURI.join('')),
-        //    null,
-        //    null
-        //);
-        //
-        //this.closePopup = function(tabBrowser) {
-        //    CustomizableUI.hidePanelForNode(
-        //        tabBrowser.ownerDocument.getElementById(vAPI.toolbarButton.viewId)
-        //    );
-        //};
-        //
-        //CustomizableUI.createWidget(this);
-        //
-        //
+
+        defaultArea = CustomizableUI.AREA_NAVBAR;
+        styleURI = [
+            '#' + TOOLBAR_BUTTON_ID + '.off {',
+            'list-style-image: url(',
+            ICON_GRAY['16'],
+            ');',
+            '}',
+            '#' + TOOLBAR_BUTTON_ID + ' {',
+            'list-style-image: url(',
+            ICON_GRAY['16'],
+            ');',
+            '}',
+            '#' + TOOLBAR_BUTTON_ID + ' {',
+            'width: 160px;',
+            'height: 290px;',
+            'overflow: hidden !important;',
+            '}'
+        ];
+
+        var platformVersion = Services.appinfo.platformVersion;
+
+        if (Services.vc.compare(platformVersion, '36.0') < 0) {
+            // Legacy support
+            styleURI.push(
+                '#' + TOOLBAR_BUTTON_ID + '[badge]:not([badge=""])::after {',
+                'position: absolute;',
+                'margin-left: -16px;',
+                'margin-top: 3px;',
+                'padding: 1px 2px;',
+                'font-size: 9px;',
+                'font-weight: bold;',
+                'color: #fff;',
+                'background: #666;',
+                'content: attr(badge);',
+                '}'
+            );
+        } else {
+            CUIEvents = {};
+            var updateBadge = function () {
+                var buttonInPanel = CustomizableUI.getWidget(TOOLBAR_BUTTON_ID).areaType === CustomizableUI.TYPE_MENU_PANEL;
+
+                //for (var win of vAPI.tabs.getWindows()) {
+                //    var button = win.document.getElementById(TOOLBAR_BUTTON_ID);
+                //    if ( buttonInPanel ) {
+                //        button.classList.remove('badged-button');
+                //        continue;
+                //    }
+                //    if ( button === null ) {
+                //        continue;
+                //    }
+                //    button.classList.add('badged-button');
+                //}
+
+                if (buttonInPanel) {
+                    return;
+                }
+
+                // Anonymous elements need some time to be reachable
+                setTimeout(this.updateBadgeStyle, 250);
+            }.bind(CUIEvents);
+
+            CUIEvents.onCustomizeEnd = updateBadge;
+            CUIEvents.onWidgetUnderflow = updateBadge;
+
+            CUIEvents.updateBadgeStyle = function () {
+                var css = [
+                    'background: #666',
+                    'color: #fff'
+                ].join(';');
+
+                //for ( var win of vAPI.tabs.getWindows() ) {
+                //    var button = win.document.getElementById(vAPI.toolbarButton.id);
+                //    if ( button === null ) {
+                //        continue;
+                //    }
+                //    var badge = button.ownerDocument.getAnonymousElementByAttribute(
+                //        button,
+                //        'class',
+                //        'toolbarbutton-badge'
+                //    );
+                //    if ( !badge ) {
+                //        return;
+                //    }
+                //
+                //    badge.style.cssText = css;
+                //}
+            };
+
+            var onCreated = function (button) {
+                button.setAttribute('badge', '');
+                setTimeout(updateBadge, 250);
+            };
+
+            CustomizableUI.addListener(CUIEvents);
+        }
+
+        styleURI = Services.io.newURI(
+            'data:text/css,' + encodeURIComponent(styleURI.join('')),
+            null,
+            null
+        );
+
+        var closePopup = function (tabBrowser) {
+            CustomizableUI.hidePanelForNode(
+                tabBrowser.ownerDocument.getElementById(TOOLBAR_VIEW_ID)
+            );
+        };
+
+
+        CustomizableUI.createWidget({
+            id: TOOLBAR_BUTTON_ID,
+            type: TOOLBAR_TYPE,
+            viewId: TOOLBAR_VIEW_ID,
+            tooltiptext: TOOLTIP_TEXT,
+            label: LABEL,
+            closePopup: closePopup,
+            styleURI: styleURI,
+            onCreated: onCreated,
+            updateBadge: updateBadge,
+            defaultArea: defaultArea
+        });
+
         //cleanupTasks.push(function() {
         //    if ( this.CUIEvents ) {
         //        CustomizableUI.removeListener(this.CUIEvents);
@@ -358,11 +317,10 @@ var ToolbarButton = exports.ToolbarButton = function () {
         //            .removeSheet(this.styleURI, 1);
         //    }
         //}.bind(this));
-        //
-        //this.init = null;
     };
 
-    return {
-        init: init
-    }
-};
+    //EXPOSE API
+    api.init = init;
+
+    return api;
+})(ToolbarButton || {});

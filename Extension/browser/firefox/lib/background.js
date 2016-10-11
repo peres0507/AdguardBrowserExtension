@@ -38,7 +38,7 @@ try {
     //    delete simpleStorage.storage['app-version'];
     //}
 
-    //var SdkPanel = null;
+    var SdkPanel = null;
     //// PaleMoon (25) and fennec doesn't support sdk/panel
     //try {
     //    SdkPanel = require('sdk/panel').Panel;
@@ -46,20 +46,12 @@ try {
     //    Log.info("Module sdk/panel is not supported");
     //}
 
-    //var SdkContextMenu = null;
+    var SdkContextMenu = null;
     //try {
     //    SdkContextMenu = require('sdk/context-menu');
     //} catch (ex) {
     //    Log.info("Module sdk/context-menu is not supported");
     //}
-
-    //load module 'sdk/ui/button/toggle'. This module supported from 29 version
-    var SdkButton;
-    try {
-        SdkButton = require('sdk/ui/button/toggle').ToggleButton;
-    } catch (ex) {
-        Log.info('Module sdk/ui/button/toggle is not supported');
-    }
 
     var framesMap = new FramesMap(antiBannerService, TabsMap);
     var adguardApplication = new AdguardApplication(framesMap);
@@ -80,7 +72,7 @@ try {
     //contentScripts.init(contentMessageHandler);
     //
     //// Initialize overlay toolbar button
-    //UI.init(antiBannerService, framesMap, filteringLog, adguardApplication, SdkPanel, SdkContextMenu, SdkButton);
+    UI.init(antiBannerService, framesMap, filteringLog, adguardApplication, SdkPanel, SdkContextMenu);
 
     console.log('Init app..OK');
 } catch (ex) {
