@@ -34,7 +34,7 @@ var Prefs = exports.Prefs = {
 		return "chrome://adguard/content/data/filters/filter_mobile_" + filterId + ".txt";
 	},
 	getUrl: function (url) {
-		return "chrome://adguard/content/data/" + url;
+		return "chrome://adguard/content/" + url;
 	},
 	localGroupsMetadataPath: 'chrome://adguard/content/data/filters/groups.xml',
 	localFiltersMetadataPath: 'chrome://adguard/content/data/filters/filters.xml',

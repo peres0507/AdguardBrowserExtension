@@ -29,8 +29,8 @@ var ToolbarButton = (function (api) {
     var TOOLTIP_TEXT = "AG tooltip";
 
     var ICON_GRAY = {
-        '16': Prefs.getUrl('content/skin/firefox-gray-16.png'),
-        '32': Prefs.getUrl('content/skin/firefox-gray-32.png')
+        '16': Prefs.getUrl('skin/firefox-gray-16.png'),
+        '32': Prefs.getUrl('skin/firefox-gray-32.png')
     };
     var ICON_BLUE = {
         '16': Prefs.getUrl('content/skin/firefox-blue-16.png'),
@@ -192,7 +192,7 @@ var ToolbarButton = (function (api) {
             ICON_GRAY['16'],
             ');',
             '}',
-            '#' + TOOLBAR_BUTTON_ID + ' {',
+            '#' + TOOLBAR_VIEW_ID + ' {',
             'width: 160px;',
             'height: 290px;',
             'overflow: hidden !important;',
@@ -282,24 +282,21 @@ var ToolbarButton = (function (api) {
             null
         );
 
-        var closePopup = function (tabBrowser) {
-            CustomizableUI.hidePanelForNode(
-                tabBrowser.ownerDocument.getElementById(TOOLBAR_VIEW_ID)
-            );
-        };
-
-
         CustomizableUI.createWidget({
             id: TOOLBAR_BUTTON_ID,
             type: TOOLBAR_TYPE,
             viewId: TOOLBAR_VIEW_ID,
             tooltiptext: TOOLTIP_TEXT,
             label: LABEL,
+            defaultArea: defaultArea,
+
+            onBeforeCreated: onBeforeCreated,
+
             closePopup: closePopup,
             styleURI: styleURI,
             onCreated: onCreated,
-            updateBadge: updateBadge,
-            defaultArea: defaultArea
+            updateBadge: updateBadge
+
         });
 
         //cleanupTasks.push(function() {
@@ -319,7 +316,110 @@ var ToolbarButton = (function (api) {
         //}.bind(this));
     };
 
+    /**
+     * On before widget create handler
+     *
+     * @param doc
+     */
+    var onBeforeCreated = function(doc) {
+        var panel = doc.createElement('panelview');
+
+        populatePanel(doc, panel);
+
+        doc.getElementById('PanelUI-multiView').appendChild(panel);
+
+        doc.defaultView.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+            .getInterface(Components.interfaces.nsIDOMWindowUtils)
+            .loadSheet(styleURI, 1);
+    };
+
+    var populatePanel = function(doc, panel) {
+        panel.setAttribute('id', TOOLBAR_VIEW_ID);
+
+        var iframe = doc.createElement('iframe');
+        iframe.setAttribute('type', 'content');
+
+        panel.appendChild(iframe);
+
+        //var updateTimer = null;
+        //var delayedResize = function(attempts) {
+        //    if ( updateTimer ) {
+        //        return;
+        //    }
+        //
+        //    // Sanity check
+        //    attempts = (attempts || 0) + 1;
+        //    if (attempts > 1000) {
+        //        console.error('uBlock> delayedResize: giving up after too many attemps');
+        //        return;
+        //    }
+        //
+        //    updateTimer = setTimeout(resizePopup, 10, attempts);
+        //};
+        //var resizePopup = function(attempts) {
+        //    updateTimer = null;
+        //    var body = iframe.contentDocument.body;
+        //    panel.parentNode.style.maxWidth = 'none';
+        //    // https://github.com/chrisaljoudi/uBlock/issues/730
+        //    // Voodoo programming: this recipe works
+        //    var toPixelString = pixels => pixels.toString() + 'px';
+        //
+        //    var clientHeight = body.clientHeight;
+        //    iframe.style.height = toPixelString(clientHeight);
+        //    panel.style.height = toPixelString(clientHeight + (panel.boxObject.height - panel.clientHeight));
+        //
+        //    var clientWidth = body.clientWidth;
+        //    iframe.style.width = toPixelString(clientWidth);
+        //    panel.style.width = toPixelString(clientWidth + (panel.boxObject.width - panel.clientWidth));
+        //
+        //    if ( iframe.clientHeight !== body.clientHeight || iframe.clientWidth !== body.clientWidth ) {
+        //        delayedResize(attempts);
+        //    }
+        //};
+        //
+        //var CustomizableUI = this.CustomizableUI;
+        //var widgetId = this.id;
+        //var onPopupReady = function() {
+        //    var win = this.contentWindow;
+        //
+        //    if ( !win || win.location.host !== location.host ) {
+        //        return;
+        //    }
+        //
+        //    if (CustomizableUI) {
+        //        var placement = CustomizableUI.getPlacementOfWidget(widgetId);
+        //        if (placement.area === CustomizableUI.AREA_PANEL) {
+        //            // Add some overrides for displaying the popup correctly in a panel
+        //            win.QueryInterface(Ci.nsIInterfaceRequestor).getInterface(Ci.nsIDOMWindowUtils)
+        //                .loadSheet(Services.io.newURI(vAPI.getURL("css/popup-vertical.css"), null, null), Ci.nsIDOMWindowUtils.AUTHOR_SHEET);
+        //        }
+        //    }
+        //
+        //    new win.MutationObserver(delayedResize).observe(win.document.body, {
+        //        attributes: true,
+        //        characterData: true,
+        //        subtree: true
+        //    });
+        //
+        //    delayedResize();
+        //};
+        //
+        //iframe.addEventListener('load', onPopupReady, true);
+    };
+
+    var closePopup = function (tabBrowser) {
+        CustomizableUI.hidePanelForNode(
+            tabBrowser.ownerDocument.getElementById(TOOLBAR_VIEW_ID)
+        );
+    };
+
     //EXPOSE API
+
+    /**
+     * Initializes toolbar button
+     *
+     * @type {Function}
+     */
     api.init = init;
 
     return api;
