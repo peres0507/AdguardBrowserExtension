@@ -15,7 +15,7 @@
  * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/* global Components, Prefs, Services */
+/* global Components, Prefs, Services, WorkaroundUtils */
 
 /**
  * Firefox toolbar toggle button
@@ -41,7 +41,6 @@ var ToolbarButton = (function (api) {
         '32': Prefs.getUrl('content/skin/firefox-32.png')
     };
 
-
     var CustomizableUI;
     var defaultArea;
     var styleURI;
@@ -54,7 +53,7 @@ var ToolbarButton = (function (api) {
         //    location.host + ':closePopup',
         //    vAPI.toolbarButton.onPopupCloseRequested
         //);
-        //
+
         //cleanupTasks.push(function() {
         //    vAPI.messaging.globalMessageManager.removeMessageListener(
         //        location.host + ':closePopup',
@@ -291,12 +290,13 @@ var ToolbarButton = (function (api) {
             defaultArea: defaultArea,
 
             onBeforeCreated: onBeforeCreated,
+            onViewShowing: onViewShowing,
+            onViewHiding: onViewHiding,
+            onCreated: onCreated,
 
             closePopup: closePopup,
             styleURI: styleURI,
-            onCreated: onCreated,
             updateBadge: updateBadge
-
         });
 
         //cleanupTasks.push(function() {
@@ -321,7 +321,7 @@ var ToolbarButton = (function (api) {
      *
      * @param doc
      */
-    var onBeforeCreated = function(doc) {
+    var onBeforeCreated = function (doc) {
         var panel = doc.createElement('panelview');
 
         populatePanel(doc, panel);
@@ -333,7 +333,7 @@ var ToolbarButton = (function (api) {
             .loadSheet(styleURI, 1);
     };
 
-    var populatePanel = function(doc, panel) {
+    var populatePanel = function (doc, panel) {
         panel.setAttribute('id', TOOLBAR_VIEW_ID);
 
         var iframe = doc.createElement('iframe');
@@ -341,71 +341,86 @@ var ToolbarButton = (function (api) {
 
         panel.appendChild(iframe);
 
-        //var updateTimer = null;
-        //var delayedResize = function(attempts) {
-        //    if ( updateTimer ) {
-        //        return;
-        //    }
-        //
-        //    // Sanity check
-        //    attempts = (attempts || 0) + 1;
-        //    if (attempts > 1000) {
-        //        console.error('uBlock> delayedResize: giving up after too many attemps');
-        //        return;
-        //    }
-        //
-        //    updateTimer = setTimeout(resizePopup, 10, attempts);
-        //};
-        //var resizePopup = function(attempts) {
-        //    updateTimer = null;
-        //    var body = iframe.contentDocument.body;
-        //    panel.parentNode.style.maxWidth = 'none';
-        //    // https://github.com/chrisaljoudi/uBlock/issues/730
-        //    // Voodoo programming: this recipe works
-        //    var toPixelString = pixels => pixels.toString() + 'px';
-        //
-        //    var clientHeight = body.clientHeight;
-        //    iframe.style.height = toPixelString(clientHeight);
-        //    panel.style.height = toPixelString(clientHeight + (panel.boxObject.height - panel.clientHeight));
-        //
-        //    var clientWidth = body.clientWidth;
-        //    iframe.style.width = toPixelString(clientWidth);
-        //    panel.style.width = toPixelString(clientWidth + (panel.boxObject.width - panel.clientWidth));
-        //
-        //    if ( iframe.clientHeight !== body.clientHeight || iframe.clientWidth !== body.clientWidth ) {
-        //        delayedResize(attempts);
-        //    }
-        //};
-        //
-        //var CustomizableUI = this.CustomizableUI;
-        //var widgetId = this.id;
-        //var onPopupReady = function() {
-        //    var win = this.contentWindow;
-        //
-        //    if ( !win || win.location.host !== location.host ) {
-        //        return;
-        //    }
-        //
-        //    if (CustomizableUI) {
-        //        var placement = CustomizableUI.getPlacementOfWidget(widgetId);
-        //        if (placement.area === CustomizableUI.AREA_PANEL) {
-        //            // Add some overrides for displaying the popup correctly in a panel
-        //            win.QueryInterface(Ci.nsIInterfaceRequestor).getInterface(Ci.nsIDOMWindowUtils)
-        //                .loadSheet(Services.io.newURI(vAPI.getURL("css/popup-vertical.css"), null, null), Ci.nsIDOMWindowUtils.AUTHOR_SHEET);
-        //        }
-        //    }
-        //
-        //    new win.MutationObserver(delayedResize).observe(win.document.body, {
-        //        attributes: true,
-        //        characterData: true,
-        //        subtree: true
-        //    });
-        //
-        //    delayedResize();
-        //};
-        //
-        //iframe.addEventListener('load', onPopupReady, true);
+        var updateTimer = null;
+        var delayedResize = function (attempts) {
+            if (updateTimer) {
+                return;
+            }
+
+            // Sanity check
+            attempts = (attempts || 0) + 1;
+            if (attempts > 1000) {
+                console.error('delayedResize: giving up after too many attemps');
+                return;
+            }
+
+            updateTimer = setTimeout(resizePopup, 10, attempts);
+        };
+
+        var resizePopup = function (attempts) {
+            updateTimer = null;
+            var body = iframe.contentDocument.body;
+            panel.parentNode.style.maxWidth = 'none';
+            // https://github.com/chrisaljoudi/uBlock/issues/730
+            // Voodoo programming: this recipe works
+            var toPixelString = function (pixels) {
+                return pixels.toString() + 'px';
+            };
+
+            var clientHeight = body.clientHeight;
+            iframe.style.height = toPixelString(clientHeight);
+            panel.style.height = toPixelString(clientHeight + (panel.boxObject.height - panel.clientHeight));
+
+            var clientWidth = body.clientWidth;
+            iframe.style.width = toPixelString(clientWidth);
+            panel.style.width = toPixelString(clientWidth + (panel.boxObject.width - panel.clientWidth));
+
+            if (iframe.clientHeight !== body.clientHeight || iframe.clientWidth !== body.clientWidth) {
+                delayedResize(attempts);
+            }
+        };
+
+        var onPopupReady = function () {
+            var win = this.contentWindow;
+
+            if (!win || win.location.host !== location.host) {
+                return;
+            }
+
+            if (CustomizableUI) {
+                var placement = CustomizableUI.getPlacementOfWidget(TOOLBAR_BUTTON_ID);
+                if (placement.area === CustomizableUI.AREA_PANEL) {
+                    // Add some overrides for displaying the popup correctly in a panel
+                    win.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIDOMWindowUtils)
+                        .loadSheet(Services.io.newURI(Prefs.getURL("skin/badge.css"), null, null), Components.interfaces.nsIDOMWindowUtils.AUTHOR_SHEET);
+                }
+            }
+
+            new win.MutationObserver(delayedResize).observe(win.document.body, {
+                attributes: true,
+                characterData: true,
+                subtree: true
+            });
+
+            delayedResize();
+        };
+
+        iframe.addEventListener('load', onPopupReady, true);
     };
+
+    var onViewShowing = function (e) {
+        e.target.firstChild.setAttribute('src', 'chrome://adguard/content/popup.html');
+
+        //TODO: Send message to content page
+        console.log(contentScripts);
+        contentScripts.sendMessageToWorker(e.target, {type: 'resizePanelPopup'});
+    };
+
+    var onViewHiding = function (e) {
+        e.target.parentNode.style.maxWidth = '';
+        e.target.firstChild.setAttribute('src', 'about:blank');
+    };
+
 
     var closePopup = function (tabBrowser) {
         CustomizableUI.hidePanelForNode(
@@ -413,14 +428,53 @@ var ToolbarButton = (function (api) {
         );
     };
 
+
+    var updateBadgeText = function (text) {
+        var blockedText = WorkaroundUtils.getBlockedCountText(text);
+        //TODO: Implement
+
+        //contentScripts.sendMessageToWorker(e.target, {type: 'initPanelPopup', tabInfo: {}, filteringInfo: {}});
+    };
+
+    var updateIconState = function (options) {
+        var icon;
+        if (options.disabled) {
+            icon = ICON_GRAY;
+        } else if (options.adguardDetected) {
+            icon = ICON_BLUE;
+        } else {
+            icon = ICON_GREEN;
+        }
+
+        //TODO: Implement
+    };
+
+
     //EXPOSE API
 
     /**
      * Initializes toolbar button
      *
+     * @param UI
      * @type {Function}
      */
     api.init = init;
+
+    /**
+     * Updates button badge text
+     *
+     * @param text
+     * @type {Function}
+     */
+    api.updateBadgeText = updateBadgeText;
+
+    /**
+     * Update button icon
+     *
+     * @param options icon display options
+     * @type {Function}
+     */
+    api.updateIconState = updateIconState;
 
     return api;
 })(ToolbarButton || {});

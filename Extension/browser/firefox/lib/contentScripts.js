@@ -424,4 +424,4 @@ ContentScripts.prototype = {
     }
 };
 
-exports.contentScripts = new ContentScripts();
+var contentScripts = new ContentScripts();
