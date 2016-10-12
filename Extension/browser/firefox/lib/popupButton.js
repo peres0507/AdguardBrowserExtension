@@ -29,6 +29,7 @@
 
 /**
  * Object that manages toolbar button rendering.
+ * TODO: Deprecated, changed to ToolbarButton
  */
 var PopupButton = exports.PopupButton = {
 
