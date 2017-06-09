@@ -539,19 +539,19 @@ var AdguardAssistant = function ($, AdguardSelectorLib, AdguardRulesConstructorL
 			return;
 		}
 
-		options.onSliderMove = function (delta) {
-			var elem;
-			if (delta > 0) {
-				elem = parents[delta - 1];
-			}
-			if (delta === 0) {
-				elem = element;
-			}
-			if (delta < 0) {
-				elem = children[Math.abs(delta + 1)];
-			}
-			onSliderMove(elem);
-		};
+		options.onSliderMove = utils.debounce(function (delta) {
+            var elem;
+            if (delta > 0) {
+                elem = parents[delta - 1];
+            }
+            if (delta === 0) {
+                elem = element;
+            }
+            if (delta < 0) {
+                elem = children[Math.abs(delta + 1)];
+            }
+            onSliderMove(elem);
+        }, 150);
 
 		SliderWidget.init(findInIframe("#slider").get(0), {
 			min: options.min,
