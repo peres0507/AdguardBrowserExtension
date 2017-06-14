@@ -79,6 +79,10 @@ var SliderWidget = (function ($) { // jshint ignore:line
     };
 
     var setValue = function (v) {
+        if (value === v) {
+            return;
+        }
+
         if (v < min) {
             value = min;
         } else if (v > max) {
@@ -87,7 +91,9 @@ var SliderWidget = (function ($) { // jshint ignore:line
             value = v;
         }
 
+        console.log(value);
         refresh();
+        console.log('refreshed');
 
         onValueChanged(value);
     };
@@ -119,24 +125,31 @@ var SliderWidget = (function ($) { // jshint ignore:line
         //This will prevent the slider from moving if the mouse is taken out of the
         //slider area before the mouse down has been released.
         $placeholder.on('mouseenter', function () {
+            console.log('mouseenter');
             $placeholder.on('click', function (e) {
                 //calculate the correct position of the slider set the value
+                console.log('click');
                 var value = getSliderValue(e.pageX);
                 setValue(value);
             });
             $placeholder.on('mousedown', function () {
+                console.log('mousedown');
                 $(this).on('mousemove', function (e) {
                     //calculate the correct position of the slider set the value
+                    console.log('mousemove 0 ' + e.pageX);
                     var value = getSliderValue(e.pageX);
                     setValue(value);
+                    console.log('mousemove 1');
                 });
             });
             $placeholder.on('mouseup', function () {
+                console.log('mouseup');
                 $(this).off('mousemove');
             });
         });
 
         $placeholder.on('mouseleave', function () {
+            console.log('mouseleave');
             $placeholder.off('mousemove');
             $placeholder.off('click');
         });
