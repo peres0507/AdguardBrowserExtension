@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>JS Bin</title>
+
+    <script src="../../../libs/balalaika.patched.js"></script>
+
+    <script type="text/javascript">
+        var $ = balalaika;
+
+        function start() {
+
+            var $placeholder = $('#placeholder');
+            var $handle = $('#handle');
+
+            $(document).on('mouseup', function () {
+                $placeholder.off('mousemove');
+                $handle.off('mousemove');
+            });
+
+            $handle.on('mousedown', function (e) {
+                e.preventDefault();
+                console.log(this.parentNode);
+                return false;
+            });
+
+            $placeholder.on('click', function (e) {
+                console.log('click');
+            });
+            $placeholder.on('mousedown', function () {
+                console.log('mousedown');
+                $(this).on('mousemove', function (e) {
+                    //calculate the correct position of the slider set the value
+                    console.log('mousemove 0 ' + e.pageX);
+                });
+            });
+            $placeholder.on('mouseup', function () {
+                console.log('mouseup');
+                $(this).off('mousemove');
+            });
+
+            $placeholder.on('mouseleave', function () {
+                console.log('mouseleave');
+
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', start, false);
+    </script>
+</head>
+<body>
+<div id="placeholder" style="width: 100%; background-color: grey; height: 50px;">
+    <a href='#' id='handle'>
+        Click and drag me
+    </a>
+</div>
+</body>
+</html>

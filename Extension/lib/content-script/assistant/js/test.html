@@ -4,27 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>JS Bin</title>
-
-    <script type="text/javascript">
-        function start() {
-            var handle = document.getElementById('test');
-            handle.addEventListener('mousedown', function (event) {
-                console.log('mousedown', event.pageX, event.pageY);
-            }.bind(this));
-            handle.addEventListener('mouseup', function (event) {
-                console.log('mouseup', event.pageX, event.pageY);
-            }.bind(this));
-            handle.addEventListener('mousemove', function (event) {
-                console.log('mousemove', event.pageX, event.pageY);
-            }.bind(this));
-        }
-    </script>
 </head>
-<body onload="start();">
-<div id="placeholder" style="width: 100%; background-color: grey; height: 50px;">
-    <a href='#' id='test'>
-        Click and drag me
-    </a>
-</div>
+<body>
+
+<iframe src="test-frame.html" width="600px" />
 </body>
 </html>
