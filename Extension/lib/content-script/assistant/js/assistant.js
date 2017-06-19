@@ -270,7 +270,7 @@ var AdguardAssistant = function ($, AdguardSelectorLib, AdguardRulesConstructorL
 		var appendContent = function (iframe) {
 			appendContentToIframe(iframe, content);
 			localizeMenu();
-			makeDraggable(iframe);
+			//makeDraggable(iframe);
 			checkPosition();
 			callback(iframe);
 		};

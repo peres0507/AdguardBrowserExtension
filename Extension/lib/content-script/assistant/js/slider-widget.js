@@ -111,7 +111,9 @@ var SliderWidget = (function ($) { // jshint ignore:line
         //While the ui-slider-handle is being held down reference it parent.
         $handle.on('mousedown', function (e) {
             e.preventDefault();
-            return $(this.parentNode).trigger('mousedown');
+            console.log(this.parentNode);
+            return false;
+            //return $(this.parentNode).trigger('mousedown');
         });
 
         var rect = placeholder.getBoundingClientRect();
@@ -124,7 +126,7 @@ var SliderWidget = (function ($) { // jshint ignore:line
 
         //This will prevent the slider from moving if the mouse is taken out of the
         //slider area before the mouse down has been released.
-        $placeholder.on('mouseenter', function () {
+        //$placeholder.on('mouseenter', function () {
             console.log('mouseenter');
             $placeholder.on('click', function (e) {
                 //calculate the correct position of the slider set the value
@@ -146,12 +148,16 @@ var SliderWidget = (function ($) { // jshint ignore:line
                 console.log('mouseup');
                 $(this).off('mousemove');
             });
-        });
+        //});
 
         $placeholder.on('mouseleave', function () {
             console.log('mouseleave');
-            $placeholder.off('mousemove');
-            $placeholder.off('click');
+
+            var value = getSliderValue(e.pageX);
+            setValue(value);
+
+            // $placeholder.off('mousemove');
+            // $placeholder.off('click');
         });
     };
 
