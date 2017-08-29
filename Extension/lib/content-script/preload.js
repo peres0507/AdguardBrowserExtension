@@ -56,8 +56,6 @@
     var shadowRoot = null;
     var loadTruncatedCss = false;
 
-    var ADG_COLLAPSE_STYLE_ID = 'adguard-collapse-styles';
-
     /**
      * Set callback for saving css hits
      */
@@ -575,8 +573,7 @@
         var removeRule = window.CSSStyleSheet.prototype.removeRule;
 
         function shouldOverride(self) {
-            return self.ownerNode && adguardStyleElements.indexOf(self.ownerNode) >= 0 &&
-                self.ownerNode.id !== ADG_COLLAPSE_STYLE_ID;
+            return self.ownerNode && adguardStyleElements.indexOf(self.ownerNode) >= 0;
         }
 
         window.CSSStyleSheet.prototype.deleteRule = function (i) {
