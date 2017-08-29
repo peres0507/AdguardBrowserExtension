@@ -597,6 +597,14 @@
                 removeRule.apply(this, arguments);
             }
         };
+
+        Object.defineProperty(window.CSSStyleSheet.prototype, 'disabled', { get: function() {
+            if (shouldOverride(this)) {
+                return false;
+            } else {
+                return this['disabled'];
+            }
+        } });
     };
 
     /**
