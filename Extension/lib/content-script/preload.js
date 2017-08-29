@@ -598,9 +598,17 @@
             }
         };
 
-        Object.defineProperty(window.CSSStyleSheet.prototype, 'disabled', { get: function() {
-            return false;
-        } });
+        Object.defineProperty(window.CSSStyleSheet.prototype, 'disabled', {
+            get: function () {
+                if (shouldOverride(this)) {
+                    return false;
+                } else {
+                    return this._disabled;
+                }
+            }, set: function (val) {
+                this._disabled = val;
+            }
+        });
     };
 
     /**
