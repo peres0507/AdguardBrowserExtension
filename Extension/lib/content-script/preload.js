@@ -93,7 +93,6 @@
         }
 
         initRequestWrappers();
-        protectShadowRoot();
 
         // We use shadow DOM when it's available to minimize our impact on web page DOM tree.
         // According to ABP issue #452, creating a shadow root breaks running CSS transitions.
@@ -104,6 +103,7 @@
             if ("createShadowRoot" in document.documentElement && shadowDomExceptions.indexOf(document.domain) == -1) {
                 shadowRoot = document.documentElement.createShadowRoot();
                 shadowRoot.appendChild(document.createElement("shadow"));
+                protectShadowRoot();
             }
         }
 
