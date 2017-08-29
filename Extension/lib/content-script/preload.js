@@ -575,7 +575,7 @@
         var removeRule = window.CSSStyleSheet.prototype.removeRule;
 
         function shouldOverride(self) {
-            return self.ownerNode && this.ownerNode.getAttribute(ADG_STYLE_ATTRIBUTE);
+            return self.ownerNode && self.ownerNode.getAttribute(ADG_STYLE_ATTRIBUTE);
         }
 
         window.CSSStyleSheet.prototype.deleteRule = function (i) {
@@ -611,7 +611,7 @@
      * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/829
      */
     var protectStyleSheets = function () {
-        var script = "(" + overrideCSSStyleSheetProperties.toString() + ")('"+ ADG_COLLAPSE_STYLE_ID.toString() + "');";
+        var script = "(" + overrideCSSStyleSheetProperties.toString() + ")('"+ ADG_STYLE_ATTRIBUTE.toString() + "');";
         executeScripts([script]);
     };
 
