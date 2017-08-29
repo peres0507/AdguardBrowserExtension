@@ -56,6 +56,9 @@
     var shadowRoot = null;
     var loadTruncatedCss = false;
 
+    var ADG_STYLE_ATTRIBUTE = 'adg-style';
+    var ADG_COLLAPSE_STYLE_ID = 'adguard-collapse-styles';
+
     /**
      * Set callback for saving css hits
      */
@@ -481,6 +484,7 @@
         for (var i = 0; i < css.length; i++) {
             var styleEl = document.createElement("style");
             styleEl.setAttribute("type", "text/css");
+            styleEl.setAttribute(ADG_STYLE_ATTRIBUTE, "true");
             setStyleContent(styleEl, css[i], useShadowDom);
 
             if (useShadowDom && shadowRoot) {
@@ -489,6 +493,7 @@
                 (document.head || document.documentElement).appendChild(styleEl);
             }
 
+            protectStyleSheets();
             protectStyleElementFromRemoval(styleEl, useShadowDom);
             protectStyleElementContent(styleEl);
         }
@@ -562,6 +567,32 @@
             'subtree': true,
             'characterDataOldValue': true
         });
+    };
+
+    var deleteRule = window.CSSStyleSheet.prototype.deleteRule;
+    var removeRule = window.CSSStyleSheet.prototype.removeRule;
+
+    /**
+     * Override rule removal methods
+     * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/829
+     */
+    var protectStyleSheets = function () {
+        window.CSSStyleSheet.prototype.deleteRule = function (i) {
+            if (this.ownerNode && this.ownerNode.getAttribute(ADG_STYLE_ATTRIBUTE) &&
+                this.ownerNode.id !== ADG_COLLAPSE_STYLE_ID) {
+                // Do nothing
+            } else {
+                deleteRule.apply(this, arguments);
+            }
+        };
+        window.CSSStyleSheet.prototype.removeRule = function (i) {
+            if (this.ownerNode && this.ownerNode.getAttribute(ADG_STYLE_ATTRIBUTE) &&
+                this.ownerNode.id !== ADG_COLLAPSE_STYLE_ID) {
+                // Do nothing
+            } else {
+                removeRule.apply(this, arguments);
+            }
+        };
     };
 
     /**
