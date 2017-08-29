@@ -56,7 +56,6 @@
     var shadowRoot = null;
     var loadTruncatedCss = false;
 
-    var ADG_STYLE_ATTRIBUTE = 'adg-style';
     var ADG_COLLAPSE_STYLE_ID = 'adguard-collapse-styles';
 
     /**
@@ -471,6 +470,8 @@
         applyExtendedCss(selectors.extendedCss);
     };
 
+    var adguardStyleElements = [];
+
     /**
      * Applies CSS stylesheets
      *
@@ -484,7 +485,7 @@
         for (var i = 0; i < css.length; i++) {
             var styleEl = document.createElement("style");
             styleEl.setAttribute("type", "text/css");
-            styleEl.setAttribute(ADG_STYLE_ATTRIBUTE, "true");
+            adguardStyleElements.push(styleEl);
             setStyleContent(styleEl, css[i], useShadowDom);
 
             if (useShadowDom && shadowRoot) {
@@ -577,17 +578,20 @@
      * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/829
      */
     var protectStyleSheets = function () {
+        function shouldOverride(self) {
+            return self.ownerNode && adguardStyleElements.indexOf(self.ownerNode) >= 0 &&
+                self.ownerNode.id !== ADG_COLLAPSE_STYLE_ID;
+        }
+
         window.CSSStyleSheet.prototype.deleteRule = function (i) {
-            if (this.ownerNode && this.ownerNode.getAttribute(ADG_STYLE_ATTRIBUTE) &&
-                this.ownerNode.id !== ADG_COLLAPSE_STYLE_ID) {
+            if (shouldOverride(this)) {
                 // Do nothing
             } else {
                 deleteRule.apply(this, arguments);
             }
         };
         window.CSSStyleSheet.prototype.removeRule = function (i) {
-            if (this.ownerNode && this.ownerNode.getAttribute(ADG_STYLE_ATTRIBUTE) &&
-                this.ownerNode.id !== ADG_COLLAPSE_STYLE_ID) {
+            if (shouldOverride(this)) {
                 // Do nothing
             } else {
                 removeRule.apply(this, arguments);
