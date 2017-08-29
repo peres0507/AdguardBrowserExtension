@@ -56,6 +56,8 @@
     var shadowRoot = null;
     var loadTruncatedCss = false;
 
+    var ADG_STYLE_ATTRIBUTE = 'adguard-styles';
+
     /**
      * Set callback for saving css hits
      */
@@ -484,7 +486,7 @@
         for (var i = 0; i < css.length; i++) {
             var styleEl = document.createElement("style");
             styleEl.setAttribute("type", "text/css");
-            adguardStyleElements.push(styleEl);
+            styleEl.setAttribute(ADG_STYLE_ATTRIBUTE, "true");
             setStyleContent(styleEl, css[i], useShadowDom);
 
             if (useShadowDom && shadowRoot) {
@@ -568,12 +570,12 @@
         });
     };
 
-    var overrideCSSStyleSheetProperties = function () {
+    var overrideCSSStyleSheetProperties = function (ADG_STYLE_ATTRIBUTE) {
         var deleteRule = window.CSSStyleSheet.prototype.deleteRule;
         var removeRule = window.CSSStyleSheet.prototype.removeRule;
 
         function shouldOverride(self) {
-            return self.ownerNode && adguardStyleElements.indexOf(self.ownerNode) >= 0;
+            return self.ownerNode && this.ownerNode.getAttribute(ADG_STYLE_ATTRIBUTE);
         }
 
         window.CSSStyleSheet.prototype.deleteRule = function (i) {
@@ -609,7 +611,7 @@
      * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/829
      */
     var protectStyleSheets = function () {
-        var script = "(" + overrideCSSStyleSheetProperties.toString() + ")();";
+        var script = "(" + overrideCSSStyleSheetProperties.toString() + ")('"+ ADG_COLLAPSE_STYLE_ID.toString() + "');";
         executeScripts([script]);
     };
 
