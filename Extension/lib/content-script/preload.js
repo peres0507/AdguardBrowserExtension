@@ -95,6 +95,7 @@
         }
 
         initRequestWrappers();
+        protectStyleSheets();
 
         // We use shadow DOM when it's available to minimize our impact on web page DOM tree.
         // According to ABP issue #452, creating a shadow root breaks running CSS transitions.
@@ -494,7 +495,6 @@
                 (document.head || document.documentElement).appendChild(styleEl);
             }
 
-            protectStyleSheets();
             protectStyleElementFromRemoval(styleEl, useShadowDom);
             protectStyleElementContent(styleEl);
         }
