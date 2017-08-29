@@ -93,6 +93,7 @@
         }
 
         initRequestWrappers();
+        protectShadowRoot();
 
         // We use shadow DOM when it's available to minimize our impact on web page DOM tree.
         // According to ABP issue #452, creating a shadow root breaks running CSS transitions.
@@ -263,6 +264,38 @@
             var script = "(" + injectPageScriptAPI.toString() + ")('" + wrapperScriptName + "', " + overrideWebSocket + ", " + overrideWebRTC + ");";
             executeScripts([script]);
         }
+    };
+
+    /**
+     * Overrides shadowRoot getter
+     * The solution from ABP
+     *
+     * Function supposed to be executed in page's context
+     */
+    var overrideShadowRootGetter = function () {
+        if ("shadowRoot" in Element.prototype) {
+            var ourShadowRoot = document.documentElement.shadowRoot;
+            if (ourShadowRoot) {
+                var desc = Object.getOwnPropertyDescriptor(Element.prototype, "shadowRoot");
+                var shadowRoot = Function.prototype.call.bind(desc.get);
+
+                Object.defineProperty(Element.prototype, "shadowRoot", {
+                    configurable: true, enumerable: true, get: function () {
+                        var thisShadow = shadowRoot(this);
+                        return thisShadow === ourShadowRoot ? null : thisShadow;
+                    }
+                });
+            }
+        }
+    };
+
+    /**
+     * Protects shadow root from access in page's context
+     * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/829
+     */
+    var protectShadowRoot = function () {
+        var script = "(" + overrideShadowRootGetter.toString() + ")();";
+        executeScripts([script]);
     };
 
     /**
