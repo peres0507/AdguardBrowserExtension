@@ -570,14 +570,14 @@
         });
     };
 
-    var deleteRule = window.CSSStyleSheet.prototype.deleteRule;
-    var removeRule = window.CSSStyleSheet.prototype.removeRule;
-
     /**
      * Override rule removal methods
      * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/829
      */
     var protectStyleSheets = function () {
+        var deleteRule = window.CSSStyleSheet.prototype.deleteRule;
+        var removeRule = window.CSSStyleSheet.prototype.removeRule;
+
         function shouldOverride(self) {
             return self.ownerNode && adguardStyleElements.indexOf(self.ownerNode) >= 0 &&
                 self.ownerNode.id !== ADG_COLLAPSE_STYLE_ID;
