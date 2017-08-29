@@ -570,12 +570,12 @@
         });
     };
 
-    var overrideCSSStyleSheetProperties = function (ADG_STYLE_ATTRIBUTE) {
+    var overrideCSSStyleSheetProperties = function (adgStyleAttribute) {
         var deleteRule = window.CSSStyleSheet.prototype.deleteRule;
         var removeRule = window.CSSStyleSheet.prototype.removeRule;
 
         function shouldOverride(self) {
-            return self.ownerNode && self.ownerNode.getAttribute(ADG_STYLE_ATTRIBUTE);
+            return self.ownerNode && self.ownerNode.getAttribute(adgStyleAttribute);
         }
 
         window.CSSStyleSheet.prototype.deleteRule = function (i) {
