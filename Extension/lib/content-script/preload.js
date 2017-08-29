@@ -570,11 +570,7 @@
         });
     };
 
-    /**
-     * Override rule removal methods
-     * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/829
-     */
-    var protectStyleSheets = function () {
+    var overrideCSSStyleSheetProperties = function () {
         var deleteRule = window.CSSStyleSheet.prototype.deleteRule;
         var removeRule = window.CSSStyleSheet.prototype.removeRule;
 
@@ -609,6 +605,15 @@
                 this._disabled = val;
             }
         });
+    };
+
+    /**
+     * Override rule removal methods
+     * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/829
+     */
+    var protectStyleSheets = function () {
+        var script = "(" + overrideCSSStyleSheetProperties.toString() + ")();";
+        executeScripts([script]);
     };
 
     /**
