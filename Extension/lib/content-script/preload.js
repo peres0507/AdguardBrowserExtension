@@ -103,7 +103,6 @@
             if ("createShadowRoot" in document.documentElement && shadowDomExceptions.indexOf(document.domain) == -1) {
                 shadowRoot = document.documentElement.createShadowRoot();
                 shadowRoot.appendChild(document.createElement("shadow"));
-                protectShadowRoot();
             }
         }
 
@@ -264,54 +263,6 @@
             var script = "(" + injectPageScriptAPI.toString() + ")('" + wrapperScriptName + "', " + overrideWebSocket + ", " + overrideWebRTC + ");";
             executeScripts([script]);
         }
-    };
-
-    /**
-     * Overrides shadowRoot getter
-     * The solution from ABP
-     *
-     * Function supposed to be executed in page's context
-     */
-    var overrideShadowRootGetter = function () {
-        if ("shadowRoot" in Element.prototype) {
-            var ourShadowRoot = document.documentElement.shadowRoot;
-            if (ourShadowRoot) {
-                var desc = Object.getOwnPropertyDescriptor(Element.prototype, "shadowRoot");
-                var shadowRoot = Function.prototype.call.bind(desc.get);
-
-                Object.defineProperty(Element.prototype, "shadowRoot", {
-                    configurable: true, enumerable: true, get: function () {
-                        var thisShadow = shadowRoot(this);
-                        return thisShadow === ourShadowRoot ? null : thisShadow;
-                    }
-                });
-            }
-        }
-    };
-
-    /**
-     * Overrides stylesheets property disabled
-     *
-     * Function supposed to be executed in page's context
-     */
-    var overrideStyleSheetProperties = function () {
-        Object.defineProperty(window.HTMLStyleElement.prototype, 'disabled', {
-            get: function () {
-                return false;
-            }, set: function (val) {
-                // Do nothing
-            }
-        });
-    };
-
-    /**
-     * Protects shadow root from access in page's context
-     * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/829
-     */
-    var protectShadowRoot = function () {
-        var scriptShadowRoot = "(" + overrideShadowRootGetter.toString() + ")();";
-        var scriptStylesheets = "(" + overrideStyleSheetProperties.toString() + ")();";
-        executeScripts([scriptShadowRoot, scriptStylesheets]);
     };
 
     /**
