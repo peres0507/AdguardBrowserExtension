@@ -1,8 +1,8 @@
-! Checksum: uS0eWRotdSQurbB+KkLCXQ
+! Checksum: jBoiUUaXgQtpKjZyRuzx/Q
 ! Title: Safari filter
 ! Description: Special filter for Safari 9+ on iOS and OS X. We need a separate filter for Safari because it does not fully support our rules syntax.
-! Version: 1.0.3.62
-! TimeUpdated: 2017-09-18T13:02:21.007+04:00
+! Version: 1.0.3.68
+! TimeUpdated: 2017-10-09T18:01:29.937+04:00
 ! Expires: 2 days (update frequency)
 ||adexec.net^$popup
 ||0912701309f8ce.com^$popup
@@ -76,11 +76,12 @@ televisaofutebol.com#@#iframe[width="300"][height="250"]
 @@||doubleclick.net/gpt/pubads_impl_$domain=allpatents.com|armsrack.com|axlegeeks.com|careertrends.com|corporate.com|credio.com|findthebest.com|findthecompany.com|findthedata.com|findthehome.com|gearsuite.com|healthgrove.com|homeowl.com|insidegov.com|mooseroots.com|pickban.com|pikasaur.com|platform.com|pointafter.com|prettyfamous.com|softwareinsider.com|specout.com|startclass.com|underthelabel.com|weatherdb.com
 @@||studychacha.com^$generichide
 @@||computerworm.net^$generichide
-@@||adtrackers.net^$script,other,domain=crackhex.ch|animmex.tv|finalservers.net|freeomovie.com|cmacapps.com
-@@*.ico$domain=crackhex.ch|animmex.tv|finalservers.net|freeomovie.com|cmacapps.com
-@@||adclixx.net^$script,other,domain=crackhex.ch|animmex.tv|finalservers.net|freeomovie.com|cmacapps.com
-@@||adnetasia.com^$script,other,domain=crackhex.ch|animmex.tv|finalservers.net|freeomovie.com|cmacapps.com
-@@||bannertrack.net^$script,other,domain=crackhex.ch|animmex.tv|finalservers.net|freeomovie.com|cmacapps.com
+@@||adtrackers.net^$script,other,domain=crackhex.ch|animmex.tv|finalservers.net|freeomovie.com|cmacapps.com|yalujailbreak.net
+@@*.ico$domain=crackhex.ch|animmex.tv|finalservers.net|freeomovie.com|cmacapps.com|yalujailbreak.net
+@@||adclixx.net^$script,other,domain=crackhex.ch|animmex.tv|finalservers.net|freeomovie.com|cmacapps.com|yalujailbreak.net
+@@||adnetasia.com^$script,other,domain=crackhex.ch|animmex.tv|finalservers.net|freeomovie.com|cmacapps.com|yalujailbreak.net
+@@||bannertrack.net^$script,other,domain=crackhex.ch|animmex.tv|finalservers.net|freeomovie.com|cmacapps.com|yalujailbreak.net
+@@||yalujailbreak.net^$generichide
 @@||crackhex.ch^$generichide
 @@||finalservers.net^$generichide
 @@||freeomovie.com^$generichide
@@ -374,13 +375,10 @@ hdrezka.me##div[style="padding: 0px; margin: 0px;"] > table[style*="word-break:b
 @@||jsc.marketgid.com/*/seasonvar.ru.*.js
 @@||rootmedia.ws/js/lib.js
 tree.tv,comedy-film.net,free-torrent.org,free-torrents.org,onlyf.ws,torrentino.me##body > :not(div)
-tapochek.net##body > div#body_container > div#page_container > div#page_content > table > tbody > tr > td > div[id*="Composite"]
-24videos.me,ahs-online.net,all-episodes.net,all-tv.org,allhit.tv,amovies.biz,audioboo.ru,baskino.club,bigcinema.to,bigtorrent.org,bobfilm1.net,cloud.mail.ru,comedy-portal.net,cwer.ws,dnevniki-vampira.net,dochronika.ru,doramatv.ru,fanserials.tv,fast-bit.org,fast-torrent.ru,fastpic.ru,fasttorrent.ru,filin.tv,filmix-online.net,filmix.net,filmogo.co,filmtor.net,findanime.ru,firebit.net,fizrukoff.net,free-torrent.org,free-torrents.org,freehd.com.ua,game-torrent.info,games-reviews.net,hd720.biz,hdclub.org,hdkinomax.com,hdkinoteatr.com,hdrezka.me,hronika.info,ikinohd.com,kino-dom.org,kino-hd.in,kino-hd720.net,kino-live.red,kino-live2.org,kino-nada.net,kino-v-online.tv,kinoclips.net,kinogb.net,kinogo-co-2016.ru,kinogo-hd.net,kinogo-net-2016.ru,kinogo-net-co.ru,kinogo-online.net,kinogo.club,kinogo.eu,kinoklad.net,kinokong.net,kinokrad.co,kinoprosmotr.net,kinosvit.tv,kinozadrot.net,kinozz.net,klipzona.co,krutor.org,linecinema.org,livetv-torrent.com,lostfilm-online.ru,lostfilmonline.ru,megaserial.net,megogo-hd.net,multiki-online24.ru,my-tfile.org,n-torrents.ru,nice-film.ru,nnm-club.me,nnmclub.to,nod32eset.ru,nowa.cc,onelike.tv,onlainfilm.ucoz.ua,online-freebee.net,online-life.cc,only-tv.org,ostfilm.tv,ovgorskiy.ru,radikal.ru,rsload.net,rufilmtv.org,rumedia.ws,rustorka.com,rutor.info,seasonvar.ru,serialguru.ru,serialytut.tv,sezon-hd.ru,show-online.tv,stereotraker.ru,tapochek.net,tfile-music.org,tfile.co,tfilm.club,tivix.net,torrent-games.net,torrent-soft.net,torrent-windows.net,tracker.hdclub.com.ua,trackeroc.ru,trackerock.ru,tracktor.tv,trialeset.ru,turkcinema.tv,tv-torrent.org,tvbook.tv,tvfru.net,uniongang.net,unionpeer.org,wikianime.ru,x-true.info,yourcinema.tv,yummyanime.com,zagonka.ru##body > div[id][class][style*="data:image/jpeg;base64"]
+24videos.me,ahs-online.net,all-episodes.net,all-tv.org,allhit.tv,amovies.biz,audioboo.ru,baskino.club,bigcinema.to,bigtorrent.org,bobfilm1.net,cloud.mail.ru,comedy-portal.net,cwer.ws,dnevniki-vampira.net,dochronika.ru,doramatv.ru,fanserials.tv,fast-bit.org,fast-torrent.ru,fastpic.ru,fasttorrent.ru,filin.tv,filmix-online.net,filmix.net,filmogo.co,filmtor.net,findanime.ru,firebit.net,fizrukoff.net,free-torrent.org,free-torrents.org,freehd.com.ua,game-torrent.info,games-reviews.net,hd720.biz,hdkinomax.com,hdkinoteatr.com,hdrezka.me,hronika.info,ikinohd.com,kino-dom.org,kino-hd.in,kino-hd720.net,kino-live.red,kino-live2.org,kino-nada.net,kino-v-online.tv,kinoclips.net,kinogb.net,kinogo-co-2016.ru,kinogo-hd.net,kinogo-net-2016.ru,kinogo-net-co.ru,kinogo-online.net,kinogo.club,kinogo.eu,kinoklad.net,kinokong.net,kinokrad.co,kinoprosmotr.net,kinosvit.tv,kinozadrot.net,kinozz.net,klipzona.co,krutor.org,linecinema.org,livetv-torrent.com,lostfilm-online.ru,lostfilmonline.ru,megaserial.net,megogo-hd.net,multiki-online24.ru,my-tfile.org,n-torrents.ru,nice-film.ru,nnm-club.me,nnmclub.to,nod32eset.ru,nowa.cc,onelike.tv,onlainfilm.ucoz.ua,online-freebee.net,online-life.cc,only-tv.org,ostfilm.tv,ovgorskiy.ru,radikal.ru,rsload.net,rufilmtv.org,rumedia.ws,rustorka.com,rutor.info,seasonvar.ru,serialguru.ru,serialytut.tv,sezon-hd.ru,show-online.tv,stereotraker.ru,tapochek.net,tfile-music.org,tfile.co,tfilm.club,tivix.net,torrent-games.net,torrent-soft.net,torrent-windows.net,tracker.hdclub.com.ua,trackeroc.ru,trackerock.ru,tracktor.tv,trialeset.ru,turkcinema.tv,tv-torrent.org,tvbook.tv,tvfru.net,uniongang.net,unionpeer.org,wikianime.ru,x-true.info,yourcinema.tv,yummyanime.com,zagonka.ru##body > div[id][class][style*="data:image/jpeg;base64"]
 rutorgames.org##body > noindex
 filmix.net##noindex > div[style$="!important;"]
-nnm-club.me,nnmclub.to,filmix.net,kinokrad.co##div[id*="Composite"]
 nnm-club.me,nnmclub.to##.leftnav > center > noindex
-baskino.club##div[id*="Composite"] *
 meddaily.ru##div[style="width: 240px; background-color: White;"]
 convertfiles.com###advertisement_section
 convertfiles.com##div[id^="div-gpt-ad"]
