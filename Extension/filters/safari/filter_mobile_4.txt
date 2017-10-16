@@ -1,8 +1,8 @@
-! Checksum: zXtT7KoUqrMnYAcw6EiP2A
+! Checksum: LPXIKgqKH7cgAqSr1tB3Iw
 ! Title: Social media filter
 ! Description: Filter for social media widgets (Like buttons and such).
-! Version: 1.0.24.15
-! TimeUpdated: 2017-10-11T23:00:32.156+04:00
+! Version: 1.0.24.21
+! TimeUpdated: 2017-10-15T20:00:44.430+04:00
 ! Expires: 2 days (update frequency)
 #%#var AG_onLoad=function(func){if(document.readyState==="complete"||document.readyState==="interactive")func();else if(document.addEventListener)document.addEventListener("DOMContentLoaded",func);else if(document.attachEvent)document.attachEvent("DOMContentLoaded",func)};
 #%#var AG_removeElementById = function(id) { var element = document.getElementById(id); if (element && element.parentNode) { element.parentNode.removeChild(element); }};
@@ -372,6 +372,13 @@ m.tf.co.kr#$#li.sBtn_reply { float: initial!important; display: inline-block!imp
 ||djcracx.com/?*=*&_=
 ||crackflare.com/?*=*&_=
 ||worldhack.net/foro/clientscript/locker/
+autobytel.com##.share-widget
+globalreinsurance.com##a[title^="Share this on"]
+jinekoloji.com##.widget-social
+gidonline.in###socbg
+gidonline.in###soc
+ted.com##div[class=" p-r:1 p-y:1 d:f a-i:c "]
+xtraordinaryfansub.com##.sharebar-home
 regionalwolfsburg.de##.shareicon
 netdoktor.de###share-button
 freenung-x.com##footer > div[style="float:right;padding:2px 10px 0px 0px;font:normal 13px Arial;color:#666"]
@@ -619,7 +626,7 @@ barstoolsports.com##.iconWrap.facebook
 barstoolsports.com##.articleFooterSocial
 bento.de##.social-icons
 cod33.ru##.social-float
-cod33.ru##.social_widgets
+cod33.ru,tjournal.ru,dtf.ru,vc.ru,rian.com.ua##.social_widgets
 ohmymag.de##body.omm .fshare
 ohmymag.de###likeboxreceiver
 pokemongopocket.com##.widget_bimber_widget_facebook_page
@@ -1271,9 +1278,6 @@ cbsnews.com###floating-sharebar
 loopit.in###floatingSocialShare
 polygon.com###follow-bar-buttons
 1plus1.ua###footer-social-popup
-gidonline.club###friend > #soc
-gidonline.club###friend > #socbg
-gidonline.club###friend > .pf
 nationalreview.com###full-story-share
 acura.com###global-social-networking
 softwares-serials.in###google_plus_right
@@ -1307,7 +1311,6 @@ bonusmieter.de###mo_globba > div[-ext-has='div#fb-root']
 fikirto.com###mobile-share-boxbottom
 emlakkulisi.com###modal
 bitterwallet.com###module-widget-meta-4
-gidonline.club###msoc
 ohmygoal.co###navigation > div.right
 nba.com###nbaArticleBottomShareWrapper
 nba.com###nbaArticleCopySocial
@@ -2637,6 +2640,7 @@ zdnet.co.kr##ul.sub_view_tit4.clfx
 ##.share-pinterest
 !+ NOT_OPTIMIZED
 ##.share-facebook
+##.resp-sharing-button
 ##.global-share
 ###global-share
 ##.post-social-pin
@@ -3516,6 +3520,7 @@ designboom.com,livescience.com,pbtech.co.nz,peoplesworld.org,space.com##.fa-face
 ||cdn-library.su/plusonet/lib/$domain=~pluso.net
 ||mailget.net^$third-party
 ||my.hellobar.com^$third-party
+inettools.net###ouibounce-modal
 cabconmodding.com##.FloatingContainer
 video.az###js-dialog-social-overlay
 firstonetv.watch##body > div[class]:empty
@@ -3710,6 +3715,8 @@ bomb01.com#$#.modal-open { overflow: visible!important; }
 1track.ru#$##shareModal { display: none!important; }
 1track.ru#$#.modal-backdrop { display: none!important; }
 1track.ru#$#body { overflow: visible!important; }
+neokur.com#$#body { overflow: visible!important; }
+neokur.com#$#.jquery-modal.blocker { display: none!important; }
 @@||facebook.com/restserver.php?*.getStats&$domain=agsat.com.ua
 cnet.com#@#.share-button
 radiojavan.com#@##socialize

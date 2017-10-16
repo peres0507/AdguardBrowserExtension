@@ -1,8 +1,8 @@
-! Checksum: u74yJoZOhIiyrjjzIuk3zA
+! Checksum: pAMY4cnZeUZjfuDY/HzLQQ
 ! Title: Spyware filter
 ! Description: The most comprehensive list of various online counters and web analytics tools. If you do not want your actions on the Internet to be tracked, use this filter.
-! Version: 1.0.14.89
-! TimeUpdated: 2017-10-10T03:00:31.750+04:00
+! Version: 1.0.14.96
+! TimeUpdated: 2017-10-14T19:00:39.219+04:00
 ! Expires: 2 days (update frequency)
 ! Homepage: http://adguard.com/filters.html#privacy
 ! License: http://creativecommons.org/licenses/by-sa/3.0/
@@ -106,6 +106,7 @@ journal-plaza.net##.rightside div.block.bnavi[-ext-has="h3.dtitle:contains(Сч�
 ! Should be uncommented once v2.10 goes live
 ! ||app-measurement.com^
 !
+||soska.us^$third-party
 ||yield-manager.browsiprod.com^$third-party
 ||l.ffx.io^$third-party
 ||bkrtx.com^$third-party
@@ -3615,6 +3616,9 @@ journal-plaza.net##.rightside div.block.bnavi[-ext-has="h3.dtitle:contains(Сч�
 !
 ! Section contains the list of tracking servers, which are hosted on useful sites as subdomains
 !
+||trk.stroeermediabrands.de^
+||gocp.stroeermediabrands.de^$third-party
+||js.stroeermediabrands.de^$third-party
 ||tracking.oe24.at^
 ||tracking.kurier.at^
 ||analytics.codigo.se^
@@ -4142,6 +4146,10 @@ _tracking.php?b=
 ||scorecardresearch.com^$domain=cnet.com,important
 ! End: cnet.com trackers
 !
+||festyy.com/bundles/smeweb/img/tracking
+||vidmoly.me/log.php
+||xxxkingtube.com/fp.php
+merkur.de##.id-Amp-recommendation
 ||pages.e.newsdigitalmedia.com.au/Script/pageTracking.js
 ||sa.sayaclar.com/c/s*.php?$third-party
 filmjethdizle.club##a[href="http://sayaclar.com"]
@@ -4967,6 +4975,10 @@ dreamprogs.net##td[Width="88"][Height="31"]
 !-------------- Whitelist ------------------------------------------------------!
 !-------------------------------------------------------------------------------!
 !
+! uptime.community - the site is broken
+@@||geoplugin.net/javascript.gp$domain=uptime.community
+! https://forum.adguard.com/index.php?threads/25869/
+@@||googletagmanager.com/gtm.js$domain=eksisozluk.com
 ! https://github.com/AdguardTeam/ExperimentalFilter/issues/1476
 @@||tags.bkrtx.com/js/bk-coretag.js^$domain=abc7.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/4314
