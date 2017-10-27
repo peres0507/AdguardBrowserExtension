@@ -815,6 +815,9 @@
      */
     var onProcessShouldCollapseResponse = function (response) {
 
+        console.log('onProcessShouldCollapseResponse');
+        console.log(response);
+
         if (!response) {
             return;
         }
@@ -870,7 +873,7 @@
             requestId: requestId
         };
 
-        contentPage.sendMessage(message, onProcessShouldCollapseResponse);
+        window.contentPage.sendMessage(message, onProcessShouldCollapseResponse);
     };
 
     /**
@@ -879,6 +882,9 @@
      * @param response Response from bg page.
      */
     var onProcessShouldCollapseManyResponse = function (response) {
+
+        console.log('onProcessShouldCollapseManyResponse');
+        console.log(response);
 
         if (!response) {
             return;
@@ -928,7 +934,7 @@
         };
 
         // Send all prepared requests in one message
-        contentPage.sendMessage(message, onProcessShouldCollapseManyResponse);
+        window.contentPage.sendMessage(message, onProcessShouldCollapseManyResponse);
     };
 
     /**

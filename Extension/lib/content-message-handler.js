@@ -297,10 +297,16 @@
                 var block = adguard.webRequestService.checkPageScriptWrapperRequest(sender.tab, message.elementUrl, message.documentUrl, message.requestType);
                 return {block: block, requestId: message.requestId};
             case 'processShouldCollapse':
+                console.log(1);
                 var collapse = adguard.webRequestService.processShouldCollapse(sender.tab, message.elementUrl, message.documentUrl, message.requestType);
+                console.log(2);
+                console.log(collapse);
                 return {collapse: collapse, requestId: message.requestId};
             case 'processShouldCollapseMany':
+                console.log(3);
                 var requests = adguard.webRequestService.processShouldCollapseMany(sender.tab, message.documentUrl, message.requests);
+                console.log(4);
+                console.log(requests);
                 return {requests: requests};
             case 'addUserRule':
                 adguard.userrules.addRules([message.ruleText]);
