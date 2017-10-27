@@ -855,6 +855,12 @@
             return;
         }
 
+        // contentPage could become undefined in FF
+        // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/880
+        if (!contentPage) {
+            return;
+        }
+
         // Save request to a map (it will be used in response callback)
         var requestId = saveCollapseRequest(element);
 
