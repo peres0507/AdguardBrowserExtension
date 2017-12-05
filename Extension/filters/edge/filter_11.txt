@@ -1,8 +1,8 @@
-! Checksum: /J2HlgOF4OJXs1fNIH5Odw
+! Checksum: mJ7TW2/pGi4mUbINVaM00A
 ! Title: Mobile Ads filter
 ! Description: Filter for all known mobile ad networks. Useful for mobile devices.
-! Version: 1.0.10.58
-! TimeUpdated: 2017-11-21T01:01:14.861+04:00
+! Version: 1.0.10.75
+! TimeUpdated: 2017-12-01T20:01:07.569+04:00
 ! Expires: 2 days (update frequency)
 ! Homepage: http://adguard.com/filters.html#mobile
 ! License: http://creativecommons.org/licenses/by-sa/3.0/
@@ -19,7 +19,8 @@
 !
 ! Experimental
 !
-#%#var AG_defineProperty=function(){var p="function"==typeof WeakMap?WeakMap:function(){function c(){this.a=Math.random().toString(36).slice(7)}c.prototype.get=function(e){return e[this.a]};c.prototype.set=function(e,c){e[this.a]=c;return this};return c}();return function(c,e,n){function h(a,c){if(!(a instanceof Object))return a;var f=c.indexOf("."),d=c.slice(0,f),g=c.slice(f+1);if(f=k.get(a))for(var l=f.length;0<l--;){var m=f[l];if(m==c)return a;if(m.split(".",1)[0]==d)return console.warn("AG_defineProperty: unresolvable circular reference detected."), a}var b=Object.getOwnPropertyDescriptor(a,d);if(!b&&Object.isExtensible(a)||b.configurable)0===g.length?Object.defineProperty(a,d,e):Object.defineProperty(a,d,{get:function(){if(b){if(b.hasOwnProperty("value"))var a=b.value;else if(b.get)a=b.get.call(this);else return;return h(a,g)}},set:function(a){return b?b.hasOwnProperty("value")?b.writable?(b.value=a,!0):!1:b.set?b.set.call(this,a):!1:(b={},b.value=a,b.writable=!0)},enumerable:b?b.enumerable:!0});else if(b&&b.writable){if(0===g.length)if(e.writable)a[d]= e.value;else return console.warn("AG_defineProperty: cannot rewrite property "+d+"."),a;a[d]=h(b.value,g)}else return console.warn("AG_defineProperty: cannot redefine property "+d+"."),a;f?f.push(c):k.set(a,[c]);return a}var k=new p;h(n||window,c+".")}}();
+#%#var AG_abortInlineScript=function(e,f){var c,d;if("currentScript"in document)var b=function(){return document.currentScript};else b=function(){var a=document.getElementsByTagName("script");return a[a.length-1]},window.addEventListener("DOMContentLoaded",function(){b=function(){return null}});AG_defineProperty(f,{get:function(){var a=b();if(a&&a!==d&&(d=a,e.test(a.textContent)))throw"AdGuard aborted a script execution.";return c},set:function(a){c=a}})};
+#%#var AG_defineProperty=function(){var k,l=Object.defineProperty;if("function"==typeof WeakMap)k=WeakMap;else{var m=0,n=function(){this.a=(m+=Math.random()).toString()};n.prototype.set=function(c,a){var b=c[this.a];b&&b[0]===c?b[1]=a:l(c,this.a,{value:[c,a],writable:!0});return this};n.prototype.get=function(c){var a;return(a=c[this.a])&&a[0]===c?a[1]:void 0};n.prototype.has=function(c){var a=c[this.a];return a?a[0]===c:!1};k=n}function r(c){this.c=c;this.f=Object.create(null)}function t(c,a,b,d){this.g=c;this.i=a;this.b=b;this.h=d}function u(){this.a=new k}function v(c,a,b){var d=a.i,e=a.b,f=new r(e.c),g;for(g in e.f)v(c,e.f[g],f);d=new t(b,d,f,w(a.h));b.f[d.i]=d;"undefined"!==typeof b.c&&(e=x(b.c,d.i),d.a=e,f=d.h||y(c,d),!e||e.configurable?(l(b.c,d.i,f),e&&z(e)&&(A(b.c,f,e.value),B(c,e.value,a.b))):e&&z(e)&&B(c,e.value,a.b))}function y(c,a){return{get:function(){if(this!==a.g.c)var b=a.a&&a.a.get?a.a.get.call(this):void 0;else b:if(b=a.a){if(z(b))b=b.value;else if(b.get)b=b.get.call(this);else{b=void 0;break b}B(c,b,a.b)}else b=void 0;return b},set:function(b){if(this===a.g.c&&C(b)){b=D(c,b);var d=a.a;d&&z(d)&&d.value===b.c?b=!0:(E(a,b.c,this),F(c,b,a.b),b=void 0)}else b=E(a,b,this);return b},enumerable:a.a?a.a.enumerable:!0}}function F(c,a,b){for(var d in b.f){var e=b.f[d];if(a.f[d]){var f=c,g=a.f[d];!e.h||g.h||"undefined"===typeof g.g.c||g.a||(g.a=w(e.h));g.b&&e.b&&g.b!==e.b&&F(f,g.b,e.b)}else v(c,e,a)}}function B(c,a,b){C(a)&&(a=D(c,a),F(c,a,b))}function A(c,a,b){return z(a)?a.writable?(a.value=b,!0):!1:a.set?a.set.call(c,b):!1}function E(c,a,b){var d=c.a;if(!d){if(!G(c.g.c))return!1;c.a={value:a,configurable:!0,writable:!0,enumerable:!0};return!0}return A(b,d,a)}function z(c){return"undefined"!==typeof c.writable}function w(c){if(c){for(var a={},b=H;b--;){var d=I[b];c.hasOwnProperty(d)&&(a[d]=c[d])}return a}}function D(c,a){var b=c.a.get(a);b||(b=new r(a),c.a.set(a,b));return b}var I="value get set writable configurable enumerable".split(" "),H=6,x=Object.getOwnPropertyDescriptor,G=Object.isExtensible;function C(c){var a=typeof c;return"function"===a||"object"===a&&null!==c?!0:!1}var J;return function(c,a,b){J||(J=new u);var d=J;b=b||window;var e=new r;c+=".";var f=e||new r;for(var g=d.g||(d.g=/^([^\\\.]|\\.)*?\./),h,p,q;c;){h=g.exec(c);if(null===h)throw 1;h=h[0].length;p=c.slice(0,h-1);c=c.slice(h);(h=f.f[p])?q=h.b:(q=new r,h=new t(f,p,q),f.f[p]=h);f=q}if(!h)throw 1;c=h;c.h=a;B(d,b,e)};}();
 ! JS API FINISH
 !---------------------------------------------------------------------------!
 !-------------- Advertising networks ---------------------------------------!
@@ -931,6 +932,10 @@ westseattleblog.com#@#.header-ad
 !
 ! Extended CSS rules
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/7732
+wetter.de##.large-4 > .wrapper-teaser:has([data-adformat])
+! https://forum.adguard.com/index.php?threads/27134/
+money.cnn.com##.content-scroll > div#ng-view > section.headline_list:has(> div.section_header:contains(Partner Offers))
 ! https://github.com/AdguardTeam/AdguardFilters/issues/7270
 lifehack.org##.visible-xs[style^="background-color: rgb"]:has(>[id^="div-gpt-ad"])
 lifehack.org##.visible-xs[style^="background-color: rgb"]:has([id^="lifehack_m_"][id*="TF"])
@@ -983,7 +988,7 @@ m.reddit.com##article[class="Post size-compact"][-ext-has=".PostHeader__sponsore
 !-------------------
 !### TEMPORARY ###
 ! WebSockets are not blocked
-all-tor.net,free-rutor.org,lenfilm.tv,krutor.org,fast-bit.org,tor-ru.net,hd-bit.org,radikal.ru,hdkinomax.com,on-movie.net,fastpic.ru,rutor.is,baskino.club,rutor.info,nnm.me,korzik.net,seasonvar.ru,rsload.net,nnm-club.me,nnmclub.to,rustorka.com,auto.mail.ru,horo.mail.ru,realty.mail.ru,health.mail.ru,afisha.mail.ru,cloud.mail.ru,otvet.mail.ru,pogoda.mail.ru,sport.mail.ru,tv.mail.ru,torg.mail.ru,cars.mail.ru,hi-tech.mail.ru,rustorka.com,top-tor.org,super-tor.net,filmix.net,free-ru.org#%#window.WebSocket = undefined;
+nnm-club.tv,all-tor.net,free-rutor.org,lenfilm.tv,krutor.org,fast-bit.org,tor-ru.net,hd-bit.org,radikal.ru,hdkinomax.com,on-movie.net,fastpic.ru,rutor.is,baskino.club,rutor.info,nnm.me,korzik.net,seasonvar.ru,rsload.net,nnm-club.me,nnmclub.to,rustorka.com,auto.mail.ru,horo.mail.ru,realty.mail.ru,health.mail.ru,afisha.mail.ru,cloud.mail.ru,otvet.mail.ru,pogoda.mail.ru,sport.mail.ru,tv.mail.ru,torg.mail.ru,cars.mail.ru,hi-tech.mail.ru,rustorka.com,top-tor.org,super-tor.net,filmix.net,free-ru.org#%#window.WebSocket = undefined;
 ! https://forum.adguard.com/index.php?threads/12443/
 pornhub.com#%#AG_onLoad(function() { if (typeof redirect !== 'function') return; var str = redirect.toString(); var m = str.match(/\'(\/view.*)\'/); if (m.length != 2) return; var link = m[1]; window.location.href = m[1]; });
 ! For Moscow metro Wi-Fi
@@ -1102,6 +1107,9 @@ deviantart.com#$#div[class*="dp-ad-"] {height:0px!important; width:0px!important
 @@||tf-robots.nl^$elemhide,jsinject,content
 !
 !#####################
+! https://github.com/AdguardTeam/AdguardFilters/issues/8001
+reviews.mtbr.com#@#.header-ad
+! https://github.com/AdguardTeam/AdguardFilters/issues/7916
 ! https://github.com/AdguardTeam/AdguardFilters/issues/6807
 @@||hdzog.com/assets/$domain=m.hdzog.com
 @@||hdzog.com/get_file/$domain=m.hdzog.com
@@ -1311,6 +1319,14 @@ m.youtube.com##a[href^="/watch?v="][onclick^="return koya.onEvent(arguments[0]||
 !+ NOT_OPTIMIZED
 m.youtube.com##a[href^="/watch?v="][onclick^="return koya.onEvent(arguments[0]||window.event,'"]:not([role]):not([class]):not([id]) + div
 !
+m.ln-online.de,m.dnn.de,m.maz-online.de,m.sn-online.de,m.paz-online.de,m.ostsee-zeitung.de,m.haz.de,m.neuepresse.de,m.goettinger-tageblatt.de,m.kn-online.de##.pdma-adaside
+money.cnn.com##.ob-widget-section.ob-first
+wsj.com###AD_RAIL1.wsj-ad
+wsj.com##p > #deloitte_column > [data-module-zone="deloitte_insights"] > .deloitte-insights
+mobile.nytimes.com##[class^="ResponsiveAd-topAd--"]
+mobile.nytimes.com##[class^="ResponsiveAd-storyBodyAd--"]
+mobile.nytimes.com##[class^="ResponsiveAd-bottomAd--"]
+money.cnn.com##iframe[src^="http://money.cnn.com/.element/ssi/partners/"]
 m.3movs.com##.banner
 m.3movs.com###fltd.p-ig
 m.3movs.com##.bottom_spot

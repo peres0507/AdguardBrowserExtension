@@ -1,8 +1,8 @@
-! Checksum: tgrA7dC83X9vzCFWHlwDYA
+! Checksum: oW6ujKncnfTLagiw08w+JA
 ! Title: Safari filter
 ! Description: Special filter for Safari 9+ on iOS and OS X. We need a separate filter for Safari because it does not fully support our rules syntax.
-! Version: 1.0.3.78
-! TimeUpdated: 2017-11-21T01:01:18.671+04:00
+! Version: 1.0.3.82
+! TimeUpdated: 2017-12-04T16:01:17.649+04:00
 ! Expires: 2 days (update frequency)
 ! Homepage: http://adguard.com/filters.html#safari
 ! License: http://creativecommons.org/licenses/by-sa/3.0/
@@ -38,6 +38,7 @@
 !
 !****** TEMPORARY ******
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/7995
 !***********************
 !
 ! https://github.com/AdguardTeam/AdguardFilters/issues/5314
@@ -74,7 +75,6 @@ mathb-ege.sdamgia.ru##.content >div[style="margin-bottom:20px"] > div[style="wid
 televisaofutebol.com#@#iframe[width="300"][height="250"]
 ! https://github.com/AdguardTeam/AdguardFilters/issues/4906
 @@||mobilesringtones.com^$generichide
-@@||cdnjs.cloudflare.com/ajax/libs/fuckadblock/*/fuckadblock.min.js$domain=mobilesringtones.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/4899
 @@||susutin.com^$generichide
 ! https://forum.adguard.com/index.php?threads/deezer-com-antiadblock.21269/
@@ -496,10 +496,10 @@ hdrezka.me##div[style="padding: 0px; margin: 0px;"] > table[style*="word-break:b
 @@||jsc.marketgid.com/*/seasonvar.ru.*.js
 @@||rootmedia.ws/js/lib.js
 tree.tv,comedy-film.net,free-torrent.org,free-torrents.org,onlyf.ws,torrentino.me##body > :not(div)
-24videos.me,ahs-online.net,all-episodes.net,all-tv.org,allhit.tv,amovies.biz,audioboo.ru,baskino.club,bigcinema.to,bigtorrent.org,bobfilm1.net,cloud.mail.ru,comedy-portal.net,cwer.ws,dnevniki-vampira.net,dochronika.ru,doramatv.ru,fanserials.tv,fast-bit.org,fast-torrent.ru,fastpic.ru,fasttorrent.ru,filin.tv,filmix-online.net,filmix.net,filmogo.co,filmtor.net,findanime.ru,firebit.net,fizrukoff.net,free-torrent.org,free-torrents.org,freehd.com.ua,game-torrent.info,games-reviews.net,hd720.biz,hdkinomax.com,hdkinoteatr.com,hdrezka.me,hronika.info,ikinohd.com,kino-dom.org,kino-hd.in,kino-hd720.net,kino-live.red,kino-live2.org,kino-nada.net,kino-v-online.tv,kinoclips.net,kinogb.net,kinogo-co-2016.ru,kinogo-hd.net,kinogo-net-2016.ru,kinogo-net-co.ru,kinogo-online.net,kinogo.club,kinogo.eu,kinoklad.net,kinokong.net,kinokrad.co,kinoprosmotr.net,kinosvit.tv,kinozadrot.net,kinozz.net,klipzona.co,krutor.org,linecinema.org,livetv-torrent.com,lostfilm-online.ru,lostfilmonline.ru,megaserial.net,megogo-hd.net,multiki-online24.ru,my-tfile.org,n-torrents.ru,nice-film.ru,nnm-club.me,nnmclub.to,nod32eset.ru,nowa.cc,onelike.tv,onlainfilm.ucoz.ua,online-freebee.net,online-life.cc,only-tv.org,ostfilm.tv,ovgorskiy.ru,radikal.ru,rsload.net,rufilmtv.org,rumedia.ws,rustorka.com,rutor.info,seasonvar.ru,serialguru.ru,serialytut.tv,sezon-hd.ru,show-online.tv,stereotraker.ru,tapochek.net,tfile-music.org,tfile.co,tfilm.club,tivix.net,torrent-games.net,torrent-soft.net,torrent-windows.net,tracker.hdclub.com.ua,trackeroc.ru,trackerock.ru,tracktor.tv,trialeset.ru,turkcinema.tv,tv-torrent.org,tvbook.tv,tvfru.net,uniongang.net,unionpeer.org,wikianime.ru,x-true.info,yourcinema.tv,yummyanime.com,zagonka.ru##body > div[id][class][style*="data:image/jpeg;base64"]
+nnm-club.tv,24videos.me,ahs-online.net,all-episodes.net,all-tv.org,allhit.tv,amovies.biz,audioboo.ru,baskino.club,bigcinema.to,bigtorrent.org,bobfilm1.net,cloud.mail.ru,comedy-portal.net,cwer.ws,dnevniki-vampira.net,dochronika.ru,doramatv.ru,fanserials.tv,fast-bit.org,fast-torrent.ru,fastpic.ru,fasttorrent.ru,filin.tv,filmix-online.net,filmix.net,filmogo.co,filmtor.net,findanime.ru,firebit.net,fizrukoff.net,free-torrent.org,free-torrents.org,freehd.com.ua,game-torrent.info,games-reviews.net,hd720.biz,hdkinomax.com,hdkinoteatr.com,hdrezka.me,hronika.info,ikinohd.com,kino-dom.org,kino-hd.in,kino-hd720.net,kino-live.red,kino-live2.org,kino-nada.net,kino-v-online.tv,kinoclips.net,kinogb.net,kinogo-co-2016.ru,kinogo-hd.net,kinogo-net-2016.ru,kinogo-net-co.ru,kinogo-online.net,kinogo.club,kinogo.eu,kinoklad.net,kinokong.net,kinokrad.co,kinoprosmotr.net,kinosvit.tv,kinozadrot.net,kinozz.net,klipzona.co,krutor.org,linecinema.org,livetv-torrent.com,lostfilm-online.ru,lostfilmonline.ru,megaserial.net,megogo-hd.net,multiki-online24.ru,my-tfile.org,n-torrents.ru,nice-film.ru,nnm-club.me,nnmclub.to,nod32eset.ru,nowa.cc,onelike.tv,onlainfilm.ucoz.ua,online-freebee.net,online-life.cc,only-tv.org,ostfilm.tv,ovgorskiy.ru,radikal.ru,rsload.net,rufilmtv.org,rumedia.ws,rustorka.com,rutor.info,seasonvar.ru,serialguru.ru,serialytut.tv,sezon-hd.ru,show-online.tv,stereotraker.ru,tapochek.net,tfile-music.org,tfile.co,tfilm.club,tivix.net,torrent-games.net,torrent-soft.net,torrent-windows.net,tracker.hdclub.com.ua,trackeroc.ru,trackerock.ru,tracktor.tv,trialeset.ru,turkcinema.tv,tv-torrent.org,tvbook.tv,tvfru.net,uniongang.net,unionpeer.org,wikianime.ru,x-true.info,yourcinema.tv,yummyanime.com,zagonka.ru##body > div[id][class][style*="data:image/jpeg;base64"]
 rutorgames.org##body > noindex
 filmix.net##noindex > div[style$="!important;"]
-nnm-club.me,nnmclub.to##.leftnav > center > noindex
+nnm-club.tv,nnm-club.me,nnmclub.to##.leftnav > center > noindex
 meddaily.ru##div[style="width: 240px; background-color: White;"]
 !***
 !******
@@ -918,10 +918,10 @@ youtube.com#%#(function () {try {var youtubeAdRegExp = /^((.*_)?(ad|ads|afv|adse
 @@||minitoon.net^$generichide
 @@||money2015.tistory.com^$generichide
 @@||mongri.net^$generichide
-@@||pinaya.center^$generichide
 @@||ruinses.tistory.com^$generichide
 @@||ssulwar.com^$generichide
 @@||te31.com^$generichide
+@@||yabang.org^$generichide
 @@||anigod.com^$generichide
 @@||anigod.org^$generichide
 @@||kflix.tv^$generichide
