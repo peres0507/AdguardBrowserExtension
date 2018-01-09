@@ -1,8 +1,8 @@
-! Checksum: kLK1zeJulua39mbBsZNKZQ
+! Checksum: 4lqNd8wqGjnU1lFFkE1htw
 ! Title: Filter unblocking useful ads
 ! Description: Filter that unblocks search and self-promo ads.
-! Version: 1.0.1.35
-! TimeUpdated: 2017-12-12T20:01:08.155+04:00
+! Version: 1.0.1.37
+! TimeUpdated: 2017-12-28T18:17:49.865+04:00
 ! Expires: 2 days (update frequency)
 #%#var AG_onLoad=function(func){if(document.readyState==="complete"||document.readyState==="interactive")func();else if(document.addEventListener)document.addEventListener("DOMContentLoaded",func);else if(document.attachEvent)document.attachEvent("DOMContentLoaded",func)};
 #%#var AG_removeElementById = function(id) { var element = document.getElementById(id); if (element && element.parentNode) { element.parentNode.removeChild(element); }};
@@ -36,33 +36,11 @@ google.ad,google.ae,google.al,google.am,google.as,google.at,google.az,google.ba,
 @@||ask.com/web$document
 search.ask.com#@#.sponsoredTop
 search.ask.com#@##sponsoredTop
-yandex.ru,yandex.com,yandex.ua,yandex.kz,yandex.by#@#.serp-adv-item
-yandex.ru,yandex.com,yandex.ua,yandex.kz,yandex.by#@#.serp-adv-item > div > h2
-yandex.ru,yandex.com,yandex.ua,yandex.kz,yandex.by#@#.serp-adv-item .organic__content-wrapper
-yandex.ru,yandex.com,yandex.ua,yandex.kz,yandex.by#@#.serp-adv-item .sitelinks
-yandex.ru,yandex.com,yandex.ua,yandex.kz,yandex.by#@#.serp-adv-item .organic__path
-yandex.ru,yandex.com,yandex.ua,yandex.kz,yandex.by#@$#.main__content .serp-list > .serp-adv-item:contains(реклама) { position: absolute!important; left: -3000px!important; }
-yandex.ru,yandex.com,yandex.ua,yandex.kz,yandex.by#@#.teaser_type_internal
-yandex.ru,yandex.com,yandex.ua,yandex.kz,yandex.by#@#.banner_js_inited
-yandex.ru,yandex.com,yandex.ua,yandex.kz,yandex.by,yandex.com.tr#@#.serp-item.z-market
-yandex.ru,yandex.com,yandex.ua,yandex.kz,yandex.by,yandex.com.tr#@#.b-advertizing-and-wizards
-@@||direct.yandex.ru$domain=yandex.ru|yandex.ua|yandex.kz|yandex.by
-@@.yandex.ru/count$domain=yandex.ru|yandex.ua|yandex.kz|yandex.by
-yandex.ru,yandex.com,yandex.ua,yandex.kz,yandex.by#@#.ads-header
-@@||auto.yandex.ru/search$document
-@@||auto.yandex.ru/*/offers$document
-@@||auto.yandex.ua/search$document
-@@||auto.yandex.ua/*/offers$document
-@@||yaca.yandex.ru/yca$document
-@@||yaca.yandex.ua/yca$document
-@@||yaca.yandex.kz/yca$document
-@@||yaca.yandex.by/yca$document
-realty.yandex.ru,realty.yandex.ua,realty.yandex.by#@#.b-guadeloupe
-market.yandex.ru,market.yandex.ua,market.yandex.kz,market.yandex.by#@#.spec-adv
-market.yandex.ru,market.yandex.ua,market.yandex.kz,market.yandex.by#@#.ad-link
-blogs.yandex.ru,blogs.yandex.ua,blogs.yandex.kz,blogs.yandex.by#@#.ad-link
-images.yandex.ru,images.yandex.ua,images.yandex.kz,images.yandex.by#@#.b-direct
-images.yandex.ru,images.yandex.ua,images.yandex.kz,images.yandex.by#@#.ad-link
+yandex.by,yandex.com,yandex.com.tr,yandex.fr,yandex.kz,yandex.ru,yandex.ua#@$#.container__banner { position: absolute!important; left: -3000px!important; }
+yandex.by,yandex.com,yandex.com.tr,yandex.fr,yandex.kz,yandex.ru,yandex.ua#@#.container__banner iframe
+yandex.by,yandex.com,yandex.com.tr,yandex.fr,yandex.kz,yandex.ru,yandex.ua#@$#.search-direct-snippet-view { position: absolute!important; left: -3000px!important; }
+realty.yandex.by,realty.yandex.kz,realty.yandex.ru,realty.yandex.ua#@#.b-guadeloupe
+rabota.yandex.by,rabota.yandex.kz,rabota.yandex.ru,rabota.yandex.ua#@#.search-results__guadeloupe
 @@||startpage.com/adsense/search/async-ads.js$domain=startpage.com
 @@||startpage.com^$elemhide,content
 irr.ru#@#.ad-link

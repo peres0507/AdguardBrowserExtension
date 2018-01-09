@@ -1,8 +1,8 @@
-! Checksum: e0KXcZbsuTtyWva2T7sySA
+! Checksum: dUKlc8FHxUTGmF0ixLoL8w
 ! Title: Japanese filter
 ! Description: Adguard Japanese filter. Filter that enables blocking of ads on websites in Japanese.
-! Version: 1.0.93.16
-! TimeUpdated: 2017-12-11T13:46:52.536+04:00
+! Version: 1.0.93.17
+! TimeUpdated: 2017-12-25T06:01:02.104+04:00
 ! Expires: 2 days (update frequency)
 ! Homepage: http://adguard.com/filters.html#japanese
 ! License: http://creativecommons.org/licenses/by-sa/3.0/
@@ -28,6 +28,7 @@
 !
 ! Section contains list of advertising networks
 !
+||trafficjp.com^$third-party
 |http://www*.a8.net/$third-party
 ||10clicks.com^$third-party
 ||12freeweb.com/img/cmimg.jpg
@@ -376,6 +377,11 @@ _ds_adtag_
 !
 ! Section contains rules for specific websites
 !
+youflix.is###detail_main > .content_vlist[style*="height: 100%; overflow:hidden;"]
+youflix.is###detail_side > div[style*="width:630px; margin:10px auto; overflow: hidden;"] + script + .content_vlist
+youflix.is##.movie-in-ad
+youflix.is##.over_videoAd
+youflix.is##.content_vlist .content_vlist[style^="height:305px; overflow:hidden;"]
 avgle.com##div[style^="width:100%; height: 90px;"]
 ||avgle.com/templates/frontend/videojs-*.js
 ||avgle.com/images/av/*.mp4

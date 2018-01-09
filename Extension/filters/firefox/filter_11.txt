@@ -1,8 +1,8 @@
-! Checksum: szO2PrbD+Cwff+FuPBQotw
+! Checksum: KBl+fQ6uVhjQQ9fCABkYSQ
 ! Title: Mobile Ads filter
 ! Description: Filter for all known mobile ad networks. Useful for mobile devices.
-! Version: 1.0.10.94
-! TimeUpdated: 2017-12-13T13:01:12.924+04:00
+! Version: 1.0.11.28
+! TimeUpdated: 2017-12-28T18:17:54.766+04:00
 ! Expires: 2 days (update frequency)
 ! Homepage: http://adguard.com/filters.html#mobile
 ! License: http://creativecommons.org/licenses/by-sa/3.0/
@@ -66,6 +66,9 @@
 !+ NOT_OPTIMIZED
 ||hqsjc.com^
 !
+||api*.batmobi.net^
+||cdn.batmobi.net^
+||api*.batmobil.net^
 ||adn.insight.ucweb.com^
 ||us.3zs0.date^
 ||tkmftc.aotter.net^
@@ -933,6 +936,11 @@ westseattleblog.com#@#.header-ad
 !
 ! Extended CSS rules
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/8943
+chiemgau24.de##div[data-id-module="col-width-watcher"] > div.id-Container--hasNoHeadline:matches-css-before(content:*- Reklame)
+chiemgau24.de##div[data-id-module="col-width-watcher"] > div.id-Container--hasHeadline:has(> h3 > span:contains(Auch interessant))
+! https://github.com/AdguardTeam/AdguardFilters/issues/7983
+mobile.twitter.com##._29ahSMvH section.rn-1oszu61 div[class][style*="padding-"] > ._1_KafmK5[-ext-has='svg.YunaQoc2']
 ! https://github.com/AdguardTeam/AdguardFilters/issues/8313
 anwap.mobi##body > div[class]:has(> a > strong)
 ! https://github.com/AdguardTeam/AdguardFilters/issues/7732
@@ -1112,6 +1120,9 @@ deviantart.com#$#div[class*="dp-ad-"] {height:0px!important; width:0px!important
 @@||tf-robots.nl^$elemhide,jsinject,content
 !
 !#####################
+!
+! https://github.com/AdguardTeam/AdguardFilters/issues/8470
+@@||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=m.pandora.tv
 ! https://github.com/AdguardTeam/AdguardFilters/issues/7798
 med1.de#@#div[id^="imAd_"]
 @@||cdn.interactivemedia.net/live/Med1.de/live/globalAdTag.min.js$domain=med1.de
@@ -1158,8 +1169,8 @@ timesofindia.indiatimes.com#@#style[type="text/css"] + div[class]:not([id]):not(
 @@||report-ads-to.pubnation.com/dist/pnr.js?t=$domain=m.neogaf.com
 ! https://github.com/AdguardTeam/AdguardDNS/issues/64
 ! Fixing Google Search ads when HTTPS filtering is disabled
-@@://googleadservices.com
-@@://www.googleadservices.com
+@@://googleadservices.com^|
+@@://www.googleadservices.com^|
 ! https://github.com/AdguardTeam/AdguardFilters/issues/4453
 @@||15min.lt^$generichide
 15min.lt#@#.widget.ads
@@ -1317,6 +1328,9 @@ google.ad,google.ae,google.al,google.am,google.as,google.at,google.az,google.ba,
 ! Yandex Search
 yandex.by,yandex.com,yandex.kz,yandex.ru,yandex.ua##.body__topblocks
 yandex.by,yandex.com,yandex.kz,yandex.ru,yandex.ua##.teaser_type_internal
+! https://github.com/AdguardTeam/AdguardFilters/issues/7659#issuecomment-351299187
+yandex.ru##.time-banner~div[class] > a[href^="https://yandex.ru/clck/redir/dtype=clck/lid=geotouch."]:not([class*="timeload__reload"])
+yandex.ru##.banner__link-frame
 !
 m.auto.ru##.card.i-bem > div[class^="_"] > div[class^="_"]
 m.auto.ru##.index.i-bem > div[class]:not([data-bem])
@@ -1332,7 +1346,24 @@ m.youtube.com##a[href^="/watch?v="][onclick^="return koya.onEvent(arguments[0]||
 m.youtube.com##a[href^="/watch?v="][onclick^="return koya.onEvent(arguments[0]||window.event,'"]:not([role]):not([class]):not([id]) + div
 !
 !
-reddit.com##.PostContent > a.PostContent__image-link[style*="background-image: url"]
+m.sunporno.com##.spot
+m.tnaflix.com##.bannerBlock
+spankwire.com##.headerAd+span
+spankwire.com###floatingBanner
+4pda.ru##body > a[role="button"][href="#"]
+4pda.ru##body > div[class][style^="zoom:"]
+youflix.is##main > #detail_main + div[style="margin-bottom:-20px;"] > .content_vlist
+||m.realgfporn.com/th^
+/m.realgfporn.com\/[a-z]{1,13}[0-9]{1,13}[a-z]{1,13}.js/
+filmakinesi2.org##iframe + .perfbox > a > img
+youjizz.com##.bottom_pr
+youjizz.com###mobileRollAd
+gotgayporn.com##small:not([class]):not([id]):not([style])
+m.sovsport.ru##.fonbet_match_centre
+wz.de##.adLine_separator
+shiftdelete.net##iframe[src*="/getAd?"]
+m.befuck.com##a[href^="http://nats.beataporn.com"]
+m.turizmajansi.com###ContentPlaceHolder1_uc_banner_main_top_AdRotator_a1
 gotporn.com##.advertisement
 porn.com##.m-zone
 m.porntube.com##.adv
@@ -1807,6 +1838,14 @@ auth.wi-fi.ru##.c-fullscreen-banner
 !
 ! Blocking of Facebook ads
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/8162
+! https://github.com/AdguardTeam/AdguardFilters/issues/7352
+! https://github.com/AdguardTeam/AdguardFilters/issues/8648
+||app.openstreamapp.com/*/getallads/
+! https://github.com/AdguardTeam/AdguardFilters/issues/8642
+||crosspromotion.weplayer.cc^
+||ad.weplayer.cc^
+! com.google.android.googlequicksearchbox - app crashes when request is blocked
 ! https://github.com/AdguardTeam/AdguardFilters/issues/7287
 ! https://github.com/AdguardTeam/AdguardFilters/issues/6505
 ! https://github.com/AdguardTeam/AdguardFilters/issues/6728
@@ -1941,8 +1980,6 @@ auth.wi-fi.ru##.c-fullscreen-banner
 ||vads-api.daumkakao.com/xylophone/adrequest/json
 ! https://github.com/AdguardTeam/ExperimentalFilter/issues/2026
 ||spoofgames.com/prod/*.txt
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1742
-||bahamut.com.tw/JS/ad/
 ! https://github.com/AdguardTeam/ExperimentalFilter/issues/2022
 ||gdeposylka.ru/js/primatic.js?_=
 ! https://github.com/AdguardTeam/ExperimentalFilter/issues/1806
@@ -2000,6 +2037,8 @@ auth.wi-fi.ru##.c-fullscreen-banner
 !+ NOT_PLATFORM(ios, ext_safari, ext_android_cb)
 ||app.adjust.com^
 !
+||sts.batmobi.net^
+||api.facebook.com/method/logging.clientevent
 ||pps-log.op-mobile.opera.com^
 ||event.allnews.uodoo.com^
 ||tktracker.aotter.net^
@@ -2209,7 +2248,6 @@ auth.wi-fi.ru##.c-fullscreen-banner
 ||nlog.droid4x.cn^
 ||nrc.tapas.net^
 ||oc.umeng.com^
-||onelink.me^
 ||online-metrix.net^
 ||openstat.net^
 ||ping.taplytics.com^

@@ -1,8 +1,8 @@
-! Checksum: 6LJ1Suu14CmitGcvg6LAyw
+! Checksum: VF/vxDsC2V4qtgTOgKxN5w
 ! Title: Mobile Ads filter
 ! Description: Filter for all known mobile ad networks. Useful for mobile devices.
-! Version: 1.0.10.94
-! TimeUpdated: 2017-12-13T13:01:12.924+04:00
+! Version: 1.0.11.28
+! TimeUpdated: 2017-12-28T18:17:54.766+04:00
 ! Expires: 2 days (update frequency)
 #%#var AG_onLoad=function(func){if(document.readyState==="complete"||document.readyState==="interactive")func();else if(document.addEventListener)document.addEventListener("DOMContentLoaded",func);else if(document.attachEvent)document.attachEvent("DOMContentLoaded",func)};
 #%#var AG_removeElementById = function(id) { var element = document.getElementById(id); if (element && element.parentNode) { element.parentNode.removeChild(element); }};
@@ -38,6 +38,9 @@
 ||recreativ.ru^
 !+ NOT_OPTIMIZED
 ||hqsjc.com^
+||api*.batmobi.net^
+||cdn.batmobi.net^
+||api*.batmobil.net^
 ||adn.insight.ucweb.com^
 ||us.3zs0.date^
 ||tkmftc.aotter.net^
@@ -869,6 +872,9 @@ blogdoiphone.com#@#.header-ad
 blogdoiphone.com#@#.custom-ad
 westseattleblog.com#@#.custom-ad
 westseattleblog.com#@#.header-ad
+chiemgau24.de##div[data-id-module="col-width-watcher"] > div.id-Container--hasNoHeadline:matches-css-before(content:*- Reklame)
+chiemgau24.de##div[data-id-module="col-width-watcher"] > div.id-Container--hasHeadline:has(> h3 > span:contains(Auch interessant))
+mobile.twitter.com##._29ahSMvH section.rn-1oszu61 div[class][style*="padding-"] > ._1_KafmK5[-ext-has='svg.YunaQoc2']
 anwap.mobi##body > div[class]:has(> a > strong)
 wetter.de##.large-4 > .wrapper-teaser:has([data-adformat])
 money.cnn.com##.content-scroll > div#ng-view > section.headline_list:has(> div.section_header:contains(Partner Offers))
@@ -964,6 +970,7 @@ deviantart.com#$#div[class*="dp-ad-"] {height:0px!important; width:0px!important
 ||mobimagic.com/ads/
 ||graph.facebook.com/network_ads
 @@||tf-robots.nl^$elemhide,jsinject,content
+@@||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=m.pandora.tv
 med1.de#@#div[id^="imAd_"]
 @@||cdn.interactivemedia.net/live/Med1.de/live/globalAdTag.min.js$domain=med1.de
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$domain=vorsprung-online.de
@@ -989,8 +996,8 @@ timesofindia.indiatimes.com#@#style[type="text/css"] + div[class]:not([id]):not(
 @@||pubads.g.doubleclick.net/gampad/ads?env=vp&gdfp_req=1&output=xml_vast*&url=http%3A%2F%2Famp.usatoday.com
 @@||players.brightcove.net/*/index.html?videoId=$domain=amp.usatoday.com
 @@||report-ads-to.pubnation.com/dist/pnr.js?t=$domain=m.neogaf.com
-@@://googleadservices.com
-@@://www.googleadservices.com
+@@://googleadservices.com^|
+@@://www.googleadservices.com^|
 @@||15min.lt^$generichide
 15min.lt#@#.widget.ads
 15min.lt#@#.ads
@@ -1072,6 +1079,8 @@ deviantart.com#@#.mobile-ad
 google.ad,google.ae,google.al,google.am,google.as,google.at,google.az,google.ba,google.be,google.bf,google.bg,google.bi,google.bj,google.bs,google.bt,google.by,google.ca,google.cat,google.cd,google.cf,google.cg,google.ch,google.ci,google.cl,google.cm,google.cn,google.co.ao,google.co.bw,google.co.ck,google.co.cr,google.co.id,google.co.il,google.co.in,google.co.jp,google.co.ke,google.co.kr,google.co.ls,google.co.ma,google.co.mz,google.co.nz,google.co.th,google.co.tz,google.co.ug,google.co.uk,google.co.uz,google.co.ve,google.co.vi,google.co.za,google.co.zm,google.co.zw,google.com,google.com.af,google.com.ag,google.com.ai,google.com.ar,google.com.au,google.com.bd,google.com.bh,google.com.bn,google.com.bo,google.com.br,google.com.bz,google.com.co,google.com.cu,google.com.cy,google.com.do,google.com.ec,google.com.eg,google.com.et,google.com.fj,google.com.gh,google.com.gi,google.com.gt,google.com.hk,google.com.jm,google.com.kh,google.com.kw,google.com.lb,google.com.ly,google.com.mm,google.com.mt,google.com.mx,google.com.my,google.com.na,google.com.nf,google.com.ng,google.com.ni,google.com.np,google.com.om,google.com.pa,google.com.pe,google.com.pg,google.com.ph,google.com.pk,google.com.pr,google.com.py,google.com.qa,google.com.sa,google.com.sb,google.com.sg,google.com.sl,google.com.sv,google.com.tj,google.com.tr,google.com.tw,google.com.ua,google.com.uy,google.com.vc,google.com.vn,google.cv,google.cz,google.de,google.dj,google.dk,google.dm,google.dz,google.ee,google.es,google.fi,google.fm,google.fr,google.ga,google.ge,google.gg,google.gl,google.gm,google.gp,google.gr,google.gy,google.hn,google.hr,google.ht,google.hu,google.ie,google.im,google.iq,google.is,google.it,google.je,google.jo,google.kg,google.ki,google.kz,google.la,google.li,google.lk,google.lt,google.lu,google.lv,google.md,google.me,google.mg,google.mk,google.ml,google.mn,google.ms,google.mu,google.mv,google.mw,google.ne,google.nl,google.no,google.nr,google.nu,google.pl,google.pn,google.ps,google.pt,google.ro,google.rs,google.ru,google.rw,google.sc,google.se,google.sh,google.si,google.sk,google.sm,google.sn,google.so,google.sr,google.st,google.td,google.tg,google.tk,google.tl,google.tm,google.tn,google.to,google.tt,google.vg,google.vu,google.ws###taw
 yandex.by,yandex.com,yandex.kz,yandex.ru,yandex.ua##.body__topblocks
 yandex.by,yandex.com,yandex.kz,yandex.ru,yandex.ua##.teaser_type_internal
+yandex.ru##.time-banner~div[class] > a[href^="https://yandex.ru/clck/redir/dtype=clck/lid=geotouch."]:not([class*="timeload__reload"])
+yandex.ru##.banner__link-frame
 m.auto.ru##.card.i-bem > div[class^="_"] > div[class^="_"]
 m.auto.ru##.index.i-bem > div[class]:not([data-bem])
 m.auto.ru##.listing__page > div[class^="_"]:not([class$="listing__item_view_old"])
@@ -1080,7 +1089,24 @@ m.auto.ru##.listing__page > div[class^="_"]:not([class$="listing__item_view_old"
 m.youtube.com##a[href^="/watch?v="][onclick^="return koya.onEvent(arguments[0]||window.event,'"]:not([role]):not([class]):not([id])
 !+ NOT_OPTIMIZED
 m.youtube.com##a[href^="/watch?v="][onclick^="return koya.onEvent(arguments[0]||window.event,'"]:not([role]):not([class]):not([id]) + div
-reddit.com##.PostContent > a.PostContent__image-link[style*="background-image: url"]
+m.sunporno.com##.spot
+m.tnaflix.com##.bannerBlock
+spankwire.com##.headerAd+span
+spankwire.com###floatingBanner
+4pda.ru##body > a[role="button"][href="#"]
+4pda.ru##body > div[class][style^="zoom:"]
+youflix.is##main > #detail_main + div[style="margin-bottom:-20px;"] > .content_vlist
+||m.realgfporn.com/th^
+/m.realgfporn.com\/[a-z]{1,13}[0-9]{1,13}[a-z]{1,13}.js/
+filmakinesi2.org##iframe + .perfbox > a > img
+youjizz.com##.bottom_pr
+youjizz.com###mobileRollAd
+gotgayporn.com##small:not([class]):not([id]):not([style])
+m.sovsport.ru##.fonbet_match_centre
+wz.de##.adLine_separator
+shiftdelete.net##iframe[src*="/getAd?"]
+m.befuck.com##a[href^="http://nats.beataporn.com"]
+m.turizmajansi.com###ContentPlaceHolder1_uc_banner_main_top_AdRotator_a1
 gotporn.com##.advertisement
 porn.com##.m-zone
 m.porntube.com##.adv
@@ -1539,6 +1565,9 @@ auth.wi-fi.ru##.c-fullscreen-banner
 ||static.wi-fi.ru/brandings/rb/
 ||static0.wi-fi.ru/static/000/ios/index.html
 ||extmaps-api.yandex.net/promo/api/
+||app.openstreamapp.com/*/getallads/
+||crosspromotion.weplayer.cc^
+||ad.weplayer.cc^
 ||mobile-campaigns.avast.com^
 ||ketchapp.org/crosspromo/
 ||global.appnext.com/offerWallApi.aspx
@@ -1592,7 +1621,6 @@ auth.wi-fi.ru##.c-fullscreen-banner
 ||api.live.daum.net/*/ad/
 ||vads-api.daumkakao.com/xylophone/adrequest/json
 ||spoofgames.com/prod/*.txt
-||bahamut.com.tw/JS/ad/
 ||gdeposylka.ru/js/primatic.js?_=
 ||m.ezjoygame.com/update_android.json?os=
 ||privetapp.ru/ads/
@@ -1622,6 +1650,8 @@ auth.wi-fi.ru##.c-fullscreen-banner
 ||trackersimulator.org^
 !+ NOT_PLATFORM(ios, ext_safari, ext_android_cb)
 ||app.adjust.com^
+||sts.batmobi.net^
+||api.facebook.com/method/logging.clientevent
 ||pps-log.op-mobile.opera.com^
 ||event.allnews.uodoo.com^
 ||tktracker.aotter.net^
@@ -1831,7 +1861,6 @@ auth.wi-fi.ru##.c-fullscreen-banner
 ||nlog.droid4x.cn^
 ||nrc.tapas.net^
 ||oc.umeng.com^
-||onelink.me^
 ||online-metrix.net^
 ||openstat.net^
 ||ping.taplytics.com^

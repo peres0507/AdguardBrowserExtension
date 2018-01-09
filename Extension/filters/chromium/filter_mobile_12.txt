@@ -1,8 +1,8 @@
-! Checksum: ISucvHC/skCv+zuFvwFY5A
+! Checksum: KiZFCMkbXHGXcrkX2a/Zig
 ! Title: Safari filter
 ! Description: Special filter for Safari 9+ on iOS and OS X. We need a separate filter for Safari because it does not fully support our rules syntax.
-! Version: 1.0.3.86
-! TimeUpdated: 2017-12-13T13:01:17.597+04:00
+! Version: 1.0.3.97
+! TimeUpdated: 2017-12-25T22:01:18.168+04:00
 ! Expires: 2 days (update frequency)
 ||adexec.net^$popup
 ||0912701309f8ce.com^$popup
@@ -17,6 +17,19 @@
 ||large-format.net^$popup
 ||november-lax.com^$popup
 ||media.innity.net^$third-party
+https://github.com/AdguardTeam/AdguardFilters/issues/8800
+@@||play.anghami.com^$generichide
+play.anghami.com##.header-banner
+play.anghami.com##.content > .mpu
+@@||smslisten.com^$generichide
+@@||smsreceiving.com^$generichide
+@@||sabishiidesu.com^$generichide
+@@||yibtccoins.com^$generichide
+@@||faucethubgiveaway.win^$generichide
+@@||freebitcoin.win^$generichide
+@@||coinpot.win^$generichide
+@@||opensnow.com/js/fuckadblock.js
+@@||opensnow.com^$generichide
 @@||jilhub.xyz^$generichide
 @@||clkmein.com^$generichide
 @@||business-tv.me^$generichide
@@ -69,6 +82,7 @@ televisaofutebol.com#@#iframe[width="300"][height="250"]
 @@/ads/ad$domain=pipec.ru|xyya.net|pandamovie.net|streamgaroo.com|vidzi.tv|befuck.com
 @@||adstreet.tech/*ad$domain=befuck.com
 @@.adcenter.$domain=mcfucker.com|losmovies.club|rapidvideo.com|subs.ro
+@@||deutsche-porn.com^$generichide
 @@||masalaclips.org^$generichide
 @@||convertfiles.com^$generichide
 @@||watchvideo.us^$generichide
@@ -359,6 +373,7 @@ avaxhome.co##a[href^="http://ul.to/ref"]
 forbes.com###stackForbesAdvoice
 forbes.com##.article-speed-bump
 flashx.tv###__admvn_ios_ol
+xclusivejams2.com##a[href^="//ayclinical.com"]
 specout.com##.ad-text
 system-on-a-chip.specout.com##div.ad
 specout.com##div[class$="-ad"]
@@ -505,7 +520,6 @@ ultrafilmizle.com#@##psreklam
 @@||static-*.xvideos.com/*/js/
 @@||society6.com^$domain=society6.com
 @@||cdnssl.mediafire.com/js/
-@@||googleadservices.com/pagead/aclk?*&adurl=
 @@||xg4ken.com/trk/*&adgroupid=
 @@||analytics.edgesuite.net^$domain=foxnews.com
 @@||global.fncstatic.com/static/v/all/js/ads.js$domain=foxnews.com
@@ -540,7 +554,6 @@ cari.com.my###cvidloader
 @@||go.com/b/ss/$domain=espn.go.com
 @@||once.unicornmedia.com/now/*/content.once?$domain=espn.go.com
 @@||googletagservices.com/tag/js/gpt.js$domain=nfl.com
-@@||googleadservices.com/pagead/aclk?
 @@||go.admost.com/adx/js/admost.js^$domain=mackolik.com
 @@||app.medyanetads.com/ad.js$domain=mackolik.com
 @@||app.medyanetads.com/Session$domain=mackolik.com
