@@ -1,8 +1,8 @@
-! Checksum: xO4JsBuIBhv02scJYzXkxQ
+! Checksum: oUtv6toapZPTm0Shly7PWQ
 ! Title: Safari filter
 ! Description: Special filter for Safari 9+ on iOS and OS X. We need a separate filter for Safari because it does not fully support our rules syntax.
-! Version: 1.0.3.97
-! TimeUpdated: 2017-12-25T22:01:18.168+04:00
+! Version: 1.0.4.3
+! TimeUpdated: 2018-01-06T00:01:19.542+04:00
 ! Expires: 2 days (update frequency)
 ||adexec.net^$popup
 ||0912701309f8ce.com^$popup
@@ -17,7 +17,14 @@
 ||large-format.net^$popup
 ||november-lax.com^$popup
 ||media.innity.net^$third-party
-https://github.com/AdguardTeam/AdguardFilters/issues/8800
+@@||embed.kijk.nl^$generichide
+@@||businessvoip.me^$generichide
+businessvoip.me##.adsbygoogle
+@@||nazolog.com^$generichide
+nazolog.com##.adsbygoogle
+italiashare.life##.bforum > #___gcse_0 + div[align="center"]:not([id]):not([class])
+@@||italiashare.life^$generichide
+@@||9ketsuki.info^$generichide
 @@||play.anghami.com^$generichide
 play.anghami.com##.header-banner
 play.anghami.com##.content > .mpu
@@ -351,6 +358,7 @@ rutorgames.org##body > noindex
 filmix.net##noindex > div[style$="!important;"]
 nnm-club.tv,nnm-club.me,nnmclub.to##.leftnav > center > noindex
 meddaily.ru##div[style="width: 240px; background-color: White;"]
+9to5mac.com,9to5google.com##div[class^="th"][class*=" th"]
 motorradonline.de##.mps-banner > span
 themefire.net##.adsbygoogle
 convertfiles.com###advertisement_section

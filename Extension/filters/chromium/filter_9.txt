@@ -1,8 +1,8 @@
-! Checksum: 6/1F9OPkLWKebPm71FuunQ
+! Checksum: mOSAZp/egkoSG4JT2LB6sw
 ! Title: Spanish/Portuguese filter
 ! Description: Adguard Spanish/Portuguese filter. Filter list that specifically removes adverts on Spanish and Portuguese language websites.
-! Version: 1.0.87.97
-! TimeUpdated: 2017-12-26T07:01:06.269+04:00
+! Version: 1.0.88.1
+! TimeUpdated: 2017-12-30T02:00:54.931+04:00
 ! Expires: 2 days (update frequency)
 ! Homepage: http://adguard.com/filters.html#spanish
 ! License: http://creativecommons.org/licenses/by-sa/3.0/
@@ -181,18 +181,17 @@ animextre.me,habboin.net,flooxer.com,bemad.es,cuatro.com,divinity.es,eltiempohoy
 lavozdealmeria.es,animextre.me,habboin.net,flooxer.com,bemad.es,cuatro.com,divinity.es,eltiempohoy.es,energytv.es,factoriadeficcion.com,mtmad.es,telecinco.es#$#.pub_300x250.pub_300x250m.pub_728x90.text-ad.textAd.text_ad.text_ads.text-ads.text-ad-links {display:block!important;}
 !
 !--- BlockAdBlock ---
-peliculasmegahdd.net,urlcloud.us,meulink.tk,mwpaste.com,wakfutemporada2subs.blogspot.com#%#(function() { var sto = window.setTimeout, re = /\.bab_elementid.$/; window.setTimeout = function(a, b) { if ( typeof a !== 'string' || !re.test(a) ) { return sto(a, b); } }.bind(window); var signatures = [ ['blockadblock'], ['babasbm'], [/getItem\('babn'\)/], ['getElementById','String.fromCharCode','ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789','charAt','DOMContentLoaded','AdBlock','addEventListener','doScroll','fromCharCode','<<2|r>>4','sessionStorage','clientWidth','localStorage','Math','random'] ]; var check = function(s) { var tokens, match, j, token, pos; for ( var i = 0; i < signatures.length; i++ ) { tokens = signatures[i]; match = 0; for ( j = 0, pos = 0; j < tokens.length; j++ ) { token = tokens[j]; pos = token instanceof RegExp ? s.search(token) : s.indexOf(token); if ( pos !== -1 ) { match += 1; } } if ( (match / tokens.length) >= 0.8 ) { return true; } } return false; }; var realEval = window.eval; window.eval = function(a) { if ( !check(a) ) { return realEval(a); } var el = document.body; if ( el ) { el.style.removeProperty('visibility'); } el = document.getElementById('babasbmsgx'); if ( el ) { el.parentNode.removeChild(el); } }.bind(window); })();
+eusouandroid.co,peliculasmegahdd.net,urlcloud.us,meulink.tk,mwpaste.com,wakfutemporada2subs.blogspot.com#%#(function() { var sto = window.setTimeout, re = /\.bab_elementid.$/; window.setTimeout = function(a, b) { if ( typeof a !== 'string' || !re.test(a) ) { return sto(a, b); } }.bind(window); var signatures = [ ['blockadblock'], ['babasbm'], [/getItem\('babn'\)/], ['getElementById','String.fromCharCode','ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789','charAt','DOMContentLoaded','AdBlock','addEventListener','doScroll','fromCharCode','<<2|r>>4','sessionStorage','clientWidth','localStorage','Math','random'] ]; var check = function(s) { var tokens, match, j, token, pos; for ( var i = 0; i < signatures.length; i++ ) { tokens = signatures[i]; match = 0; for ( j = 0, pos = 0; j < tokens.length; j++ ) { token = tokens[j]; pos = token instanceof RegExp ? s.search(token) : s.indexOf(token); if ( pos !== -1 ) { match += 1; } } if ( (match / tokens.length) >= 0.8 ) { return true; } } return false; }; var realEval = window.eval; window.eval = function(a) { if ( !check(a) ) { return realEval(a); } var el = document.body; if ( el ) { el.style.removeProperty('visibility'); } el = document.getElementById('babasbmsgx'); if ( el ) { el.parentNode.removeChild(el); } }.bind(window); })();
 !
 !--- antiblock.org ---
 megafilmestorrents.net,sharecool.us,netflink.top,deportesmax.com,deportesmax.info,vivo-tv.com,vivotvhd.com#%#AG_abortInlineScript(/,displayMessage:/, 'document.addEventListener')
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/9018
 ! https://github.com/AdguardTeam/AdguardFilters/issues/8367
 peliculasmegahdd.net#@##banner_ad
 ! https://github.com/AdguardTeam/AdguardFilters/issues/7888
 @@||deportesmax.info^$generichide
 ! https://github.com/AdguardTeam/AdguardFilters/issues/8160
-PLATFORM(ext_ff, ext_opera, ios, ext_android_cb, ext_ublock)
-@@||megafilmestorrents.net^$generichide
 ! https://github.com/AdguardTeam/AdguardFilters/issues/8121
 ! https://github.com/AdguardTeam/AdguardFilters/issues/7709
 letras.mus.br#%#window.canAds = true;
@@ -385,6 +384,7 @@ jokerfansub.com#@##adsense
 !
 ! Extended CSS rules
 !
+seriehd.me##.sub_single > .sidebar[-ext-has='a[href^="http://altadefinizione.pink"]']
 tv-porinternet.com##.widget-area-right > aside.widget_custom_html:has(> div.textwidget > center:contains(Publicidad))
 seriesgato.com##.TPlayerNv > li.Button:has(> span:contains(Publicidad))
 xtraordinaryfansub.com##.recomendados > h1:contains(Publicidad)
@@ -629,6 +629,9 @@ http://adw.
 !-------------------- Specific rules --------------------!
 !--------------------------------------------------------!
 !
+seriehd.me##a[href^="http://altadefinizione.pink"]
+eusouandroid.co##body .td-header-style-10 .td-g-rec-id-header .adsbygoogle
+eusouandroid.co##.adsbygoogle
 animesorion.tv##body > center
 animesorion.tv###sidebarGeral > .sidebar:first-child
 animesorion.tv###content > .contentBox + center
@@ -721,7 +724,7 @@ televisionparatodos.tv##a[href^="http://www.portablemusic.mobi/"]
 ||televisionparatodos.tv/wp-content/uploads/*/reproductor.gif
 ||televisionparatodos.tv/wp-content/uploads/*/padrongif.gif
 vivo-tv.com,vivotvhd.com##.adsbygoogle
-hentaienespañol.net##.post-body > div[style="width: 1183px;height: 160px;"]
+xn--hentaienespaol-1nb.net##.post-body > div[style="width: 1183px;height: 160px;"]
 tuporno.tv##iframe[width="220"]
 xtraordinaryfansub.com##.bloque_ads
 ||bit.ly^$domain=adshort.co
@@ -734,7 +737,7 @@ peliculaxd.com##.contadorads
 animeflv.co##.avm
 animeflv.co##.episodeList > div > div:empty
 animeflv.co##.episodeList > div > div[style="float: left;"]
-hentaienespañol.net##.pr-widget
+xn--hentaienespaol-1nb.net##.pr-widget
 ||hentai-heroes.com/deaf/mo_script.php
 muchohentai.com###page > div[id^="__"]
 muyinteresante.es##.size_static.mega1

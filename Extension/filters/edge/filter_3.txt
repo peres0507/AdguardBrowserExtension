@@ -1,8 +1,8 @@
-! Checksum: DyUpc1wwtudLufGxUtdcxQ
+! Checksum: cPp6RfYugdJUgOBFjS//QQ
 ! Title: Spyware filter
 ! Description: The most comprehensive list of various online counters and web analytics tools. If you do not want your actions on the Internet to be tracked, use this filter.
-! Version: 1.0.16.60
-! TimeUpdated: 2017-12-28T18:17:16.850+04:00
+! Version: 1.0.16.83
+! TimeUpdated: 2018-01-08T20:00:34.335+04:00
 ! Expires: 2 days (update frequency)
 ! Homepage: http://adguard.com/filters.html#privacy
 ! License: http://creativecommons.org/licenses/by-sa/3.0/
@@ -101,6 +101,8 @@ journal-plaza.net##.rightside div.block.bnavi[-ext-has="h3.dtitle:contains(Сч�
 ! Should be uncommented once v2.10 goes live
 ! ||app-measurement.com^
 !
+||waust.at^$third-party
+||t2.hulu.com^
 ||168logger.com^$third-party
 ||isterra.ru^$third-party
 ||user-clicks.com^$third-party
@@ -3652,6 +3654,9 @@ journal-plaza.net##.rightside div.block.bnavi[-ext-has="h3.dtitle:contains(Сч�
 !
 ! Section contains the list of tracking servers, which are hosted on useful sites as subdomains
 !
+||analytics-ingress.bitmovin.com^
+||analytics.rotapost.ru^$third-party
+||t.premii.com^
 ||sts.eccmp.com^$third-party
 ||pxlctl.elpais.com^
 ||track2.trbo.com^$third-party
@@ -3997,6 +4002,7 @@ charlestownwyllie.oaklawnnonantum.com^
 .sg/t.gif?
 .uk/t.gif?
 !
+/playertracking/*
 /analyticsmediator.js
 .cloudfront.net/atrk.js$third-party
 /wp-content/plugins/google-analytics-for-wordpress/*
@@ -4211,6 +4217,16 @@ link.gmapp*.net$image
 ||scorecardresearch.com^$domain=cnet.com,important
 ! End: cnet.com trackers
 !
+||redirector.yarbot.host/jwplayer/ping.gif^
+||dawanda.com/trck^
+||dawanda.com/uo/trck.gif
+||dawanda.com/_strck^
+||api.hdfilmizle8.com/my.php^
+hdfilmizle8.com##iframe[src^="https://api.hdfilmizle8.com/my.php"]
+||akamai.net/*.huluim.com/*/plustracking/
+||vortex.hulu.com/*/events|
+||instamp3.tv/js/analytics.js
+||media.fc2.com/counter_empjs.php
 ||findgaytube.com/analytics.js
 ||yandex.*/cy?base=0&host=
 ||onlydudes.tv/analytics.js
@@ -4233,7 +4249,6 @@ link.gmapp*.net$image
 ||klops.ru/ahoy/
 ||izlesene.com/js/site/iStat.js
 ||a.europaplus.ru/*/event?p2=
-||netto-online.de/jquery/webanalytics/
 ||morhipo.com/Shared/AnalyticsJS^
 ||assia.tv/css/stat.js
 ||assia.tv/css/analytics.js
@@ -4395,8 +4410,8 @@ computerbild.de##.articleAdditional > .mehrthema
 ||xtraffstat.com/js/ktr.js
 ||zapcdn.space/zapret.js
 ||patreon.com/api/tracking^
-/index/ping^$domain=yoitect.com|skamaker.com|adf.ly|ay.gy|cracksurl.com|tinyium.com|skamason.com|redir2.auto-login-xxx.com|dl.underclassblog.com|special.picons.eu|quainator.com|yoalizer.com|kibuilder.com|kimechanic.com|zo.ee|viahold.com|tinyical.com|mmoity.com|pintient.com|riffhold.com|picocurl.com|bitigee.com|picocurl.com|atomcurve.com|atominik.com|battleate.com|kaitect.com|simizer.com|coginator.com|cogismith.com|twineer.com|yobuilder.com|go.awanpc.me|viwright.com|yabuilder.com|yamechanic.com|kializer.com|yoineer.com
-/callback/*$domain=yoitect.com|skamaker.com|adf.ly|ay.gy|cracksurl.com|tinyium.com|skamason.com|redir2.auto-login-xxx.com|dl.underclassblog.com|special.picons.eu|quainator.com|yoalizer.com|kibuilder.com|kimechanic.com|zo.ee|viahold.com|tinyical.com|mmoity.com|pintient.com|riffhold.com|picocurl.com|bitigee.com|picocurl.com|atomcurve.com|atominik.com|battleate.com|kaitect.com|simizer.com|coginator.com|cogismith.com|twineer.com|yobuilder.com|go.awanpc.me|viwright.com|yabuilder.com|yamechanic.com|kializer.com|yoineer.com
+/index/ping^$domain=queuecosm.bid|yoitect.com|skamaker.com|adf.ly|ay.gy|cracksurl.com|tinyium.com|skamason.com|redir2.auto-login-xxx.com|dl.underclassblog.com|special.picons.eu|quainator.com|yoalizer.com|kibuilder.com|kimechanic.com|zo.ee|viahold.com|tinyical.com|mmoity.com|pintient.com|riffhold.com|picocurl.com|bitigee.com|picocurl.com|atomcurve.com|atominik.com|battleate.com|kaitect.com|simizer.com|coginator.com|cogismith.com|twineer.com|yobuilder.com|go.awanpc.me|viwright.com|yabuilder.com|yamechanic.com|kializer.com|yoineer.com
+/callback/*$domain=queuecosm.bid|yoitect.com|skamaker.com|adf.ly|ay.gy|cracksurl.com|tinyium.com|skamason.com|redir2.auto-login-xxx.com|dl.underclassblog.com|special.picons.eu|quainator.com|yoalizer.com|kibuilder.com|kimechanic.com|zo.ee|viahold.com|tinyical.com|mmoity.com|pintient.com|riffhold.com|picocurl.com|bitigee.com|picocurl.com|atomcurve.com|atominik.com|battleate.com|kaitect.com|simizer.com|coginator.com|cogismith.com|twineer.com|yobuilder.com|go.awanpc.me|viwright.com|yabuilder.com|yamechanic.com|kializer.com|yoineer.com
 ||tracking-opi.fonpit.de/tracking/
 ||cdn3.net/pixe/
 ||dig.ultimedia.com^
@@ -4783,7 +4798,6 @@ dreamprogs.net##td[Width="88"][Height="31"]
 ||github.com/notifications/beacon/
 ||global.sueddeutsche.de/globalassets/standalone/szstats/configuration.json
 ||go.com/b/ss/
-||go.trouter.io/v2/a?
 ||google-analytics.com^*/__utm.gif
 ||google.*/gen_204?$~xmlhttprequest
 ||google.com/apis/gpf_metrics?
@@ -5146,6 +5160,31 @@ dreamprogs.net##td[Width="88"][Height="31"]
 !-------------- Whitelist ------------------------------------------------------!
 !-------------------------------------------------------------------------------!
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/9437
+@@||google-analytics.com/analytics.js$domain=anadolu.edu.tr
+! pcworld.com and kabel.canaldigital.no - websites are empty/grey for a while, similiar issue to this - https://forum.adguard.com/index.php?threads/resolved-piriform-com.23539/
+@@||google-analytics.com/analytics.js$domain=pcworld.com
+||googletagmanager.com/gtm.js$domain=kabel.canaldigital.no,empty,important
+||tags.tiqcdn.com/utag/telenor/telenor.no/prod/utag.*js$domain=kabel.canaldigital.no,empty,important
+! https://github.com/AdguardTeam/AdguardFilters/issues/9339
+@@||googletagmanager.com/gtm.js$domain=sanalmarket.com.tr
+! https://github.com/AdguardTeam/AdguardFilters/issues/9283
+@@||analytics.edgekey.net/html5/akamaihtml5-min.js$domain=nhk.or.jp
+! https://github.com/AdguardTeam/AdguardFilters/issues/9192
+@@||costco.co.kr/_ui/shared/js/analyticsmediator.js
+! https://github.com/AdguardTeam/AdguardFilters/issues/9149
+@@||googletagmanager.com/gtm.js$domain=argeweb.nl
+! https://github.com/AdguardTeam/AdguardFilters/issues/9130
+@@||popin.cc^$domain=m.crank-in.net
+! https://github.com/AdguardTeam/AdguardFilters/issues/8563
+@@||netto-online.de/jquery/webanalytics/xtcore.js
+! https://github.com/AdguardTeam/AdguardFilters/issues/9033
+@@||nexus.ensighten.com/prudential/production/$domain=prudential.com
+! https://github.com/AdguardTeam/AdguardFilters/issues/9020
+@@||cdn.scarabresearch.com/js/*/scarab-v*.js$domain=avansas.com
+@@||recommender.scarabresearch.com/merchants/$domain=avansas.com
+! https://github.com/AdguardTeam/AdguardFilters/issues/8975
+@@||geolocation.stroeerdp.de^$domain=t-online.de
 ! https://github.com/AdguardTeam/AdguardFilters/issues/8957
 @@||google-analytics.com/analytics.js$domain=sanalmarket.com.tr
 ! https://github.com/AdguardTeam/AdguardFilters/issues/8883

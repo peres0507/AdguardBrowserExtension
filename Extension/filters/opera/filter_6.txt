@@ -1,8 +1,8 @@
-! Checksum: F3vkVUMUJg4a/r9nCQhwzA
+! Checksum: 7cJZlqA3ZNxBrIOOoVDLKQ
 ! Title: German filter
 ! Description: EasyList Germany + Adguard German filter. Filter list that specifically removes adverts on German language websites.
-! Version: 1.0.39.3
-! TimeUpdated: 2017-12-27T03:00:50.798+04:00
+! Version: 1.0.39.15
+! TimeUpdated: 2018-01-09T01:00:56.878+04:00
 ! Expires: 2 days (update frequency)
 ! Homepage: http://adguard.com/filters.html#german
 ! License: http://creativecommons.org/licenses/by-sa/3.0/
@@ -77,6 +77,12 @@ promobil.de,elderland.de,runnersworld.de,sms-empfangen.com,inside-handy.de#$#.pu
 lustich.de,ainodorama.web.id,dslr-forum.de,klartext-ne.de,it-times.de#%#(function() { var sto = window.setTimeout, re = /\.bab_elementid.$/; window.setTimeout = function(a, b) { if ( typeof a !== 'string' || !re.test(a) ) { return sto(a, b); } }.bind(window); var signatures = [ ['blockadblock'], ['babasbm'], [/getItem\('babn'\)/], ['getElementById','String.fromCharCode','ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789','charAt','DOMContentLoaded','AdBlock','addEventListener','doScroll','fromCharCode','<<2|r>>4','sessionStorage','clientWidth','localStorage','Math','random'] ]; var check = function(s) { var tokens, match, j, token, pos; for ( var i = 0; i < signatures.length; i++ ) { tokens = signatures[i]; match = 0; for ( j = 0, pos = 0; j < tokens.length; j++ ) { token = tokens[j]; pos = token instanceof RegExp ? s.search(token) : s.indexOf(token); if ( pos !== -1 ) { match += 1; } } if ( (match / tokens.length) >= 0.8 ) { return true; } } return false; }; var realEval = window.eval; window.eval = function(a) { if ( !check(a) ) { return realEval(a); } var el = document.body; if ( el ) { el.style.removeProperty('visibility'); } el = document.getElementById('babasbmsgx'); if ( el ) { el.parentNode.removeChild(el); } }.bind(window); })();
 !----------------------------------
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/9337
+@@||a.bf-ad.net/makabo/ads_fol_init.js$domain=chip.de
+! https://github.com/AdguardTeam/AdguardFilters/issues/9172
+gannikus.com#@##adsense
+gannikus.com#@#.an-sponsored
+gannikus.com#@#.an-advert-banner
 ! https://github.com/AdguardTeam/AdguardFilters/issues/7792
 lustich.de#@##banner_ad
 ! https://forum.adguard.com/index.php?threads/serienjunkies-de-videos-anti-adblock.27402/
@@ -410,6 +416,12 @@ smarthomearea.de#@##adsense
 !
 ! Extended CSS rules
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/8048
+wallstreet-online.de###newsArticle > .postingText > p:contains(– Werbung –)
+! https://github.com/AdguardTeam/AdguardFilters/issues/8975
+t-online.de###Tmainbox > #Tcontbox > #Tgboxf[-ext-has='h6:contains(Anzeige)']
+t-online.de###Tcontboxi div[data-tb-region] > div > div[-ext-has='.Tanzkenn-ts']
+t-online.de###Tall > .Tgboxf:not([id])[-ext-has='div#taboola-footer-below-article-thumbnails-test']
 ! https://github.com/AdguardTeam/AdguardFilters/issues/8763
 pcwelt.de##.post-list > .post[-ext-has='div.tab']
 ! https://github.com/AdguardTeam/AdguardFilters/issues/8195
@@ -656,8 +668,6 @@ pcgameshardware.de##.articleticker_item.archive[-ext-has="h3>a:contains([Anzeige
 pcwelt.de##section[class="post"][data-vr-contentbox][-ext-has="div.holder > a > div.tab:contains(Anzeige)"]
 ! https://forum.adguard.com/index.php?threads/13474/
 pcgames.de##.item.noImg[-ext-has='div.itemHeadline span.itemTitle:contains([Anzeige])']
-!https://github.com/AdguardTeam/AdguardFilters/issues/8303
-t-online.de###Tcontboxi > div[id^="Tgb-"][-ext-has='h6:contains(Anzeige)']
 ! https://github.com/AdguardTeam/AdguardFilters/issues/8048
 wallstreet-online.de##.extract > strong:contains(Anzeige)
 !---------------------------------------------------------------------------!
@@ -717,6 +727,8 @@ menshealth.de#%#function google_ad_request_done() {};
 !--------------------------------------!
 !------- CSS fixes --------------------!
 !--------------------------------------!
+! https://github.com/AdguardTeam/AdguardFilters/issues/8975
+t-online.de#$##Tovscr-inner {background:none!important;}
 ! https://github.com/AdguardTeam/AdguardFilters/issues/8830
 nordbayerischer-kurier.de#$#.topAd {padding-top:0px!important;}
 ! https://github.com/AdguardTeam/AdguardFilters/issues/7832
@@ -817,6 +829,19 @@ pnp.de###gesBox > div[style*="color:#aaa"]:not([class]):not([id])
 !+ NOT_OPTIMIZED
 lvz.de##.pdma-adaside
 !
+holidaycheck.de##.ad
+||mdsglvod-a.akamaihd.net/vod/2.0/progressive^
+kabeleinsdoku.de##.k-ad-disclaimer
+kabeleinsdoku.de###modal-overlay
+rtlnext.rtl.de##.centered-ad
+rtlnext.rtl.de##.rtli-sitecontrol-top
+wallstreet-online.de###nativendo-nachrichten
+wallstreet-online.de##.anzeige
+wallstreet-online.de##.container > .module > [style="background-color: #e9e9e9; padding: 5px;"]
+autobild.de##div[id^="ad-placement"]
+gannikus.com##a[href^="http://www.gannikus.com/"][target="_blank"] > img
+gannikus.com##.custom-gannikus-add
+berlin.de##.ad
 finanzen.net###submitForm > .row > .col-sm-3 > .mleft-10 + a[href^="http://g.finanzen.net/transferwise-devisen-waehrungsrechner"]
 finanzen.net###submitForm > .row > .col-sm-3 > .mleft-10
 finanzen.net###submitForm > .row ~ .mleft-10 + .box + .spacer-20
@@ -886,7 +911,6 @@ t-online.de###taboola-mobile-below-article-thumbnails
 shz.de###partnerShTeaser
 alpin.de##.ad-sb
 hosttest.de##.sponsored-offers
-t-online.de##div[onfocus*="areadesc"]
 ||druckerchannel.de/bilder/dca/000_HK.png
 mobil.ksta.de##.recommend-article
 ||journalistenwatch.com/wp-content/uploads/2017/10/Abmahnung.gif
@@ -2146,6 +2170,7 @@ wallstreet-online.de###mooTickerContainer
 ! https://forum.adguard.com/index.php?threads/ads-on-kabeleins-de-tv.23357/
 ! wetter.com has different script than websites above
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/9237
 ! https://github.com/AdguardTeam/AdguardFilters/issues/7551
 ! https://forum.adguard.com/index.php?threads/resolved-chip-de-chrome-extension.23472/
 ! comedycentral.tv
@@ -2194,6 +2219,8 @@ wallstreet-online.de###mooTickerContainer
 @@||southpark.de^$jsinject
 ! https://github.com/AdguardTeam/AdguardForWindows/issues/960
 @@||gofeminin.de^$content
+! https://github.com/easylist/easylistgermany/issues/22
+t-online.de#@#img[alt*="Rabatt"]
 !###############
 ! https://github.com/AdguardTeam/AdguardFilters/issues/7638
 @@||pagead2.googlesyndication.com/pagead/js/r*/show_ads_impl.js$domain=autobild.de
@@ -9576,7 +9603,6 @@ podcast.de##iframe[style^="width:160px;height:600px;"]
 reitforum.de##iframe[width="160"][height="610"]
 reitforum.de##iframe[width="728"][height="100"]
 t-online.de##img[alt*="Mary & Paul"]
-t-online.de##img[alt*="Rabatt"]
 t-online.de##img[alt="Bequeme Slipper & Mokassins von hoher Qualität bei Vamos"]
 t-online.de##img[alt="Die neue Kollektion bei opus-fashion.com"]
 fitforfun.de##img[alt="FigurCoach Schlank per Mausklick"]
