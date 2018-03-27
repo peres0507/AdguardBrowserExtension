@@ -74,6 +74,19 @@ QUnit.test("Test filter compiler - simple 'if' conditions", function (assert) {
 
     rules = [
         'always_included_rule',
+        '!#if true',
+        'if_adguard_included_rule',
+        '!#endif'
+    ];
+
+    compiled = FilterCompiler.compile(rules);
+    assert.ok(compiled);
+    assert.equal(compiled.length, 2);
+    assert.equal(compiled[0], 'always_included_rule');
+    assert.equal(compiled[1], 'if_adguard_included_rule');
+
+    rules = [
+        'always_included_rule',
         '!#if adguard',
         'if_adguard_included_rule',
         '!#endif',
@@ -252,6 +265,7 @@ QUnit.test("Test filter compiler - 'if' conditions brackets", function (assert) 
     var rules;
     var compiled;
 
+    // (((true))) = true
     rules = [
         'always_included_rule',
         '!#if (((adguard)))',
@@ -265,6 +279,7 @@ QUnit.test("Test filter compiler - 'if' conditions brackets", function (assert) 
     assert.equal(compiled[0], 'always_included_rule');
     assert.equal(compiled[1], 'if_adguard_included_rule');
 
+    // (true && true) = true
     rules = [
         'always_included_rule',
         '!#if (adguard && adguard_ext_chromium)',
@@ -291,6 +306,7 @@ QUnit.test("Test filter compiler - 'if' conditions brackets", function (assert) 
     assert.equal(compiled.length, 1);
     assert.equal(compiled[0], 'always_included_rule');
 
+    // (false || false) && (false) = false
     rules = [
         'always_included_rule',
         '!#if ((adguard || adguard_ext_opera) && (adguard_ext_firefox))',
@@ -303,10 +319,10 @@ QUnit.test("Test filter compiler - 'if' conditions brackets", function (assert) 
     assert.equal(compiled.length, 1);
     assert.equal(compiled[0], 'always_included_rule');
 
-
+    // false || true && (false) = false
     rules = [
         'always_included_rule',
-        '!#if adguard_ext_opera || adguard && (adguard_ext_firefox))',
+        '!#if adguard_ext_opera || adguard && (adguard_ext_firefox)',
         'if_adguard_included_rule',
         '!#endif'
     ];
@@ -316,6 +332,7 @@ QUnit.test("Test filter compiler - 'if' conditions brackets", function (assert) 
     assert.equal(compiled.length, 1);
     assert.equal(compiled[0], 'always_included_rule');
 
+    // !(false) = true
     rules = [
         'always_included_rule',
         '!#if !(adguard_ext_opera)',

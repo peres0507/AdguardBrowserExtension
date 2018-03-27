@@ -37,8 +37,8 @@ var FilterCompiler = (function () {
     var CONDITION_OPERATOR_NOT = "!";
     var CONDITION_OPERATOR_AND = "&&";
     var CONDITION_OPERATOR_OR = "||";
-    var CONDITION_BRACKET_START = "(";
-    var CONDITION_BRACKET_END = ")";
+    var CONDITION_BRACKET_OPEN_CHAR = "(";
+    var CONDITION_BRACKET_CLOSE_CHAR = ")";
 
     var INCLUDE_DIRECTIVE = "!#include";
 
@@ -47,13 +47,13 @@ var FilterCompiler = (function () {
      *
      * @param str
      */
-    var checkBrackets = function (str) {
+    var checkBracketsBalance = function (str) {
         var depth = 0;
         for (var i in str){
-            if (str[i] === CONDITION_BRACKET_START) {
+            if (str[i] === CONDITION_BRACKET_OPEN_CHAR) {
                 // if the char is an opening parenthesis then we increase the depth
                 depth ++;
-            } else if(str[i] === CONDITION_BRACKET_END) {
+            } else if(str[i] === CONDITION_BRACKET_CLOSE_CHAR) {
                 // if the char is an closing parenthesis then we decrease the depth
                 depth --;
             }
@@ -93,6 +93,11 @@ var FilterCompiler = (function () {
         return -1;
     };
 
+    /**
+     * Resolves constant expression
+     *
+     * @param expression
+     */
     var resolveConditionConstant = function (expression) {
         if (!expression) {
             throw new Error('Invalid directives: Empty condition');
@@ -114,21 +119,20 @@ var FilterCompiler = (function () {
 
         expression = expression.trim();
 
-        if (!checkBrackets(expression)) {
+        if (!checkBracketsBalance(expression)) {
             throw new Error('Invalid directives: Incorrect brackets: ' + expression);
         }
 
-        // Parse brackets
-        if (expression.indexOf(CONDITION_BRACKET_START) === 0) {
-            var endBracketIndex = expression.indexOf(CONDITION_BRACKET_END);
-            if (endBracketIndex === -1) {
-                throw new Error('Invalid directives: Incorrect brackets: ' + expression);
-            }
+        //Replace bracketed expressions
+        var openBracketIndex = expression.lastIndexOf(CONDITION_BRACKET_OPEN_CHAR);
+        if (openBracketIndex !== -1) {
+            var endBracketIndex = expression.indexOf(CONDITION_BRACKET_CLOSE_CHAR, openBracketIndex);
+            var innerExpression = expression.substring(openBracketIndex + 1, endBracketIndex);
+            var innerResult = resolveExpression(innerExpression);
+            var resolvedInner = expression.substring(0, openBracketIndex) +
+                    innerResult + expression.substring(endBracketIndex + 1);
 
-            if (endBracketIndex === expression.length - CONDITION_BRACKET_END.length) {
-                // TODO: Fix strip from brackets
-                return resolveExpression(expression.substring(CONDITION_BRACKET_START.length, expression.length - CONDITION_BRACKET_END.length));
-            }
+            return resolveExpression(resolvedInner);
         }
 
         var result;
