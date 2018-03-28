@@ -204,35 +204,123 @@ var FilterCompiler = (function () {
     };
 
     /**
+     * Executes async request
+     *
+     * @param url Url
+     * @param contentType Content type
+     * @param successCallback success callback
+     * @param errorCallback error callback
+     */
+    var executeRequestAsync = function (url, contentType, successCallback, errorCallback) {
+
+        var request = new XMLHttpRequest();
+        try {
+            request.open('GET', url);
+            request.setRequestHeader('Content-type', contentType);
+            request.setRequestHeader('Pragma', 'no-cache');
+            request.overrideMimeType(contentType);
+            request.mozBackgroundRequest = true;
+            if (successCallback) {
+                request.onload = function () {
+                    successCallback(request);
+                };
+            }
+            if (errorCallback) {
+                var errorCallbackWrapper = function () {
+                    errorCallback(request);
+                };
+                request.onerror = errorCallbackWrapper;
+                request.onabort = errorCallbackWrapper;
+                request.ontimeout = errorCallbackWrapper;
+            }
+            request.send(null);
+        } catch (ex) {
+            if (errorCallback) {
+                errorCallback(request, ex);
+            }
+        }
+    };
+
+    /**
+     * Validates and resolves include directive
+     *
+     * @param directive
+     */
+    var resolveInclude = function (directive) {
+        var dfd = new Promise(function (resolve, reject) {
+            if (directive.indexOf(INCLUDE_DIRECTIVE) !== 0) {
+                resolve([directive]);
+            } else {
+                var url = directive.substring(INCLUDE_DIRECTIVE.length).trim();
+                //TODO: Validate url
+
+                var onError = function (request, ex) {
+                    reject(ex);
+                };
+
+                var onSuccess = function (response) {
+                    var responseText = response.responseText;
+                    if (!responseText) {
+                        onError(response, "Response is empty");
+                    }
+
+                    var lines = responseText.split(/[\r\n]+/);
+                    //TODO: Compile lines
+                    resolve(lines);
+                };
+
+                executeRequestAsync(url, "text/plain", onSuccess, onError);
+            }
+        });
+
+        return dfd;
+    };
+
+    /**
      * Resolves include directives
-     * TODO: Implement
      *
      * @param rules
      */
     var resolveIncludes = function (rules) {
+        var dfds = [];
 
-        // Validate
-        // Resolve
+        for (var i = 0; i < rules.length; i++) {
+            var rule = rules[i];
 
-        // Recursive
+            dfds.push(resolveInclude(rule));
+        }
 
-        return rules;
+        return Promise.all(dfds);
     };
 
     /**
      * Compiles filter content
+     *
+     * @param rules Array of strings
      */
-    var compile = function (rules) {
+    var compile = function (rules, successCallBack, errorCallback) {
 
-        var result;
+        try {
+            // Resolve 'if' conditions
+            var resolvedConditionsResult = resolveConditions(rules);
 
-        // Resolve 'if' conditions
-        result = resolveConditions(rules);
+            // Resolve 'includes' directives
+            var promise = resolveIncludes(resolvedConditionsResult);
 
-        // Resolve 'includes' directives
-        result = resolveIncludes(result);
+            promise.then(function (values) {
+                var result = [];
+                values.forEach(function (v) {
+                    result = result.concat(v);
+                });
 
-        return result;
+                successCallBack(result);
+            }, function (ex) {
+                errorCallback(ex);
+            });
+
+        } catch (ex) {
+            errorCallback(ex);
+        }
     };
 
     return {

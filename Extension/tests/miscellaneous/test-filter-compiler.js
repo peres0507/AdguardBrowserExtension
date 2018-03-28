@@ -11,28 +11,26 @@ var FilterCompilerConditionsConstants = {
 };
 
 QUnit.test("Test filter compiler", function (assert) {
+    var done = assert.async();
 
     var rules = [
         'test'
     ];
 
-    var compiled = FilterCompiler.compile(rules);
-    assert.ok(compiled);
-    assert.equal(compiled.length, 1);
-    assert.equal(compiled[0], 'test');
+    FilterCompiler.compile(rules, function (compiled) {
+        assert.ok(compiled);
+        assert.equal(compiled.length, 1);
+        assert.equal(compiled[0], 'test');
+
+        done();
+    });
 });
 
 QUnit.test("Test filter compiler - simple 'if' conditions", function (assert) {
 
     var rules;
-    var compiled;
 
-    rules = [
-        'always_included_rule',
-        '!#if adguard',
-        'if_adguard_included_rule',
-        '!#endif'
-    ];
+    var done = assert.async(5);
 
     rules = [
         'always_included_rule',
@@ -41,11 +39,13 @@ QUnit.test("Test filter compiler - simple 'if' conditions", function (assert) {
         '!#endif'
     ];
 
-    compiled = FilterCompiler.compile(rules);
-    assert.ok(compiled);
-    assert.equal(compiled.length, 2);
-    assert.equal(compiled[0], 'always_included_rule');
-    assert.equal(compiled[1], 'if_adguard_included_rule');
+    FilterCompiler.compile(rules, function (compiled) {
+        assert.ok(compiled);
+        assert.equal(compiled.length, 2);
+        assert.equal(compiled[0], 'always_included_rule');
+        assert.equal(compiled[1], 'if_adguard_included_rule');
+        done();
+    });
 
     rules = [
         'always_included_rule',
@@ -54,10 +54,12 @@ QUnit.test("Test filter compiler - simple 'if' conditions", function (assert) {
         '!#endif'
     ];
 
-    compiled = FilterCompiler.compile(rules);
-    assert.ok(compiled);
-    assert.equal(compiled.length, 1);
-    assert.equal(compiled[0], 'always_included_rule');
+    FilterCompiler.compile(rules, function (compiled) {
+        assert.ok(compiled);
+        assert.equal(compiled.length, 1);
+        assert.equal(compiled[0], 'always_included_rule');
+        done();
+    });
 
     rules = [
         'always_included_rule',
@@ -66,11 +68,13 @@ QUnit.test("Test filter compiler - simple 'if' conditions", function (assert) {
         '!#endif'
     ];
 
-    compiled = FilterCompiler.compile(rules);
-    assert.ok(compiled);
-    assert.equal(compiled.length, 2);
-    assert.equal(compiled[0], 'always_included_rule');
-    assert.equal(compiled[1], 'if_adguard_included_rule');
+    FilterCompiler.compile(rules, function (compiled) {
+        assert.ok(compiled);
+        assert.equal(compiled.length, 2);
+        assert.equal(compiled[0], 'always_included_rule');
+        assert.equal(compiled[1], 'if_adguard_included_rule');
+        done();
+    });
 
     rules = [
         'always_included_rule',
@@ -79,11 +83,13 @@ QUnit.test("Test filter compiler - simple 'if' conditions", function (assert) {
         '!#endif'
     ];
 
-    compiled = FilterCompiler.compile(rules);
-    assert.ok(compiled);
-    assert.equal(compiled.length, 2);
-    assert.equal(compiled[0], 'always_included_rule');
-    assert.equal(compiled[1], 'if_adguard_included_rule');
+    FilterCompiler.compile(rules, function (compiled) {
+        assert.ok(compiled);
+        assert.equal(compiled.length, 2);
+        assert.equal(compiled[0], 'always_included_rule');
+        assert.equal(compiled[1], 'if_adguard_included_rule');
+        done();
+    });
 
     rules = [
         'always_included_rule',
@@ -95,12 +101,14 @@ QUnit.test("Test filter compiler - simple 'if' conditions", function (assert) {
         '!#endif'
     ];
 
-    compiled = FilterCompiler.compile(rules);
-    assert.ok(compiled);
-    assert.equal(compiled.length, 3);
-    assert.equal(compiled[0], 'always_included_rule');
-    assert.equal(compiled[1], 'if_adguard_included_rule');
-    assert.equal(compiled[2], 'if_adguard_ext_chromium_included_rule');
+    FilterCompiler.compile(rules, function (compiled) {
+        assert.ok(compiled);
+        assert.equal(compiled.length, 3);
+        assert.equal(compiled[0], 'always_included_rule');
+        assert.equal(compiled[1], 'if_adguard_included_rule');
+        assert.equal(compiled[2], 'if_adguard_ext_chromium_included_rule');
+        done();
+    });
 });
 
 QUnit.test("Test filter compiler - unsupported conditions", function (assert) {
@@ -112,16 +120,20 @@ QUnit.test("Test filter compiler - unsupported conditions", function (assert) {
         '!#endif'
     ];
 
-    var compiled = FilterCompiler.compile(rules);
-    assert.ok(compiled);
-    assert.equal(compiled.length, 1);
-    assert.equal(compiled[0], 'test');
+    var done = assert.async();
+    FilterCompiler.compile(rules, function (compiled) {
+        assert.ok(compiled);
+        assert.equal(compiled.length, 1);
+        assert.equal(compiled[0], 'test');
+        done();
+    });
 });
 
 QUnit.test("Test filter compiler - logical 'if' conditions", function (assert) {
 
     var rules;
-    var compiled;
+
+    var done = assert.async(10);
 
     // true && true = true
     rules = [
@@ -131,11 +143,13 @@ QUnit.test("Test filter compiler - logical 'if' conditions", function (assert) {
         '!#endif'
     ];
 
-    compiled = FilterCompiler.compile(rules);
-    assert.ok(compiled);
-    assert.equal(compiled.length, 2);
-    assert.equal(compiled[0], 'always_included_rule');
-    assert.equal(compiled[1], 'if_adguard_included_rule');
+    FilterCompiler.compile(rules, function (compiled) {
+        assert.ok(compiled);
+        assert.equal(compiled.length, 2);
+        assert.equal(compiled[0], 'always_included_rule');
+        assert.equal(compiled[1], 'if_adguard_included_rule');
+        done();
+    });
 
     // true && false = false
     rules = [
@@ -145,10 +159,12 @@ QUnit.test("Test filter compiler - logical 'if' conditions", function (assert) {
         '!#endif'
     ];
 
-    compiled = FilterCompiler.compile(rules);
-    assert.ok(compiled);
-    assert.equal(compiled.length, 1);
-    assert.equal(compiled[0], 'always_included_rule');
+    FilterCompiler.compile(rules, function (compiled) {
+        assert.ok(compiled);
+        assert.equal(compiled.length, 1);
+        assert.equal(compiled[0], 'always_included_rule');
+        done();
+    });
 
     // true || false = true
     rules = [
@@ -158,11 +174,13 @@ QUnit.test("Test filter compiler - logical 'if' conditions", function (assert) {
         '!#endif'
     ];
 
-    compiled = FilterCompiler.compile(rules);
-    assert.ok(compiled);
-    assert.equal(compiled.length, 2);
-    assert.equal(compiled[0], 'always_included_rule');
-    assert.equal(compiled[1], 'if_adguard_included_rule');
+    FilterCompiler.compile(rules, function (compiled) {
+        assert.ok(compiled);
+        assert.equal(compiled.length, 2);
+        assert.equal(compiled[0], 'always_included_rule');
+        assert.equal(compiled[1], 'if_adguard_included_rule');
+        done();
+    });
 
     // true && false || true = true
     rules = [
@@ -172,11 +190,13 @@ QUnit.test("Test filter compiler - logical 'if' conditions", function (assert) {
         '!#endif'
     ];
 
-    compiled = FilterCompiler.compile(rules);
-    assert.ok(compiled);
-    assert.equal(compiled.length, 2);
-    assert.equal(compiled[0], 'always_included_rule');
-    assert.equal(compiled[1], 'if_adguard_included_rule');
+    FilterCompiler.compile(rules, function (compiled) {
+        assert.ok(compiled);
+        assert.equal(compiled.length, 2);
+        assert.equal(compiled[0], 'always_included_rule');
+        assert.equal(compiled[1], 'if_adguard_included_rule');
+        done();
+    });
 
     // true && false && true = false
     rules = [
@@ -186,10 +206,12 @@ QUnit.test("Test filter compiler - logical 'if' conditions", function (assert) {
         '!#endif'
     ];
 
-    compiled = FilterCompiler.compile(rules);
-    assert.ok(compiled);
-    assert.equal(compiled.length, 1);
-    assert.equal(compiled[0], 'always_included_rule');
+    FilterCompiler.compile(rules, function (compiled) {
+        assert.ok(compiled);
+        assert.equal(compiled.length, 1);
+        assert.equal(compiled[0], 'always_included_rule');
+        done();
+    });
 
     // false && true && true = false
     rules = [
@@ -199,10 +221,12 @@ QUnit.test("Test filter compiler - logical 'if' conditions", function (assert) {
         '!#endif'
     ];
 
-    compiled = FilterCompiler.compile(rules);
-    assert.ok(compiled);
-    assert.equal(compiled.length, 1);
-    assert.equal(compiled[0], 'always_included_rule');
+    FilterCompiler.compile(rules, function (compiled) {
+        assert.ok(compiled);
+        assert.equal(compiled.length, 1);
+        assert.equal(compiled[0], 'always_included_rule');
+        done();
+    });
 
     // false && true || true = true
     rules = [
@@ -212,11 +236,13 @@ QUnit.test("Test filter compiler - logical 'if' conditions", function (assert) {
         '!#endif'
     ];
 
-    compiled = FilterCompiler.compile(rules);
-    assert.ok(compiled);
-    assert.equal(compiled.length, 2);
-    assert.equal(compiled[0], 'always_included_rule');
-    assert.equal(compiled[1], 'if_adguard_included_rule');
+    FilterCompiler.compile(rules, function (compiled) {
+        assert.ok(compiled);
+        assert.equal(compiled.length, 2);
+        assert.equal(compiled[0], 'always_included_rule');
+        assert.equal(compiled[1], 'if_adguard_included_rule');
+        done();
+    });
 
     // false || true && true = true
     rules = [
@@ -226,11 +252,13 @@ QUnit.test("Test filter compiler - logical 'if' conditions", function (assert) {
         '!#endif'
     ];
 
-    compiled = FilterCompiler.compile(rules);
-    assert.ok(compiled);
-    assert.equal(compiled.length, 2);
-    assert.equal(compiled[0], 'always_included_rule');
-    assert.equal(compiled[1], 'if_adguard_included_rule');
+    FilterCompiler.compile(rules, function (compiled) {
+        assert.ok(compiled);
+        assert.equal(compiled.length, 2);
+        assert.equal(compiled[0], 'always_included_rule');
+        assert.equal(compiled[1], 'if_adguard_included_rule');
+        done();
+    });
 
     // false && false || true = true
     rules = [
@@ -240,11 +268,13 @@ QUnit.test("Test filter compiler - logical 'if' conditions", function (assert) {
         '!#endif'
     ];
 
-    compiled = FilterCompiler.compile(rules);
-    assert.ok(compiled);
-    assert.equal(compiled.length, 2);
-    assert.equal(compiled[0], 'always_included_rule');
-    assert.equal(compiled[1], 'if_adguard_included_rule');
+    FilterCompiler.compile(rules, function (compiled) {
+        assert.ok(compiled);
+        assert.equal(compiled.length, 2);
+        assert.equal(compiled[0], 'always_included_rule');
+        assert.equal(compiled[1], 'if_adguard_included_rule');
+        done();
+    });
 
     // false && true && true = false
     rules = [
@@ -254,16 +284,18 @@ QUnit.test("Test filter compiler - logical 'if' conditions", function (assert) {
         '!#endif'
     ];
 
-    compiled = FilterCompiler.compile(rules);
-    assert.ok(compiled);
-    assert.equal(compiled.length, 1);
-    assert.equal(compiled[0], 'always_included_rule');
+    FilterCompiler.compile(rules, function (compiled) {
+        assert.ok(compiled);
+        assert.equal(compiled.length, 1);
+        assert.equal(compiled[0], 'always_included_rule');
+        done();
+    });
 });
 
 QUnit.test("Test filter compiler - 'if' conditions brackets", function (assert) {
 
+    var done = assert.async(8);
     var rules;
-    var compiled;
 
     // (((true))) = true
     rules = [
@@ -273,11 +305,13 @@ QUnit.test("Test filter compiler - 'if' conditions brackets", function (assert) 
         '!#endif'
     ];
 
-    compiled = FilterCompiler.compile(rules);
-    assert.ok(compiled);
-    assert.equal(compiled.length, 2);
-    assert.equal(compiled[0], 'always_included_rule');
-    assert.equal(compiled[1], 'if_adguard_included_rule');
+    FilterCompiler.compile(rules, function (compiled) {
+        assert.ok(compiled);
+        assert.equal(compiled.length, 2);
+        assert.equal(compiled[0], 'always_included_rule');
+        assert.equal(compiled[1], 'if_adguard_included_rule');
+        done();
+    });
 
     // (true && true) = true
     rules = [
@@ -287,11 +321,13 @@ QUnit.test("Test filter compiler - 'if' conditions brackets", function (assert) 
         '!#endif'
     ];
 
-    compiled = FilterCompiler.compile(rules);
-    assert.ok(compiled);
-    assert.equal(compiled.length, 2);
-    assert.equal(compiled[0], 'always_included_rule');
-    assert.equal(compiled[1], 'if_adguard_included_rule');
+    FilterCompiler.compile(rules, function (compiled) {
+        assert.ok(compiled);
+        assert.equal(compiled.length, 2);
+        assert.equal(compiled[0], 'always_included_rule');
+        assert.equal(compiled[1], 'if_adguard_included_rule');
+        done();
+    });
 
     // (true || false) && false = false
     rules = [
@@ -301,10 +337,12 @@ QUnit.test("Test filter compiler - 'if' conditions brackets", function (assert) 
         '!#endif'
     ];
 
-    compiled = FilterCompiler.compile(rules);
-    assert.ok(compiled);
-    assert.equal(compiled.length, 1);
-    assert.equal(compiled[0], 'always_included_rule');
+    FilterCompiler.compile(rules, function (compiled) {
+        assert.ok(compiled);
+        assert.equal(compiled.length, 1);
+        assert.equal(compiled[0], 'always_included_rule');
+        done();
+    });
 
     // (false || false) && (false) = false
     rules = [
@@ -314,10 +352,12 @@ QUnit.test("Test filter compiler - 'if' conditions brackets", function (assert) 
         '!#endif'
     ];
 
-    compiled = FilterCompiler.compile(rules);
-    assert.ok(compiled);
-    assert.equal(compiled.length, 1);
-    assert.equal(compiled[0], 'always_included_rule');
+    FilterCompiler.compile(rules, function (compiled) {
+        assert.ok(compiled);
+        assert.equal(compiled.length, 1);
+        assert.equal(compiled[0], 'always_included_rule');
+        done();
+    });
 
     // false || true && (false) = false
     rules = [
@@ -327,10 +367,12 @@ QUnit.test("Test filter compiler - 'if' conditions brackets", function (assert) 
         '!#endif'
     ];
 
-    compiled = FilterCompiler.compile(rules);
-    assert.ok(compiled);
-    assert.equal(compiled.length, 1);
-    assert.equal(compiled[0], 'always_included_rule');
+    FilterCompiler.compile(rules, function (compiled) {
+        assert.ok(compiled);
+        assert.equal(compiled.length, 1);
+        assert.equal(compiled[0], 'always_included_rule');
+        done();
+    });
 
     // !(false) = true
     rules = [
@@ -340,11 +382,13 @@ QUnit.test("Test filter compiler - 'if' conditions brackets", function (assert) 
         '!#endif'
     ];
 
-    compiled = FilterCompiler.compile(rules);
-    assert.ok(compiled);
-    assert.equal(compiled.length, 2);
-    assert.equal(compiled[0], 'always_included_rule');
-    assert.equal(compiled[1], 'if_adguard_included_rule');
+    FilterCompiler.compile(rules, function (compiled) {
+        assert.ok(compiled);
+        assert.equal(compiled.length, 2);
+        assert.equal(compiled[0], 'always_included_rule');
+        assert.equal(compiled[1], 'if_adguard_included_rule');
+        done();
+    });
 
     // false && true || true = true
     rules = [
@@ -354,11 +398,13 @@ QUnit.test("Test filter compiler - 'if' conditions brackets", function (assert) 
         '!#endif'
     ];
 
-    compiled = FilterCompiler.compile(rules);
-    assert.ok(compiled);
-    assert.equal(compiled.length, 2);
-    assert.equal(compiled[0], 'always_included_rule');
-    assert.equal(compiled[1], 'if_adguard_included_rule');
+    FilterCompiler.compile(rules, function (compiled) {
+        assert.ok(compiled);
+        assert.equal(compiled.length, 2);
+        assert.equal(compiled[0], 'always_included_rule');
+        assert.equal(compiled[1], 'if_adguard_included_rule');
+        done();
+    });
 
     // false && (true || true) = false
     rules = [
@@ -368,14 +414,17 @@ QUnit.test("Test filter compiler - 'if' conditions brackets", function (assert) 
         '!#endif'
     ];
 
-    compiled = FilterCompiler.compile(rules);
-    assert.ok(compiled);
-    assert.equal(compiled.length, 1);
-    assert.equal(compiled[0], 'always_included_rule');
+    FilterCompiler.compile(rules, function (compiled) {
+        assert.ok(compiled);
+        assert.equal(compiled.length, 1);
+        assert.equal(compiled[0], 'always_included_rule');
+        done();
+    });
 });
 
 QUnit.test("Test filter compiler - invalid 'if' conditions", function (assert) {
 
+    var done = assert.async(5);
     var rules;
 
     rules = [
@@ -385,12 +434,13 @@ QUnit.test("Test filter compiler - invalid 'if' conditions", function (assert) {
         "!#endif"
     ];
 
-    try {
-        FilterCompiler.compile(rules);
+    FilterCompiler.compile(rules, function () {
         assert.ok(false);
-    } catch (ex) {
+        done();
+    }, function (ex) {
         assert.ok(ex);
-    }
+        done();
+    });
 
     rules = [
         'always_included_rule',
@@ -398,12 +448,13 @@ QUnit.test("Test filter compiler - invalid 'if' conditions", function (assert) {
         'missing_endif'
     ];
 
-    try {
-        FilterCompiler.compile(rules);
+    FilterCompiler.compile(rules, function () {
         assert.ok(false);
-    } catch (ex) {
+        done();
+    }, function (ex) {
         assert.ok(ex);
-    }
+        done();
+    });
 
     rules = [
         'always_included_rule',
@@ -412,12 +463,13 @@ QUnit.test("Test filter compiler - invalid 'if' conditions", function (assert) {
         '!#endif'
     ];
 
-    try {
-        FilterCompiler.compile(rules);
+    FilterCompiler.compile(rules, function () {
         assert.ok(false);
-    } catch (ex) {
+        done();
+    }, function (ex) {
         assert.ok(ex);
-    }
+        done();
+    });
 
     rules = [
         'always_included_rule',
@@ -429,12 +481,13 @@ QUnit.test("Test filter compiler - invalid 'if' conditions", function (assert) {
         '!#endif'
     ];
 
-    try {
-        FilterCompiler.compile(rules);
+    FilterCompiler.compile(rules, function () {
         assert.ok(false);
-    } catch (ex) {
+        done();
+    }, function (ex) {
         assert.ok(ex);
-    }
+        done();
+    });
 
     rules = [
         'always_included_rule',
@@ -443,10 +496,28 @@ QUnit.test("Test filter compiler - invalid 'if' conditions", function (assert) {
         '!#endif'
     ];
 
-    try {
-        FilterCompiler.compile(rules);
+    FilterCompiler.compile(rules, function () {
         assert.ok(false);
-    } catch (ex) {
+        done();
+    }, function (ex) {
         assert.ok(ex);
-    }
+        done();
+    });
+});
+
+QUnit.test("Test filter compiler - simple includes", function (assert) {
+    var done = assert.async();
+
+    var rules = [
+        'test',
+        '!#include test-filter-compiler.html'
+    ];
+
+    FilterCompiler.compile(rules, function (compiled) {
+        assert.ok(compiled);
+        assert.ok(compiled.length > 1);
+        assert.equal(compiled[0], 'test');
+
+        done();
+    });
 });
